@@ -5,8 +5,7 @@ using System.Collections.Generic;
 namespace BankLibrary.Model.DataRepository
 {
     interface IRepository<T>
-    {
-        public string FilePath { get; }
+    {        
         T GetClientById(Guid id);
         void AddToStorage(T obj);
         void Serialize(IEnumerable<T> enumarableObjects);

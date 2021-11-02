@@ -1,8 +1,10 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BankLibrary.Model.DataRepository
 {
@@ -16,8 +18,11 @@ namespace BankLibrary.Model.DataRepository
         {
             repositoryManager = repManager ?? throw new ArgumentNullException(nameof(repManager));
         }
+
+
         public void AddToStorage(IStorableDoc obj)
         {
+            //todo удалить этот метод
             if(obj is Client client)
             {
                 string json = JsonConvert.SerializeObject(client);
@@ -34,11 +39,17 @@ namespace BankLibrary.Model.DataRepository
             throw new NotImplementedException();
         }
 
-       
-
-        public void Serialize(IEnumerable<IStorableDoc> enumarableObjects)
+        public void Serialize(IEnumerable<IStorableDoc> enumerableObjects)
         {
-            throw new NotImplementedException();
+            JsonSerializerSettings settings = new JsonSerializerSettings 
+            { 
+                TypeNameHandling = TypeNameHandling.Auto, 
+                Formatting = Formatting.Indented 
+            };            
+            string json= JsonConvert.SerializeObject(enumerableObjects,settings);
+            File.WriteAllText(repositoryManager.ConnectionString,json);
+
+
         }
     }
 }

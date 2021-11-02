@@ -6,6 +6,10 @@ using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using BankLibrary.AccountModel.Interfaces;
 using BankLibrary.Model.AccountModel;
+using System.Linq;
+using System.Collections.Generic;
+using BankLibrary.AccountModel;
+using System.IO;
 
 namespace BankApp
 {
@@ -14,12 +18,25 @@ namespace BankApp
         static void Main(string[] args)
         {
             var logger = LogManager.GetCurrentClassLogger();
-            string path = @"C:\Users\rogoz\OneDrive\Рабочий стол\DESKTOP-7BDPRJG.txt";
+            string path = @$"{Directory.GetCurrentDirectory()}\Storage.json";
             IRepositoryManager repositoryManager = new RepositoryManager(logger,path);
             IAccountManager accountManager = new AccountManager();
-            RegularClient client = new("Roman","RRR");
-            repositoryManager.AddToStarge(client);
+           
             var result= accountManager.CreateNewAccount(AccountType.NonDeposit);
+
+            var tt = Test(accountManager);
+            var flag=repositoryManager.CommitChanges(tt);
+
+        }
+
+        static List<RegularClient> Test(IAccountManager accountManager)
+        {
+            return Enumerable.Range(1, 10)
+                .Select(x => new RegularClient($"{x}", $"{++x}")
+                {
+                    Accounts = Enumerable.Range(1, 10).Select(i => (BankAccount)accountManager.CreateNewAccount(AccountType.NonDeposit)).ToList()
+                })
+                .ToList();
         }
     }
 }

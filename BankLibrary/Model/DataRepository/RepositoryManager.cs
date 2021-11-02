@@ -3,13 +3,14 @@ using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BankLibrary.Model.DataRepository
 {
-    [Obsolete]
+    
     public class RepositoryManager:IRepositoryManager
     {
         private readonly string repositoryPath;
@@ -18,11 +19,22 @@ namespace BankLibrary.Model.DataRepository
 
         private readonly ILogger logger;
 
+        List<Client> clientsList;
+
         public RepositoryManager(ILogger log,string path)
         {
             logger = log ?? throw new ArgumentNullException($"{nameof(log)} логгер не инициирован");
             repositoryPath = path ?? throw new NullReferenceException($"{nameof(path)} пустая строка подключения");
             repository = new Repository(this);
+            clientsList =new List<Client>();
+        }
+
+        private bool SimpleValidatePath(string path)
+        {
+            if (File.Exists(path))
+                return true;
+            else
+                throw new ArgumentException("файл не существует");            
         }
 
         public void AddToStarge(IStorableDoc doc){           
@@ -42,12 +54,29 @@ namespace BankLibrary.Model.DataRepository
             return Enumerable.Empty<IStorableDoc>();
         }
 
-        public IAccount GetAccountById(Guid guid)
+        public IAccount GetAccountById(Guid guid)=>
+                clientsList.SelectMany(r => r.Accounts)
+                           .Where(x => x.Id == guid)
+                           .SingleOrDefault();
+
+        public bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
         {
-            var clientList = ReadClientDataAsList() as List<Client>;
-            var tt = clientList.Where(x => x.Accounts.Any(y => y.Id == guid)).SingleOrDefault();
-            
-            throw new NotImplementedException();
+            bool flag;
+            if (SimpleValidatePath(repositoryPath))
+            {
+                //todo добавить catch и лог              
+                try
+                {
+                    repository.Serialize(storableDocs);
+                    flag = true;
+                    return flag;
+                }
+                catch
+                {
+
+                }
+            }
+            return default;
         }
     }
 }

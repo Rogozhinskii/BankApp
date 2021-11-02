@@ -13,7 +13,7 @@ namespace BankLibrary.Model
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public List<BankAccount> Accounts { get;}
+        public List<BankAccount> Accounts { get; set; }
        
 
         public Client(string name,string surname)

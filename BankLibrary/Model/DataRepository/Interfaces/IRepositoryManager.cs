@@ -13,5 +13,8 @@ namespace BankLibrary.Model.DataRepository.Interfaces
         IEnumerable<IStorableDoc> ReadClientDataAsList();
         void AddToStarge(IStorableDoc doc);
         IAccount GetAccountById(Guid guid);
+
+        bool CommitChanges(IEnumerable<IStorableDoc> storableDocs);
+
     }
 }
