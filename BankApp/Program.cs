@@ -19,7 +19,7 @@ namespace BankApp
             IAccountManager accountManager = new AccountManager();
             RegularClient client = new("Roman","RRR");
             repositoryManager.AddToStarge(client);
-            accountManager.CreateNewAccount(AccountType.NonDeposit)
+            var result= accountManager.CreateNewAccount(AccountType.NonDeposit);
         }
     }
 }

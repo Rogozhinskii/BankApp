@@ -6,7 +6,8 @@ namespace BankLibrary.Model.DataRepository
 {
     interface IRepository<T>
     {
-        T GetById(Guid id);
+        public string FilePath { get; }
+        T GetClientById(Guid id);
         void AddToStorage(T obj);
         void Serialize(IEnumerable<T> enumarableObjects);
         IEnumerable<T> Deserialize();

@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.DataRepository.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.DataRepository.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,9 @@ namespace BankLibrary.Model.DataRepository
     internal class Repository : IRepository<IStorableDoc>
     {
         private readonly IRepositoryManager repositoryManager;
+
+        public string FilePath => throw new NotImplementedException();
+
         public Repository(IRepositoryManager repManager)
         {
             repositoryManager = repManager ?? throw new ArgumentNullException(nameof(repManager));
@@ -25,10 +29,12 @@ namespace BankLibrary.Model.DataRepository
             throw new NotImplementedException();
         }
 
-        public IStorableDoc GetById(Guid id)
+        public IStorableDoc GetClientById(Guid id)
         {
             throw new NotImplementedException();
         }
+
+       
 
         public void Serialize(IEnumerable<IStorableDoc> enumarableObjects)
         {

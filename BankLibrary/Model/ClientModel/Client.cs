@@ -8,8 +8,8 @@ namespace BankLibrary.Model
 {
     public abstract class Client:IStorableDoc
     {
-        private Guid guid;
-        public Guid Guid { get => guid; set => guid = value; }
+        private Guid id;
+        public Guid Id { get => id; set => id = value; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
@@ -18,7 +18,7 @@ namespace BankLibrary.Model
 
         public Client(string name,string surname)
         {
-            guid = Guid.NewGuid();
+            id = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Accounts = new List<BankAccount>();

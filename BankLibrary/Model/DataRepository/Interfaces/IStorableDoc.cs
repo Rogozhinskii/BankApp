@@ -8,7 +8,7 @@ namespace BankLibrary.Model.DataRepository.Interfaces
 {
     public interface IStorableDoc
     {
-        Guid Guid { get; set; }
+        public Guid Id { get; set; }
 
         IStorableDoc Clone();
     }

@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.DataRepository.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankLibrary.Model.DataRepository
 {
+    [Obsolete]
     public class RepositoryManager:IRepositoryManager
     {
         private readonly string repositoryPath;
@@ -40,6 +42,12 @@ namespace BankLibrary.Model.DataRepository
             return Enumerable.Empty<IStorableDoc>();
         }
 
-
+        public IAccount GetAccountById(Guid guid)
+        {
+            var clientList = ReadClientDataAsList() as List<Client>;
+            var tt = clientList.Where(x => x.Accounts.Any(y => y.Id == guid)).SingleOrDefault();
+            
+            throw new NotImplementedException();
+        }
     }
 }

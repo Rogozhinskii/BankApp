@@ -1,20 +1,41 @@
 ﻿using BankLibrary.Model;
+using BankLibrary.Model.AccountModel;
+using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 
 namespace BankLibrary.AccountModel
 {
-    internal class BankAccount
+    public class BankAccount:IAccount
     {
-        public Guid Id { get; private set; }
+        private Guid id;
+        private float balance;
+        private Client owner;
+        private AccountType accountType;
+        public Guid Id => id;
 
-        public Client Owner { get; set; }
-        public float Balance { get; private set; }
+        public float Balance => balance;
 
-        public BankAccount(float balance=default){
-            Id = Guid.NewGuid();
-            Balance = balance;
-        }
+        public AccountType AccountType => accountType;
+
+        public Client Owner => owner;
+
         
-       
+
+        public BankAccount(float balance=default)
+        {
+            id = Guid.NewGuid();
+            this.balance = balance;
+        }
+
+        public BankAccount(AccountType accountType):this()
+        {
+            this.accountType = accountType;
+        }
+
+        public IStorableDoc Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

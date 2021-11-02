@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace BankLibrary.Model.DataRepository.Interfaces
         public string ConnectionString { get;}
         IEnumerable<IStorableDoc> ReadClientDataAsList();
         void AddToStarge(IStorableDoc doc);
+        IAccount GetAccountById(Guid guid);
     }
 }
