@@ -10,5 +10,9 @@ namespace BankLibrary.Model.AccountModel.Interfaces
         AccountType AccountType { get; }
         public Client Owner { get;}
 
+        bool CanReduceBalance(float count);
+        bool ReduceBalance(float count);
+
+        void IncreaseBalance(float count);
     }
 }

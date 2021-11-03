@@ -30,7 +30,7 @@ namespace BankLibrary.Model.DataRepository
             JsonSerializerSettings settings = new JsonSerializerSettings{
                 TypeNameHandling = TypeNameHandling.Auto               
             };
-            string json = File.ReadAllText(repositoryManager.ConnectionString);            
+            string json = File.ReadAllText(repositoryManager.ConnectionString);
             return JsonConvert.DeserializeObject<IEnumerable<IStorableDoc>>(json, settings); 
             
         }

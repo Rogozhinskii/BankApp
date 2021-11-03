@@ -9,7 +9,7 @@ namespace BankLibrary.AccountModel.Interfaces
         IAccount CreateNewAccount(AccountType type);
         void CloseAccount();
 
-        void SendMoney(Guid fromAccountId, Guid toAccountId, float count);
+        bool SendMoney(Guid fromAccountId, Guid toAccountId, float count);
         
 
     }

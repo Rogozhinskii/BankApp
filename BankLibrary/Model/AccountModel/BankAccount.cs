@@ -3,6 +3,7 @@ using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
+using System.Text.Json.Serialization;
 
 namespace BankLibrary.AccountModel
 {
@@ -20,22 +21,38 @@ namespace BankLibrary.AccountModel
 
         public Client Owner => owner;
 
-        
-
-        public BankAccount(float balance=default)
+       
+        public BankAccount(Guid id, float balance, Client owner, AccountType accountType)
         {
-            id = Guid.NewGuid();
+            this.id = id;
             this.balance = balance;
-        }
-
-        public BankAccount(AccountType accountType):this()
-        {
+            this.owner = owner;
             this.accountType = accountType;
         }
+    
 
         public IStorableDoc Clone()
         {
             throw new NotImplementedException();
         }
+
+        public bool CanReduceBalance(float count) =>
+            balance >= count;
+        
+
+        public bool ReduceBalance(float count)
+        {
+            bool flag = default;
+            if (CanReduceBalance(count))
+            {
+                balance -= count;
+                return true;
+            }
+            return flag;
+        }
+
+        public void IncreaseBalance(float count) =>
+            balance += count;
+        
     }
 }

@@ -65,7 +65,7 @@ namespace BankLibrary.Model.DataRepository
         {
             return CommitChanges(clientsList);
         }
-        public bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
+        private bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
         {
             bool flag;
             if (SimpleValidatePath(repositoryPath))

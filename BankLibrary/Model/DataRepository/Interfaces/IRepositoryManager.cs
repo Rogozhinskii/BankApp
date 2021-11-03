@@ -14,7 +14,7 @@ namespace BankLibrary.Model.DataRepository.Interfaces
         void AddToStarge(IStorableDoc doc);
         IAccount GetAccountById(Guid guid);
 
-        bool CommitChanges(IEnumerable<IStorableDoc> storableDocs);
+        bool CommitChanges();
 
     }
 }

@@ -21,13 +21,15 @@ namespace BankApp
             var logger = LogManager.GetCurrentClassLogger();
             string path = @$"{Directory.GetCurrentDirectory()}\Storage.json";
             IRepositoryManager repositoryManager = new RepositoryManager(logger,path);
-            IAccountManager accountManager = new AccountManager();
+            IAccountManager accountManager = new AccountManager(repositoryManager);
            
-            var result= accountManager.CreateNewAccount(AccountType.NonDeposit);
+            //var result= accountManager.CreateNewAccount(AccountType.NonDeposit);
 
-            var tt = Test(accountManager);
-            var flag = repositoryManager.CommitChanges(tt);
+            //var tt = Test(accountManager);
+            //var flag = repositoryManager.CommitChanges(tt);
 
+            var result = accountManager.SendMoney(new Guid("c7ae549c-3b71-4d67-b930-1e538ff542ec"), new Guid("42af5150-2b41-466f-8c34-283ee48c47cc"),50);
+            var res=repositoryManager.CommitChanges();
            
 
         }
