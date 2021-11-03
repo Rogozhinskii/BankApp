@@ -1,4 +1,5 @@
 ﻿using BankLibrary.AccountModel;
+using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
@@ -13,14 +14,17 @@ namespace BankLibrary.Model
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public ClientType ClientType { get; set; }
+
         public List<BankAccount> Accounts { get; set; }
        
 
-        public Client(string name,string surname)
+        public Client(string name,string surname,ClientType type)
         {
             id = Guid.NewGuid();
             Name = name;
             Surname = surname;
+            ClientType = type;
             Accounts = new List<BankAccount>();
         }
       

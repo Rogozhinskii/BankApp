@@ -19,15 +19,17 @@ namespace BankLibrary.Model.DataRepository
 
         private readonly ILogger logger;
 
-        List<Client> clientsList;
+        IEnumerable<IStorableDoc> clientsList;
 
         public RepositoryManager(ILogger log,string path)
         {
             logger = log ?? throw new ArgumentNullException($"{nameof(log)} логгер не инициирован");
             repositoryPath = path ?? throw new NullReferenceException($"{nameof(path)} пустая строка подключения");
-            repository = new Repository(this);
-            clientsList =new List<Client>();
+            repository = new Repository(this);            
+            clientsList = ReadClientDataAsList();
         }
+
+        
 
         private bool SimpleValidatePath(string path)
         {
@@ -55,10 +57,14 @@ namespace BankLibrary.Model.DataRepository
         }
 
         public IAccount GetAccountById(Guid guid)=>
-                clientsList.SelectMany(r => r.Accounts)
+                clientsList.SelectMany(r => (r as Client).Accounts)
                            .Where(x => x.Id == guid)
                            .SingleOrDefault();
 
+        public bool CommitChanges()
+        {
+            return CommitChanges(clientsList);
+        }
         public bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
         {
             bool flag;
