@@ -1,4 +1,5 @@
 ﻿using BankLibrary.AccountModel;
+using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
@@ -16,17 +17,17 @@ namespace BankLibrary.Model
 
         public ClientType ClientType { get; set; }
 
-        public List<BankAccount> Accounts { get; set; }
+        public List<IAccount> Accounts { get; set; }
        
 
-        public Client(string name,string surname,ClientType type)
-        {
-            id = Guid.NewGuid();
-            Name = name;
-            Surname = surname;
-            ClientType = type;
-            Accounts = new List<BankAccount>();
-        }
+        //public Client(string name,string surname,ClientType type)
+        //{
+            
+        //    Name = name;
+        //    Surname = surname;
+        //    ClientType = type;
+        //    Accounts = new List<IAccount>();
+        //}
       
         public void RegisterAccount(BankAccount account)
         {
@@ -46,5 +47,8 @@ namespace BankLibrary.Model
         {
             throw new NotImplementedException();
         }
+
+        public void SetId(Guid id) =>
+            this.id = id;
     }
 }

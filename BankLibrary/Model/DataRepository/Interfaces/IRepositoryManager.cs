@@ -15,6 +15,7 @@ namespace BankLibrary.Model.DataRepository.Interfaces
         IAccount GetAccountById(Guid guid);
 
         bool CommitChanges();
+        bool CommitChanges(IEnumerable<IStorableDoc> storableDocs);
 
     }
 }

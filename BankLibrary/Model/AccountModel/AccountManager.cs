@@ -7,15 +7,12 @@ using System;
 
 namespace BankLibrary.Model.AccountModel
 {
-    public class AccountManager : IAccountManager
+    public class AccountManager<T> : IAccountManager<T> where T:BankAccount, new()
     {
-        private Client client;
+        
         private IRepositoryManager repositoryManager;
-        public AccountManager(IRepositoryManager repositoryManager,Client client){
-            this.repositoryManager = repositoryManager;
-            this.client = client;
-        }
-
+        private T account;
+        
         public AccountManager(IRepositoryManager repositoryManager){
             this.repositoryManager = repositoryManager ?? throw new ArgumentNullException($"{nameof(repositoryManager)} не может быть null");           
         }
@@ -23,19 +20,10 @@ namespace BankLibrary.Model.AccountModel
 
         public AccountManager() { }
         public void CloseAccount(){
-            throw new NotImplementedException();
+            account = null;
         }
 
-        public IAccount CreateNewAccount(AccountType type){
-            IAccount account = type switch
-            {
-                AccountType.NonDeposit => new NonDepositAccount(Guid.NewGuid(),0.0f,client,AccountType.NonDeposit),
-                _=>throw new NotSupportedException("Не известный тип аккаунта")
-           };
-
-            return account;
-        }
-
+       
         public bool SendMoney(Guid fromAccountId, Guid toAccountId, float count)
         {
             bool flag = default;
@@ -44,8 +32,7 @@ namespace BankLibrary.Model.AccountModel
             if (fromAccaunt != null && toAccaunt != null)
             {
                 
-                if (fromAccaunt.CanReduceBalance(count))
-                {
+                if (fromAccaunt.CanReduceBalance(count)){
                     flag=fromAccaunt.ReduceBalance(count);
                     toAccaunt.IncreaseBalance(count);                    
                     return flag;
@@ -56,6 +43,13 @@ namespace BankLibrary.Model.AccountModel
 
         }
 
-       
+        public T CreateNewAccount(float sum)
+        {
+            T acc = new T();
+            acc.Id = Guid.NewGuid();
+            account = acc;
+            acc.IncreaseBalance(sum);
+            return acc;
+        }
     }
 }

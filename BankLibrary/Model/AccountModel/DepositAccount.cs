@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace BankLibrary.Model.AccountModel
 {
-    class NonDepositAccount:BankAccount
+    public class DepositAccount:BankAccount
     {
-        
+        public DepositAccount():base()
+        {
+
+        }
+
         [JsonConstructor]
-        public NonDepositAccount(Guid id, float balance, Client owner, AccountType accountType) : base(id, balance, owner, accountType)
+        public DepositAccount(Guid id, float balance,AccountType type) : base(id, balance,type)
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.DataRepository.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,8 +32,35 @@ namespace BankLibrary.Model.DataRepository
                 TypeNameHandling = TypeNameHandling.Auto               
             };
             string json = File.ReadAllText(repositoryManager.ConnectionString);
-            return JsonConvert.DeserializeObject<IEnumerable<IStorableDoc>>(json, settings); 
-            
+            JArray arr = JArray.Parse(json);
+            List<IStorableDoc> docs = new List<IStorableDoc>(); 
+            foreach (var item in arr){                
+                if (item["ClientType"].ToString() == ((int)ClientType.Regular).ToString()){
+                    RegularClient client = new RegularClient{
+                        Name = item["Name"].ToString(),
+                        Surname = item["Surname"].ToString(),
+                        Id = new Guid(item["Id"].ToString()),
+                        Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(), 
+                                                                                                    settings))
+                    };
+                    docs.Add(client);
+                }
+                else{
+                    if(item["ClientType"].ToString() == ((int)ClientType.Special).ToString()){
+                        SpecialClient client = new SpecialClient
+                        {
+                            Name = item["Name"].ToString(),
+                            Surname = item["Surname"].ToString(),
+                            Id = new Guid(item["Id"].ToString()),
+                            Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(),
+                                                                                                    settings))
+                        };
+                        docs.Add(client);
+                    }
+                    else { continue; }
+                }
+            }
+            return docs;
         }
 
         public IStorableDoc GetClientById(Guid id)
@@ -42,11 +70,13 @@ namespace BankLibrary.Model.DataRepository
 
         public void Serialize(IEnumerable<IStorableDoc> enumerableObjects)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings{ 
-                TypeNameHandling = TypeNameHandling.Auto, 
+            JsonSerializerSettings settings = new JsonSerializerSettings{
+                TypeNameHandling = TypeNameHandling.Auto,
                 Formatting = Formatting.Indented 
-            };           
-            string json= JsonConvert.SerializeObject(enumerableObjects, settings);           
+            };
+
+            string json= JsonConvert.SerializeObject(enumerableObjects, settings);
+            
             File.WriteAllText(repositoryManager.ConnectionString,json);
 
 

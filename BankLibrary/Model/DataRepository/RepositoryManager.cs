@@ -25,8 +25,9 @@ namespace BankLibrary.Model.DataRepository
         {
             logger = log ?? throw new ArgumentNullException($"{nameof(log)} логгер не инициирован");
             repositoryPath = path ?? throw new NullReferenceException($"{nameof(path)} пустая строка подключения");
-            repository = new Repository(this);            
-            clientsList = ReadClientDataAsList();
+            repository = new Repository(this);
+            //clientsList = ReadClientDataAsList();
+            clientsList = new List<IStorableDoc>();
         }
 
         
@@ -65,7 +66,7 @@ namespace BankLibrary.Model.DataRepository
         {
             return CommitChanges(clientsList);
         }
-        private bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
+        public bool CommitChanges(IEnumerable<IStorableDoc> storableDocs)
         {
             bool flag;
             if (SimpleValidatePath(repositoryPath))
@@ -77,9 +78,9 @@ namespace BankLibrary.Model.DataRepository
                     flag = true;
                     return flag;
                 }
-                catch
+                catch(Exception ex)
                 {
-
+                    throw new Exception(ex.Message);
                 }
             }
             return default;

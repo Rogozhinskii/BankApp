@@ -9,7 +9,7 @@ namespace BankLibrary.Model
 {
     public class RegularClient : Client
     {
-        public RegularClient(string name,string surname,ClientType type=ClientType.Regular)
-            :base(name,surname,type) {}
+        //public RegularClient(string name,string surname,ClientType type=ClientType.Regular)
+        //    :base(name,surname,type) {}
     }
 }

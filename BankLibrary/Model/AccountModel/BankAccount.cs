@@ -9,25 +9,29 @@ namespace BankLibrary.AccountModel
 {
     public class BankAccount:IAccount
     {
-        private Guid id;
-        private float balance;
-        private Client owner;
-        private AccountType accountType;
-        public Guid Id => id;
-
-        public float Balance => balance;
-
-        public AccountType AccountType => accountType;
-
-        public Client Owner => owner;
-
        
-        public BankAccount(Guid id, float balance, Client owner, AccountType accountType)
+        
+        private AccountType accountType;
+        public Guid Id { get; set; }
+
+        public float Balance { get; set; }
+
+        public AccountType AccountType { get; set; }
+
+
+
+        public BankAccount()
         {
-            this.id = id;
-            this.balance = balance;
-            this.owner = owner;
-            this.accountType = accountType;
+
+        }
+
+        [JsonConstructor]
+        public BankAccount(Guid id, float balance, AccountType type)
+        {
+            Id = id;
+            Balance = balance;
+            AccountType = type;
+            
         }
     
 
@@ -37,7 +41,7 @@ namespace BankLibrary.AccountModel
         }
 
         public bool CanReduceBalance(float count) =>
-            balance >= count;
+            Balance >= count;
         
 
         public bool ReduceBalance(float count)
@@ -45,14 +49,14 @@ namespace BankLibrary.AccountModel
             bool flag = default;
             if (CanReduceBalance(count))
             {
-                balance -= count;
+                Balance -= count;
                 return true;
             }
             return flag;
         }
 
-        public void IncreaseBalance(float count) =>
-            balance += count;
+        public virtual void IncreaseBalance(float count) =>
+            Balance += count;
         
     }
 }
