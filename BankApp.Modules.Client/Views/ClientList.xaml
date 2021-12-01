@@ -101,6 +101,7 @@
                                Fill="Transparent"
                                SnapsToDevicePixels="True"
                                />
+                    <Button Content="New Acc" Grid.Column="0" Grid.Row="5" Command="{Binding CreateNewAccount}"/>
                 </Grid>
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
@@ -144,9 +145,6 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
-
-
-
             </Grid>
 
         </Border>

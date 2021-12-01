@@ -7,6 +7,7 @@ using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace BankApp.Modules.Client.ViewModels
     {
         private string _message;
         private readonly IClientService _clientService;
+        private readonly IDialogService _dialogService;
 
         public string Message
         {
@@ -64,10 +66,19 @@ namespace BankApp.Modules.Client.ViewModels
             }
         }
 
+        private DelegateCommand _createNewAccount;
+        public DelegateCommand CreateNewAccount =>
+            _createNewAccount ?? (_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount));
 
-        public ClientListViewModel(IClientService clientService)
+        void ExecuteCreateNewAccount()
+        { 
+            _dialogService.ShowDialog("AccountView");
+        }
+
+        public ClientListViewModel(IClientService clientService,IDialogService dialogService)
         {
             _clientService = clientService;
+            _dialogService = dialogService;
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

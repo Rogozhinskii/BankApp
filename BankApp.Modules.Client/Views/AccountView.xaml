@@ -2,8 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Width="500" Height="500"
+             xmlns:lib="clr-namespace:BankLibrary.Model.AccountModel;assembly=BankLibrary"
+             xmlns:common="clr-namespace:BankUI.Core.Common;assembly=BankUI.Core">
+   
+    
     <Grid>
-            
+        <!--<ComboBox ItemsSource="{Binding Source={core: Enum}}}"/>-->
+        <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="150"
+              ItemsSource="{Binding Source={common:EnumBinding {x:Type lib:AccountType}}}"/>
+
     </Grid>
 </UserControl>

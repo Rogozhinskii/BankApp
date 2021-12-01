@@ -1,8 +1,6 @@
-﻿using BankLibrary.Common;
-using BankUI.Interfaces;
+﻿using BankUI.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Commands;
 using System.Collections.ObjectModel;
 using BankUI.Core.Common;
 

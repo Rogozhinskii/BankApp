@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BankLibrary.Common
+namespace BankUI.Core.Common
 {
     public class CommonTypesPrism
     {

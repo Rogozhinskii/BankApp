@@ -1,7 +1,7 @@
 ﻿using BankUI.Interfaces;
 using Prism.Commands;
 
-namespace BankUI.Commands
+namespace BankUI.Core.Commands
 {
     public class ApplicationCommand : IApplicationCommands
     {

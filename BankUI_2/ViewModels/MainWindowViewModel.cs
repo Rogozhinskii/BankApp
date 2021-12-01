@@ -1,5 +1,4 @@
-﻿using BankLibrary.Common;
-using BankUI.Core;
+﻿using BankUI.Core.Common;
 using BankUI.Interfaces;
 using Prism.Commands;
 using Prism.Regions;

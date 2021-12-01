@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BankUI.Core
+namespace BankUI.Core.Common
 {
     public class ViewModelBase : BindableBase, IConfirmNavigationRequest
     {

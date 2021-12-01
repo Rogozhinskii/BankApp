@@ -1,7 +1,7 @@
 ﻿using BankApp.Modules.Client;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
-using BankUI.Commands;
+using BankUI.Core.Commands;
 using BankUI.Interfaces;
 using BankUI_2.Views;
 using NLog;

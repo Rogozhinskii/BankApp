@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:core="clr-namespace:BankLibrary.Common;assembly=BankUI.Core"
+        xmlns:core="clr-namespace:BankUI.Core.Common;assembly=BankUI.Core"
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Height="700" Width="1100" >
     <Grid>

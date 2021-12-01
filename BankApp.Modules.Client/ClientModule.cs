@@ -1,7 +1,7 @@
 ﻿using BankApp.Modules.Client.Controls;
 using BankApp.Modules.Client.ViewModels;
 using BankApp.Modules.Client.Views;
-using BankLibrary.Common;
+using BankUI.Core.Common;
 using BankUI.Core.Services;
 using BankUI.Core.Services.Interfaces;
 using Prism.Ioc;
@@ -29,6 +29,7 @@ namespace BankApp.Modules.Client
             ViewModelLocationProvider.Register<ClientGroup, ClientGroupViewModel>();
             containerRegistry.RegisterForNavigation<ClientList, ClientListViewModel>();
             containerRegistry.RegisterSingleton<IClientService, ClientService>();
+            containerRegistry.RegisterDialog<AccountView, AccountViewModel>();
         }
     }
 }
