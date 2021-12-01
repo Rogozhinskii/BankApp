@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="BankApp.Modules.Client.Controls.ClientGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:core="clr-namespace:BankLibrary.Common;assembly=BankUI.Core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors">
+    
+    <Border>
+        <Border.Resources>
+            <HierarchicalDataTemplate DataType="{x:Type core:NavigationItem}"
+                                      ItemsSource="{Binding Items}">
+                <TextBlock Text="{Binding Caption}"/>
+            </HierarchicalDataTemplate>
+        </Border.Resources>    
+        
+        <TreeView x:Name="_dataTree" ItemsSource="{Binding Items}" Style="{StaticResource MaterialDesignTreeView}">
+            <i1:Interaction.Triggers>
+                <i1:EventTrigger EventName="SelectedItemChanged">
+                    <prism:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding ElementName=_dataTree,Path=SelectedItem}"/>
+                </i1:EventTrigger>               
+            </i1:Interaction.Triggers>
+            <TreeView.Resources>
+                <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                </Style>
+            </TreeView.Resources>
+            
+
+        </TreeView>
+    </Border>
+</UserControl>

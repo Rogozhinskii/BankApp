@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BankLibrary.Model
 {
-    public abstract class Client:IStorableDoc
+    public abstract class ClientBase:IStorableDoc
     {
         private Guid id;
         public Guid Id { get => id; set => id = value; }
@@ -29,26 +29,12 @@ namespace BankLibrary.Model
         //    Accounts = new List<IAccount>();
         //}
       
-        public void RegisterAccount(BankAccount account)
-        {
-            Accounts.Add(account);
-        }
-        public bool OpenAccount()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CloseAccount()
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public IStorableDoc Clone()
         {
             throw new NotImplementedException();
         }
 
-        public void SetId(Guid id) =>
-            this.id = id;
+       
     }
 }

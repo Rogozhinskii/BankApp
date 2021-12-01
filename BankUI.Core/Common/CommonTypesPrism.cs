@@ -6,6 +6,7 @@ namespace BankLibrary.Common
 {
     public class CommonTypesPrism
     {
-        public static readonly string cBankClient = "BankClient"; 
+        public const string ContentRegion = "ContentRegion"; 
+        public const string cClientGroup = "ClientGroup"; 
     }
 }

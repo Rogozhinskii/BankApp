@@ -1,5 +1,4 @@
 ﻿using System;
-using BankLibrary;
 using BankLibrary.Model;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
@@ -8,10 +7,10 @@ using BankLibrary.AccountModel.Interfaces;
 using BankLibrary.Model.AccountModel;
 using System.Linq;
 using System.Collections.Generic;
-using BankLibrary.AccountModel;
 using System.IO;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.DataRepository.Data;
 
 namespace BankApp
 {
@@ -24,8 +23,6 @@ namespace BankApp
             IRepositoryManager repositoryManager = new RepositoryManager(logger,path);
             IAccountManager<DepositAccount> accountManager = new AccountManager<DepositAccount>(repositoryManager);
 
-
-
             //var rere = repositoryManager.ReadClientDataAsList();
             var tt = Test(accountManager);
             var flag = repositoryManager.CommitChanges(tt);
@@ -36,13 +33,13 @@ namespace BankApp
 
         }
 
-        static List<Client> Test(IAccountManager<DepositAccount> accountManager)
+        static List<ClientBase> Test(IAccountManager<DepositAccount> accountManager)
         {
             var tt = Enumerable.Range(1, 10)
                 .Select(x => new RegularClient
                 {
-                    Name = $"RegularClietnName: {x}",
-                    Surname = $"RegularClientSurname: {++x}",
+                    Name = RandomData.GetRandomName(),
+                    Surname = RandomData.GetRandomSurname(),
                     Id = Guid.NewGuid(),
                     ClientType = ClientType.Regular,
                     Accounts = Enumerable.Range(1, 10).Select(i => (IAccount)accountManager.CreateNewAccount(0.0f)).ToList()
@@ -50,14 +47,14 @@ namespace BankApp
             var pp = Enumerable.Range(1, 10)
                 .Select(x => new SpecialClient
                 {
-                    Name = $"SpecialClietnName: {x}",
-                    Surname = $"SpeciaClientSurname: {++x}",
+                    Name = RandomData.GetRandomName(),
+                    Surname = RandomData.GetRandomSurname(),
                     Id = Guid.NewGuid(),
-                    ClientType = ClientType.Regular,
+                    ClientType = ClientType.Special,
                     Accounts = Enumerable.Range(1, 10).Select(i => (IAccount)accountManager.CreateNewAccount(0.0f)).ToList()
                 }).ToList();
 
-            var list = new List<Client>(tt);
+            var list = new List<ClientBase>(tt);
             list.AddRange(pp);
             return list;
         }

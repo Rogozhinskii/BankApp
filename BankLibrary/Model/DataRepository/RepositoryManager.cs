@@ -25,8 +25,7 @@ namespace BankLibrary.Model.DataRepository
         {
             logger = log ?? throw new ArgumentNullException($"{nameof(log)} логгер не инициирован");
             repositoryPath = path ?? throw new NullReferenceException($"{nameof(path)} пустая строка подключения");
-            repository = new Repository(this);
-            //clientsList = ReadClientDataAsList();
+            repository = new Repository(this);            
             clientsList = new List<IStorableDoc>();
         }
 
@@ -58,7 +57,7 @@ namespace BankLibrary.Model.DataRepository
         }
 
         public IAccount GetAccountById(Guid guid)=>
-                clientsList.SelectMany(r => (r as Client).Accounts)
+                clientsList.SelectMany(r => (r as ClientBase).Accounts)
                            .Where(x => x.Id == guid)
                            .SingleOrDefault();
 

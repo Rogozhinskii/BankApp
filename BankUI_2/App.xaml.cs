@@ -1,6 +1,8 @@
 ﻿using BankApp.Modules.Client;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
+using BankUI.Commands;
+using BankUI.Interfaces;
 using BankUI_2.Views;
 using NLog;
 using Prism.Ioc;
@@ -24,6 +26,7 @@ namespace BankUI_2
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             logger = LogManager.GetCurrentClassLogger();
+            containerRegistry.RegisterSingleton<IApplicationCommands,ApplicationCommand>();
             const string path = "ConnectionString";
             string connectionString = ConfigurationManager.AppSettings.Get(path);
             containerRegistry.RegisterInstance(typeof(ILogger), logger);

@@ -40,6 +40,7 @@ namespace BankLibrary.Model.DataRepository
                         Name = item["Name"].ToString(),
                         Surname = item["Surname"].ToString(),
                         Id = new Guid(item["Id"].ToString()),
+                        ClientType= (ClientType)Enum.Parse(typeof(ClientType), item["ClientType"].ToString()),
                         Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(), 
                                                                                                     settings))
                     };
@@ -52,6 +53,7 @@ namespace BankLibrary.Model.DataRepository
                             Name = item["Name"].ToString(),
                             Surname = item["Surname"].ToString(),
                             Id = new Guid(item["Id"].ToString()),
+                            ClientType = (ClientType)Enum.Parse(typeof(ClientType), item["ClientType"].ToString()),
                             Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(),
                                                                                                     settings))
                         };
@@ -74,11 +76,8 @@ namespace BankLibrary.Model.DataRepository
                 TypeNameHandling = TypeNameHandling.Auto,
                 Formatting = Formatting.Indented 
             };
-
-            string json= JsonConvert.SerializeObject(enumerableObjects, settings);
-            
+            string json= JsonConvert.SerializeObject(enumerableObjects, settings);            
             File.WriteAllText(repositoryManager.ConnectionString,json);
-
 
         }
     }

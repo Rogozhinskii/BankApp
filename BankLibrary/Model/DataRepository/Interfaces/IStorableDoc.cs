@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace BankLibrary.Model.DataRepository.Interfaces
     {
         public Guid Id { get; set; }
 
+        public List<IAccount> Accounts { get; set; }
         IStorableDoc Clone();
     }
 }

@@ -5,9 +5,30 @@
     <AssemblyName>BankApp.Modules.Client</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Views\unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankLibrary\BankLibrary.csproj" />
+    <ProjectReference Include="..\BankUI.Core\BankUI.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

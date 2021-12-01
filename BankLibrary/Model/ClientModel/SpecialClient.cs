@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankLibrary.Model.ClientModel
 {
-    public class SpecialClient:Client
+    public class SpecialClient:ClientBase
     {
         
     }

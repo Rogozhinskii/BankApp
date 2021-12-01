@@ -6,10 +6,12 @@
     <AssemblyName>BankUI_2</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankApp.Modules.Client\BankApp.Modules.Client.csproj" />
     <ProjectReference Include="..\BankLibrary\BankLibrary.csproj" />
+    <ProjectReference Include="..\BankUI.Core\BankUI.Core.csproj" />
   </ItemGroup>
 </Project>

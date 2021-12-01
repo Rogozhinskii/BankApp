@@ -3,14 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:core="clr-namespace:BankLibrary.Common;assembly=BankLibrary"
-        Title="{Binding Title}" Height="350" Width="525" >
+        xmlns:core="clr-namespace:BankLibrary.Common;assembly=BankUI.Core"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}" Height="700" Width="1100" >
     <Grid>
-        <TabControl>
-            <TabItem Header="Main Tab">
-                <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.cBankClient}"/>
-            </TabItem>
-        </TabControl>
-        <!--<ContentControl prism:RegionManager.RegionName="ContentRegion" />-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Column="0">
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.cClientGroup}"/>
+        </Border>
+        
+        <Border Grid.Column="1">
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.ContentRegion}"/>
+        </Border>
     </Grid>
 </Window>

@@ -16,11 +16,12 @@ namespace BankApp.Modules.Client.Views
     /// <summary>
     /// Логика взаимодействия для ClientView.xaml
     /// </summary>
-    public partial class ClientView : UserControl
+    public partial class ClientList : UserControl
     {
-        public ClientView()
+        public ClientList()
         {
             InitializeComponent();
+            
         }
     }
 }
