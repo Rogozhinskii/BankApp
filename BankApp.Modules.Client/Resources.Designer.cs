@@ -63,6 +63,15 @@ namespace BankApp.Modules.Client {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Regular Clients.
         /// </summary>
+        internal static string Folder_Default {
+            get {
+                return ResourceManager.GetString("Folder_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Regular Clients.
+        /// </summary>
         internal static string Folder_Regular {
             get {
                 return ResourceManager.GetString("Folder_Regular", resourceCulture);

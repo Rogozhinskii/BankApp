@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Text.Json.Serialization;
 
-namespace BankLibrary.AccountModel
+namespace BankLibrary.Model.AccountModel
 {
     public class BankAccount:IAccount
     {

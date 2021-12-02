@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace BankUI_2.Views
+namespace BankUI.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -9,7 +9,8 @@ namespace BankUI_2.Views
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
+
     }
 }

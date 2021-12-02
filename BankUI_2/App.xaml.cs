@@ -3,14 +3,15 @@ using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Commands;
 using BankUI.Interfaces;
-using BankUI_2.Views;
+using BankUI.Views;
+using DryIoc;
 using NLog;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Configuration;
 using System.Windows;
 
-namespace BankUI_2
+namespace BankUI
 {
     /// <summary>
     /// Interaction logic for App.xaml

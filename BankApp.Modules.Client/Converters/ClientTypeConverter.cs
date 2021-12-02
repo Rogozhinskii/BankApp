@@ -12,14 +12,11 @@ namespace BankApp.Modules.Client.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string type = string.Empty;
-            if (value != null)
-            {
-                if (value.ToString() == ClientType.Special.ToString())
-                {
+            if (value != null){
+                if (value.ToString() == ClientType.Special.ToString()){
                     type = "Привелегированный клиент";
                 }
-                else
-                {
+                else{
                     type = "Клиент без привелегий";
                 }
             }

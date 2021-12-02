@@ -114,24 +114,40 @@
                                                  Width="200"
                                                  Padding="8"
                                                  UniformCornerRadius="6">
-                                    <TextBlock>
-                                        <TextBlock.Text>
-                                            <MultiBinding Converter="{StaticResource AccountInfoConverter}">
-                                                <Binding Path="AccountType"/>
-                                                <Binding Path="Balance"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
+                                    <StackPanel>
+                                        <TextBlock Foreground="{StaticResource MaterialDesignBody}" FontSize="16" TextWrapping="Wrap">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource AccountInfoConverter}">
+                                                    <Binding Path="AccountType"/>
+                                                    <Binding Path="Id"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>
+                                    </StackPanel>
                                 </materialDesign:Card>
-                                <Button Margin="5,0,0,0"
+                                <StackPanel>
+                                    <Button Margin="5,0,0,0"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                                     ToolTip="Close account"
                                     Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-                                    <Button.DataContext>
-                                        <local:ClientList/>
-                                    </Button.DataContext>
-                                    <materialDesign:PackIcon Kind="Close"/>
-                                </Button>
+                                        <Button.DataContext>
+                                            <local:ClientList/>
+                                        </Button.DataContext>
+                                        <materialDesign:PackIcon Kind="Close"/>
+                                    </Button>
+                                    <Button Margin="5,0,0,0"
+                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                    ToolTip="More Information"
+                                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                        <Button.DataContext>
+                                            <local:ClientList/>
+                                        </Button.DataContext>
+                                        <materialDesign:PackIcon Kind="InfoCircle"/>
+                                    </Button>
+
+                                </StackPanel>
+                                
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

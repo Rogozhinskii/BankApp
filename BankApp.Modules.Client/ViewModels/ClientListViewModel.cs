@@ -30,7 +30,13 @@ namespace BankApp.Modules.Client.ViewModels
         public IStorableDoc Client
         {
             get { return _client; }
-            set { SetProperty(ref _client, value); Accounts = new ObservableCollection<IAccount>(_client.Accounts); }
+            set { 
+                    SetProperty(ref _client, value);
+                    if (_client != null)
+                    {
+                        Accounts = new ObservableCollection<IAccount>(_client.Accounts);
+                    }
+            }
         }
 
         private ObservableCollection<IStorableDoc> _bankClients;
@@ -71,8 +77,14 @@ namespace BankApp.Modules.Client.ViewModels
             _createNewAccount ?? (_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount));
 
         void ExecuteCreateNewAccount()
-        { 
-            _dialogService.ShowDialog("AccountView");
+        {
+            var dialogParameters = new DialogParameters();
+            dialogParameters.Add("accounts", _accounts);
+            _dialogService.Show("AccountView",dialogParameters, (result)=>
+            {
+                var newAcc=result.Parameters.GetValue<IAccount>("newAccount");
+                Accounts.Add(newAcc);
+            });
         }
 
         public ClientListViewModel(IClientService clientService,IDialogService dialogService)

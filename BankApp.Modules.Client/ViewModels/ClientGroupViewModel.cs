@@ -46,6 +46,7 @@ namespace BankApp.Modules.Client.ViewModels
             var root = new NavigationItem()
             {
                 Caption = "Группы клиентов",
+                NavigationPath = GetNavigationPath(FolderParameters.DefaultNavigationPath),
                 IsExpanded = true
             };
             root.Items.Add(new NavigationItem()

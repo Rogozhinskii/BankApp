@@ -1,4 +1,5 @@
 ﻿using BankLibrary.Model;
+using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Services.Interfaces;
@@ -22,10 +23,13 @@ namespace BankUI.Core.Services
             _clients = _repositoryManager.ReadClientDataAsList().ToList();
             _regularClientItems = _clients.Where(x => ((ClientBase)x).ClientType == ClientType.Regular).ToList();
             _specialClientItems = _clients.Where(x => ((ClientBase)x).ClientType == ClientType.Special).ToList();
-            //_regularClientItems = _clients.Where(x => ((RegularClient)x).ClientType == ClientType.Regular);
-            //_specialClientItems = (List<SpecialClient>)_clients.Where(x => ((SpecialClient)x).ClientType == ClientType.Special);
-
         }
+
+        public IList<IAccount> GetAccounts(IStorableDoc storableDoc)
+        {
+            return storableDoc.Accounts;
+        }
+
         public IList<IStorableDoc> GetRegularClients()
         {
             return _regularClientItems;
@@ -35,5 +39,6 @@ namespace BankUI.Core.Services
         {
             return _specialClientItems;
         }
+        
     }
 }

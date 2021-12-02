@@ -4,7 +4,7 @@ using Prism.Commands;
 using Prism.Regions;
 using System;
 
-namespace BankUI_2.ViewModels
+namespace BankUI.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {

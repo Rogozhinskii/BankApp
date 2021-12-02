@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Data;
 
@@ -13,16 +14,17 @@ namespace BankApp.Modules.Client.Converters
         {
             string accountType = string.Empty;
             string balance = string.Empty;
+            string number = string.Empty;
             if (values != null){
                 if (values[0].ToString() == AccountType.Deposit.ToString()){
                     accountType = $"Депозитный счет";
                 }
                 else{
                     accountType = $"Накопительный счет";
-                }
-                balance = values[1].ToString();
+                }                
+                number = values[1].ToString().Split('-').LastOrDefault().Substring(4,4);
             }
-            return $"{accountType}. Баланс: {balance} $";
+            return $"Номер: ***{number}\n{accountType}";
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

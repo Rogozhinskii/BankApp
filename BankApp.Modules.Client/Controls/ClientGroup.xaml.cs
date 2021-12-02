@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using BankUI.Core.Common;
+using BankUI.Interfaces;
+using System.Windows.Controls;
 
 namespace BankApp.Modules.Client.Controls
 {
@@ -7,19 +9,12 @@ namespace BankApp.Modules.Client.Controls
     /// </summary>
     public partial class ClientGroup : UserControl
     {
-        public ClientGroup()
+        public ClientGroup(IApplicationCommands _applicationCommands)
         {
             InitializeComponent();
             _dataTree.Loaded += (s, e) =>
             {
-                
-                //var parentNode = _dataTree.ItemContainerGenerator.ContainerFromIndex(0) as TreeViewItem;
-                
-                
-                //parentNode.IsSelected = true;
-                //var tt = parentNode.Items[0];
-
-
+                _applicationCommands.NavigateCommand.Execute(FolderParameters.DefaultNavigationPath);
             };
         }
     }

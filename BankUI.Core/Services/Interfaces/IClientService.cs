@@ -1,4 +1,5 @@
 ﻿using BankLibrary.Model;
+using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
@@ -11,6 +12,8 @@ namespace BankUI.Core.Services.Interfaces
     {
         IList<IStorableDoc> GetRegularClients();
         IList<IStorableDoc> GetSpecialClients();
+
+        IList<IAccount> GetAccounts(IStorableDoc storableDoc);
 
     }
 }

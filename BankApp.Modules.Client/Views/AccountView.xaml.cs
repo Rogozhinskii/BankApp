@@ -10,6 +10,11 @@ namespace BankApp.Modules.Client.Views
         public AccountView()
         {
             InitializeComponent();
+            _cmbxAccountType.Loaded += (s, e) =>
+            {
+                var _tems = _cmbxAccountType.Items;
+                _cmbxAccountType.SelectedItem = _tems[0];
+            };
         }
     }
 }
