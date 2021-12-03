@@ -61,6 +61,15 @@ namespace BankApp.Modules.Client {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на This is best.
+        /// </summary>
+        internal static string Best {
+            get {
+                return ResourceManager.GetString("Best", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Regular Clients.
         /// </summary>
         internal static string Folder_Default {

@@ -1,8 +1,14 @@
-﻿namespace BankLibrary.Model.AccountModel
+﻿using System.ComponentModel;
+
+namespace BankLibrary.Model.AccountModel
 {
+
+    [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum AccountType
     {
+        [Description("Депозит")]
         Deposit,
-        NonDeposit
+        [Description("Накопительный")]
+        Savings
     }
 }

@@ -7,11 +7,12 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace BankApp.Modules.Client.ViewModels
 {
-    public class AccountViewModel : BindableBase, IDialogAware
+    public class AccountViewModel : BindableBase, IDialogAware,IDataErrorInfo
     {
         
 
@@ -38,10 +39,42 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _accounts, value); }
         }
 
+        private IAccount _fromAccount;
+        public IAccount FromAccount
+        {
+            get { return _fromAccount; }
+            set { SetProperty(ref _fromAccount, value); }
+        }
+
+        private float _balance;
+        public float Balance
+        {
+            get { return _balance; }
+            set { SetProperty(ref _balance, value); }
+        }
+
 
         private DelegateCommand _saveNewAccount;
         public DelegateCommand SaveNewAccount =>
             _saveNewAccount ?? (_saveNewAccount = new DelegateCommand(ExecuteSaveAccountCommand));
+
+        public string Error => throw new NotImplementedException();
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = string.Empty;
+                switch (columnName)
+                {
+                    case "Balance":
+                        if (FromAccount!=null && FromAccount.Balance < _balance)
+                            error = "Не достаточно средств";
+                        break;
+                }
+                return error;
+            }
+        }
 
         void ExecuteSaveAccountCommand()
         {
@@ -81,7 +114,7 @@ namespace BankApp.Modules.Client.ViewModels
             IAccount result = accountType switch
             {
                 AccountType.Deposit => new DepositAccount(),
-                AccountType.NonDeposit => new BankAccount(),
+                AccountType.Savings => new BankAccount(),
                 _ => null
             };
 

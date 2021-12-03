@@ -10,10 +10,12 @@
     
     <UserControl.Resources>        
         <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
+        <converters:SelectedToEnableConverter x:Key="SelectedToBoolean"/>
+        <converters:BalanceValueConverter x:Key="BalanceValueConverter"/>
     </UserControl.Resources>
         
        
-    <Grid >
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="500"/>
@@ -22,7 +24,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         
@@ -72,13 +74,14 @@
             
         </StackPanel>
 
-       
+        
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2">
-            <ListBox
+            <ListBox x:Name="_accountList"
                  ItemsSource="{Binding Accounts}"
                  IsEnabled="{Binding ElementName=_tbtn,Path=IsChecked}"                 
-                 ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 SelectedItem="{Binding FromAccount}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
@@ -111,6 +114,25 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
+
+       
+        <TextBox Grid.Column="0"
+                 Grid.Row="3"
+                 Margin="17"                
+                 Style="{StaticResource MaterialDesignFilledTextBox}"
+                 materialDesign:ValidationAssist.UsePopup="True"
+                 materialDesign:ValidationAssist.PopupPlacement="Top"
+                 IsEnabled="{Binding ElementName=_accountList,Path=SelectedItem,Converter={StaticResource SelectedToBoolean}}">
+            <TextBox.Text>
+                <Binding Path="Balance"
+                         UpdateSourceTrigger="PropertyChanged"
+                         StringFormat="C">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>                        
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         
         <Button Grid.Column="1"
                 Grid.Row="3" 
