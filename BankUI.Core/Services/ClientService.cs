@@ -49,21 +49,6 @@ namespace BankUI.Core.Services
             _repositoryManager.CommitChanges(clients);
         }
 
-        public bool UpdateAccount(Guid ownerId, IAccount account) //todo это не надо
-        {
-            var found = _clients.FirstOrDefault(x => x.Id == ownerId);
-            if (found != null && found is IClient client)
-            {
-                int index = client.Accounts.IndexOf(account);
-                if (index == -1)
-                    return false;
-                client.Accounts[index] = account;
-                return true;
-            }
-            return false;
-
-        }
-
         public bool SaveNewAccount(Guid ownerId,IAccount account)
         {            
             var found = _clients.FirstOrDefault(x => x.Id == ownerId);

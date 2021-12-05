@@ -2,6 +2,7 @@
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
+using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -90,10 +91,9 @@ namespace BankApp.Modules.Client.ViewModels
             IDialogResult dialogResult = new DialogResult();
             var accountManager = _accountService.GetAccountManager(AccountType);
             var newAccount = accountManager.CreateNewAccount();
-            _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
-            _clientService.UpdateAccount(_owner.Id,FromAccount);
-            dialogResult.Parameters.Add("newAccount", newAccount);
-            dialogResult.Parameters.Add("owner", _owner);
+            _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);          
+            dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
+            dialogResult.Parameters.Add(CommonTypesPrism.ParameterOwner, _owner);
             RequestClose?.Invoke(dialogResult);
         }
 
@@ -109,20 +109,8 @@ namespace BankApp.Modules.Client.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            _owner = parameters.GetValue<IStorableDoc>("owner");
-            Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>("accounts"));
-        }
-
-        private IAccount GetNewAccount(AccountType accountType)
-        {
-            IAccount result = accountType switch
-            {
-                AccountType.Deposit => new DepositAccount(),
-                AccountType.Savings => new SavingAccount(),
-                _ => null
-            };
-
-            return result;
+            _owner = parameters.GetValue<IStorableDoc>(CommonTypesPrism.ParameterOwner);
+            Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>(CommonTypesPrism.ParameterAccounts));
         }
     }
 }

@@ -1,15 +1,11 @@
-﻿using BankLibrary.Model;
-using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
-using BankUI.Core;
 using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -21,6 +17,14 @@ namespace BankApp.Modules.Client.ViewModels
         private readonly IClientService _clientService;
         private readonly IDialogService _dialogService;
         private string _currentFolder = FolderParameters.Regular;
+
+
+        public ClientListViewModel(IClientService clientService, IDialogService dialogService)
+        {
+            _clientService = clientService;
+            _dialogService = dialogService;
+        }
+
 
         public string Message
         {
@@ -37,19 +41,11 @@ namespace BankApp.Modules.Client.ViewModels
                 SetProperty(ref _client, value);
                 if (_client != null)
                 {
-                    Accounts = new ObservableCollection<IAccount>(_client.Accounts);
+                    Accounts = new ObservableCollection<IAccount>(_client.Accounts); //костыль
                 }
             }
         }
-
-        /// <summary>
-        /// Жуткий костыль. RaisePropertyChanged не сработал
-        /// </summary>
-        /// <returns></returns>
-        private ObservableCollection<IAccount> GetAccountCollection()
-        {
-            return new ObservableCollection<IAccount>(_client.Accounts);
-        }
+               
 
         private ObservableCollection<IClient> _bankClients;
         public ObservableCollection<IClient> BankClients
@@ -78,9 +74,25 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteDeleteAccountCommand()
         {
+
             if (_selectedAccount != null)
             {
-                Accounts.Remove(_selectedAccount);                
+                if (_selectedAccount.Balance == CommonTypesPrism.zeroValue)
+                {
+                    Accounts.Remove(_selectedAccount);
+                }
+                else
+                {
+                    var dialogParameters = new DialogParameters();
+                    string errorMessage = $"Счет {_selectedAccount.Id} не может быть закрыт. На счету имеются средства: {_selectedAccount.Balance}. " +
+                                          $"Для закрытия счета переведите средства на другой счет";
+                    dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
+                    _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, (result) =>
+                    {
+
+                    });
+                }
+                                
             }
         }
 
@@ -90,25 +102,21 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteCreateNewAccount()
         {
-            var dialogParameters = new DialogParameters();
-            dialogParameters.Add("accounts", Accounts);
-            dialogParameters.Add("owner", Client);
-            _dialogService.Show("AccountView",dialogParameters, (result)=>
+            var dialogParameters = new DialogParameters()
             {
-                var newAcc=result.Parameters.GetValue<IAccount>("newAccount");
-                var owner = result.Parameters.GetValue<IClient>("owner");
+                {CommonTypesPrism.ParameterAccounts, Accounts },
+                {CommonTypesPrism.ParameterOwner, Client }
+            };            
+            _dialogService.Show(CommonTypesPrism.AccountView,dialogParameters, (result)=>
+            {
+                var newAcc=result.Parameters.GetValue<IAccount>(CommonTypesPrism.ParameterNewAccount);
+                var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
                 _clientService.SaveNewAccount(((IStorableDoc)Client).Id,newAcc);
                 LoadClients(_currentFolder);
-                Client = owner;
-                //Accounts = GetAccountCollection();
+                Client = owner;                
             });
         }
 
-        public ClientListViewModel(IClientService clientService,IDialogService dialogService)
-        {
-            _clientService = clientService;
-            _dialogService = dialogService;
-        }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
