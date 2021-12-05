@@ -134,6 +134,34 @@ namespace BankApp.Modules.Client.ViewModels
              });
         }
 
+        private DelegateCommand _saveDataCommand;
+        public DelegateCommand SaveDataCommand =>
+            _saveDataCommand ?? (_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand));
+
+        void ExecuteSaveDataCommand()
+        {
+            var result=_clientService.SaveData();
+            ShowDialog(result);
+        }
+
+        private void ShowDialog(bool result)
+        {
+            var dialogParameters = new DialogParameters();
+            if (result)
+            {
+                string notifyMessage = "Данные сохранены";
+                dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
+
+            }
+            else
+            {
+                string errorMessage = "Сохранение не выполнено";
+                dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
+            }
+        }
+
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {

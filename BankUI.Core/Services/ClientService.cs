@@ -75,9 +75,24 @@ namespace BankUI.Core.Services
             return _specialClientItems;
         }
 
-        //public IList<IClient> GetAllClients()
-        //{
-        //    //return (IList<IClient>)_clients.Cast<IClient>();
-        //}
+        public bool SaveData()
+        {            
+            try
+            {
+                _repositoryManager.CommitChanges(_clients);
+                return true;
+            }
+            catch(ArgumentException ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+            catch(UnauthorizedAccessException ex)
+            {
+                throw new UnauthorizedAccessException(ex.Message);
+            }
+            
+        }
+
+        
     }
 }

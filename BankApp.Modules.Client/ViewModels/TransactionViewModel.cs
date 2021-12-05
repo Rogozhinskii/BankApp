@@ -17,13 +17,15 @@ namespace BankApp.Modules.Client.ViewModels
     {
         private readonly ITransactionManager<IAccount> _transactionManager;
         private readonly IClientService _clientService;
+        private readonly IDialogService _dialogService;
         private IClient _owner;
 
 
-        public TransactionViewModel(ITransactionManager<IAccount> transactionManager, IClientService clientService)
+        public TransactionViewModel(ITransactionManager<IAccount> transactionManager, IClientService clientService,IDialogService dialogService)
         {
             _transactionManager = transactionManager;
             _clientService = clientService;
+            _dialogService = dialogService;
         }
 
         private float _amount;
@@ -40,11 +42,15 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _fromAccount, value); }
         }
 
-        private ReadOnlyCollection<IAccount> _ownerAccounts;
-        public ReadOnlyCollection<IAccount> OwnerAccounts
+
+        public ObservableCollection<IAccount> OwnerAccounts => GetOwnerAccounts();
+       
+        private ObservableCollection<IAccount> GetOwnerAccounts()
         {
-            get { return _ownerAccounts; }
-            set { SetProperty(ref _ownerAccounts, value); }
+            var result = new ObservableCollection<IAccount>();
+            if (_owner != null)
+                result = new ObservableCollection<IAccount>(_owner.Accounts);
+            return result;
         }
 
         private IClient _selectedRecipient;
@@ -101,12 +107,55 @@ namespace BankApp.Modules.Client.ViewModels
             }
         }
 
+        private DelegateCommand _sendMoneyCommand;
+        public DelegateCommand SendMoneyCommand =>
+            _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
+
+        void ExecuteSendMoneyCommand()
+        {
+            var result=_transactionManager.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+            RaisePropertyChanged(nameof(OwnerAccounts));
+            ShowDialog(result);
+            Amount = 0f;
+        }
+
+        private void ShowDialog(bool result)
+        {
+            var dialogParameters = new DialogParameters();
+            if (result)
+            {
+                string notifyMessage = "Перевод выполнен успешно";
+                dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
+
+            }
+            else
+            {
+                string errorMessage = "Перевод выполнить не возможно";
+                dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
+            }
+        }
+
+        private DelegateCommand _exitCommand;
+        public DelegateCommand ExitCommand =>
+            _exitCommand ?? (_exitCommand = new DelegateCommand(ExecuteExitCommand));
+
+        
+
+        void ExecuteExitCommand()
+        {
+            IDialogResult dialogResult =new DialogResult(); //на случай необходимости обработки callback            
+            RaiseRequestClose(dialogResult);
+        }
+
         public override void OnDialogOpened(IDialogParameters parameters)
         {
             _owner = parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
-            OwnerAccounts = new ReadOnlyCollection<IAccount>(_owner.Accounts);
+            RaisePropertyChanged(nameof(OwnerAccounts));
             var tempList = new List<IClient>(_clientService.GetRegularClients());
             tempList.AddRange(_clientService.GetSpecialClients());
+            tempList.Remove(_owner);
             Recipients = new ReadOnlyCollection<IClient>(tempList);
            
         }

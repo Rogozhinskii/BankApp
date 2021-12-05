@@ -17,6 +17,7 @@ namespace BankUI.Core.Services.Interfaces
 
         IList<IAccount> GetAccounts(IClient storableDoc);
         bool SaveNewAccount(Guid ownerId,IAccount account);
+        bool SaveData();
        
     }
 }

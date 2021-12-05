@@ -96,19 +96,26 @@
                                />
 
                     <StackPanel Grid.Column="0"
+                                Grid.ColumnSpan="2"
                                 Grid.Row="5" 
                                 Orientation="Horizontal">
                         <Button
                             Command="{Binding CreateNewAccount}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                            ToolTip="Открыть счет">
+                            ToolTip="Open account">
                             <materialDesign:PackIcon Kind="Plus"/>
                         </Button>
                         <Button Margin="5,0,0,0"
                             Command="{Binding SendMoneyCommand}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                            ToolTip="Перевести">
+                            ToolTip="Send">
                             <materialDesign:PackIcon Kind="ArrowLeftRight"/>
+                        </Button>
+                        <Button Margin="5,0,0,0"
+                            Command="{Binding SaveDataCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                            ToolTip="Save all changes">
+                            <materialDesign:PackIcon Kind="ContentSaveAll"/>
                         </Button>
 
                     </StackPanel>

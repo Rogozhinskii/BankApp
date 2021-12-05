@@ -9,18 +9,20 @@ namespace BankLibrary.Model.AccountModel
             account.IncreaseBalance(sum);
         }
 
-        public void SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum)
+        public bool SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum)
         {
+            bool result = false;
             if (fromAccaunt != null && toAccaunt != null)
             {
 
                 if (fromAccaunt.CanReduceBalance(sum))
                 {
-                    var flag = fromAccaunt.ReduceBalance(sum);
+                    result = fromAccaunt.ReduceBalance(sum);
                     toAccaunt.IncreaseBalance(sum);
                 }
 
             }
+            return result;
         }
     }
 }

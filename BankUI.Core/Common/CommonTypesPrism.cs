@@ -19,6 +19,8 @@ namespace BankUI.Core.Common
         public const string ErrorDialog = "ErrorDialog";
         public const string ErrorMessage = "ErrorMessage";
         public const string TransactionView = "TransactionView";
+        public const string NotificationDialog = "NotificationDialog";
+        public const string NotificationMessage = "NotificationMessage";
         #endregion
 
         #region other constants

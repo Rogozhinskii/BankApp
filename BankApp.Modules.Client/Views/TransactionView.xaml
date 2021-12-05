@@ -29,7 +29,7 @@
                   Margin="10,0,0,0"
                   Header="From">
             <ListBox 
-                 ItemsSource="{Binding OwnerAccounts}"
+                 ItemsSource="{Binding OwnerAccounts,UpdateSourceTrigger=PropertyChanged}"
                  SelectedItem="{Binding FromAccount}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -73,7 +73,8 @@
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          MaxWidth="400"
-                         materialDesign:HintAssist.Hint="Сумма перевода">
+                         materialDesign:HintAssist.Hint="Сумма перевода"
+                         >
 
                     <TextBox.Text>
                         <Binding Path="Amount"
@@ -85,12 +86,22 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <Button Grid.Row="4"
-                        Grid.Column="2"
-                        Margin="0,20,0,0"
+                <UniformGrid Columns="2"
+                             Grid.Row="4"
+                             Grid.ColumnSpan="2">
+                    <Button  Margin="0,20,0,0"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         Width="80"
-                        Content="Send" /> 
+                        Content="Send" 
+                        Command="{Binding SendMoneyCommand}"/>
+
+                    <Button  Margin="0,20,0,0"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Width="80"
+                        Content="Exit" 
+                        Command="{Binding ExitCommand}"/>
+                </UniformGrid>
+                
 
             </Grid>
 
