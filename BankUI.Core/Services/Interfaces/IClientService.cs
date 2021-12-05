@@ -11,6 +11,7 @@ namespace BankUI.Core.Services.Interfaces
 {
     public interface IClientService
     {
+        //IList<IClient> GetAllClients();
         IList<IClient> GetRegularClients();
         IList<IClient> GetSpecialClients();
 

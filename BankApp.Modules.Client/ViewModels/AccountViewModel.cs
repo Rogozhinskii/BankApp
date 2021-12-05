@@ -1,5 +1,6 @@
 ﻿using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
@@ -35,8 +36,8 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _accountType, value); }
         }
 
-        private ReadOnlyObservableCollection<IAccount> _accounts;
-        public ReadOnlyObservableCollection<IAccount> Accounts
+        private ReadOnlyCollection<IAccount> _accounts;
+        public ReadOnlyCollection<IAccount> Accounts
         {
             get { return _accounts; }
             set { SetProperty(ref _accounts, value); }
@@ -100,7 +101,7 @@ namespace BankApp.Modules.Client.ViewModels
         public override void OnDialogOpened(IDialogParameters parameters)
         {
             _owner = parameters.GetValue<IStorableDoc>(CommonTypesPrism.ParameterOwner);
-            Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>(CommonTypesPrism.ParameterAccounts));
+            Accounts = new ReadOnlyCollection<IAccount>(((IClient)_owner).Accounts);            
         }
     }
 }

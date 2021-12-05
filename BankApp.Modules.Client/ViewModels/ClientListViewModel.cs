@@ -117,6 +117,23 @@ namespace BankApp.Modules.Client.ViewModels
             });
         }
 
+        private DelegateCommand _sendMoneyCommand;
+        public DelegateCommand SendMoneyCommand =>
+            _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
+
+        void ExecuteSendMoneyCommand()
+        {
+            var dialogParameters = new DialogParameters()
+            {              
+                {CommonTypesPrism.ParameterOwner, Client }
+            };
+
+            _dialogService.Show(CommonTypesPrism.TransactionView, dialogParameters, (result) =>
+             {
+
+             });
+        }
+
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {

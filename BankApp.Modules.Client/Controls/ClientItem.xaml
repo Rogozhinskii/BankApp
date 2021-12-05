@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="BankApp.Modules.Client.Controls.ClientItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BankApp.Modules.Client.Controls" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"       
+             xmlns:converters="clr-namespace:BankApp.Modules.Client.Converters">
+    <UserControl.Resources>
+        <converters:FullNameConverter x:Key="FullNameConverter"/>
+        <converters:ClientTypeConverter x:Key="ClientTypeConverter"/>
+        <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
+    </UserControl.Resources>
+    
+    <materialDesign:Chip>
+        <materialDesign:Chip.Icon>
+            <Image Source="/BankApp.Modules.Client;component/Views/unknown.png"/>
+        </materialDesign:Chip.Icon>
+        <MultiBinding Converter="{StaticResource FullNameConverter}">
+            <Binding Path="Name"/>
+            <Binding Path="Surname"/>
+        </MultiBinding>
+    </materialDesign:Chip>
+</UserControl>

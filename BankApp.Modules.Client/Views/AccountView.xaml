@@ -6,6 +6,7 @@
              xmlns:lib="clr-namespace:BankLibrary.Model.AccountModel;assembly=BankLibrary"
              xmlns:common="clr-namespace:BankUI.Core.Common;assembly=BankUI.Core" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:BankApp.Modules.Client.Converters"
+             xmlns:controls="clr-namespace:BankApp.Modules.Client.Controls"
              >
     
     <UserControl.Resources>        
@@ -89,27 +90,7 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:Card Background="#DFDFDF"
-                                                 Foreground="Black"
-                                                 Width="200"
-                                                 Padding="8"
-                                                 UniformCornerRadius="6">
-                                <StackPanel>
-                                    <TextBlock Foreground="{StaticResource MaterialDesignBody}" FontSize="16" TextWrapping="Wrap">
-                                        <TextBlock.Text>
-                                            <MultiBinding Converter="{StaticResource AccountInfoConverter}">
-                                                <Binding Path="AccountType"/>
-                                                <Binding Path="Id"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                    <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>
-                                </StackPanel>
-                            </materialDesign:Card>
-                            <StackPanel>
-                            </StackPanel>
-                        </StackPanel>
+                        <controls:AccountItem/>                       
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

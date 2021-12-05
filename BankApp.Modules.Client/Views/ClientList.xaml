@@ -28,7 +28,9 @@
             <ListView ItemsSource="{Binding BankClients}" SelectedItem="{Binding Client}" Style="{StaticResource MaterialDesignListView}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Chip>
+                        <controls:ClientItem/>
+
+                        <!--<materialDesign:Chip>
                             <materialDesign:Chip.Icon>
                                 <Image Source="/BankApp.Modules.Client;component/Views/unknown.png"/>
                             </materialDesign:Chip.Icon>
@@ -36,7 +38,7 @@
                                 <Binding Path="Name"/>
                                 <Binding Path="Surname"/>
                             </MultiBinding>
-                        </materialDesign:Chip>
+                        </materialDesign:Chip>-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -113,7 +115,7 @@
                             <materialDesign:PackIcon Kind="Plus"/>
                         </Button>
                         <Button Margin="5,0,0,0"
-                            Command="{Binding CreateNewAccount}"
+                            Command="{Binding SendMoneyCommand}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
                             ToolTip="Перевести">
                             <materialDesign:PackIcon Kind="ArrowLeftRight"/>
@@ -126,7 +128,7 @@
                 <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
                          SelectedItem="{Binding SelectedAccount}">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vm:ClientListViewModel}">
+                        <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <controls:AccountItem/>
                                 <StackPanel>
@@ -149,47 +151,7 @@
                                         <materialDesign:PackIcon Kind="InfoCircle"/>
                                     </Button>
                                 </StackPanel>
-                            </StackPanel>
-                            
-                            <!--<StackPanel Orientation="Horizontal">
-                                <materialDesign:Card Background="#DFDFDF"
-                                                 Foreground="Black"
-                                                 Width="200"
-                                                 Padding="8"
-                                                 UniformCornerRadius="6">
-                                    <StackPanel>
-                                        <TextBlock Foreground="{StaticResource MaterialDesignBody}" FontSize="16" TextWrapping="Wrap">
-                                            <TextBlock.Text>
-                                                <MultiBinding Converter="{StaticResource AccountInfoConverter}">
-                                                    <Binding Path="AccountType"/>
-                                                    <Binding Path="Id"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>
-                                    </StackPanel>
-                                </materialDesign:Card>
-                                <StackPanel>
-                                    <Button Margin="5,0,0,0"
-                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                    ToolTip="Close account"
-                                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-                                        <Button.DataContext>
-                                            <local:ClientList/>
-                                        </Button.DataContext>
-                                        <materialDesign:PackIcon Kind="Close"/>
-                                    </Button>
-                                    <Button Margin="5,0,0,0"
-                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                        ToolTip="More Information"
-                                        Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-                                            <Button.DataContext>
-                                                <local:ClientList/>
-                                            </Button.DataContext>
-                                        <materialDesign:PackIcon Kind="InfoCircle"/>
-                                    </Button>
-                                </StackPanel>                                
-                            </StackPanel>-->
+                            </StackPanel>                            
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemContainerStyle>

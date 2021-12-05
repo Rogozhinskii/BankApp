@@ -74,6 +74,10 @@ namespace BankUI.Core.Services
         {
             return _specialClientItems;
         }
-        
+
+        //public IList<IClient> GetAllClients()
+        //{
+        //    //return (IList<IClient>)_clients.Cast<IClient>();
+        //}
     }
 }
