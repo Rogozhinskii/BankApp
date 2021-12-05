@@ -11,6 +11,7 @@
              x:Class="BankApp.Modules.Client.Views.ClientList"
              xmlns:vm="clr-namespace:BankApp.Modules.Client.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:controls="clr-namespace:BankApp.Modules.Client.Controls"
              Background="White">
     <UserControl.Resources>
         <converters:FullNameConverter x:Key="FullNameConverter"/>
@@ -125,8 +126,32 @@
                 <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
                          SelectedItem="{Binding SelectedAccount}">
                     <ListBox.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType="{x:Type vm:ClientListViewModel}">
                             <StackPanel Orientation="Horizontal">
+                                <controls:AccountItem/>
+                                <StackPanel>
+                                    <Button Margin="5,0,0,0"
+                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                    ToolTip="Close account"
+                                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                        <Button.DataContext>
+                                            <local:ClientList/>
+                                        </Button.DataContext>
+                                        <materialDesign:PackIcon Kind="Close"/>
+                                    </Button>
+                                    <Button Margin="5,0,0,0"
+                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                        ToolTip="More Information"
+                                        Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                        <Button.DataContext>
+                                            <local:ClientList/>
+                                        </Button.DataContext>
+                                        <materialDesign:PackIcon Kind="InfoCircle"/>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <!--<StackPanel Orientation="Horizontal">
                                 <materialDesign:Card Background="#DFDFDF"
                                                  Foreground="Black"
                                                  Width="200"
@@ -164,7 +189,7 @@
                                         <materialDesign:PackIcon Kind="InfoCircle"/>
                                     </Button>
                                 </StackPanel>                                
-                            </StackPanel>
+                            </StackPanel>-->
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemContainerStyle>

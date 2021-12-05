@@ -33,20 +33,5 @@
                 <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>
             </StackPanel>
         </materialDesign:Card>
-        <StackPanel>
-            <Button Margin="5,0,0,0"
-                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                    ToolTip="Close account"
-                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">                
-                <materialDesign:PackIcon Kind="Close"/>
-            </Button>
-            <Button Margin="5,0,0,0"
-                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                    ToolTip="More Information"
-                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-               
-                <materialDesign:PackIcon Kind="InfoCircle"/>
-            </Button>
-        </StackPanel>
     </StackPanel>
 </UserControl>
