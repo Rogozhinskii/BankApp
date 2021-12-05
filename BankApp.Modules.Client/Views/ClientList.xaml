@@ -29,16 +29,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <controls:ClientItem/>
-
-                        <!--<materialDesign:Chip>
-                            <materialDesign:Chip.Icon>
-                                <Image Source="/BankApp.Modules.Client;component/Views/unknown.png"/>
-                            </materialDesign:Chip.Icon>
-                            <MultiBinding Converter="{StaticResource FullNameConverter}">
-                                <Binding Path="Name"/>
-                                <Binding Path="Surname"/>
-                            </MultiBinding>
-                        </materialDesign:Chip>-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

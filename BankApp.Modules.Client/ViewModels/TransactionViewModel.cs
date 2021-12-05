@@ -8,11 +8,12 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace BankApp.Modules.Client.ViewModels
 {
-    public class TransactionViewModel : DialogViewModelBase
+    public class TransactionViewModel : DialogViewModelBase, IDataErrorInfo
     {
         private readonly ITransactionManager<IAccount> _transactionManager;
         private readonly IClientService _clientService;
@@ -23,6 +24,13 @@ namespace BankApp.Modules.Client.ViewModels
         {
             _transactionManager = transactionManager;
             _clientService = clientService;
+        }
+
+        private float _amount;
+        public float Amount
+        {
+            get { return _amount; }
+            set { SetProperty(ref _amount, value); }
         }
 
         private IAccount _fromAccount;
@@ -46,7 +54,11 @@ namespace BankApp.Modules.Client.ViewModels
             set 
             { 
                 SetProperty(ref _selectedRecipient, value);
-                RecipientAccounts = new ReadOnlyCollection<IAccount>(_selectedRecipient.Accounts);
+                if (_selectedRecipient != null)
+                {
+                    RecipientAccounts = new ReadOnlyCollection<IAccount>(_selectedRecipient.Accounts);
+                }
+                
             }
         }
 
@@ -71,6 +83,23 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _recipients, value); }
         }
 
+        public string Error => "";
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = string.Empty;
+                switch (columnName)
+                {
+                    case "Amount":
+                        if (FromAccount != null && FromAccount.Balance < _amount)
+                            error = "Не достаточно средств";
+                        break;
+                }
+                return error;
+            }
+        }
 
         public override void OnDialogOpened(IDialogParameters parameters)
         {

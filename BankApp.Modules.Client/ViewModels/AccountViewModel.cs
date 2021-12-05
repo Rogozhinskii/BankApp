@@ -64,7 +64,7 @@ namespace BankApp.Modules.Client.ViewModels
         public DelegateCommand SaveNewAccount =>
             _saveNewAccount ?? (_saveNewAccount = new DelegateCommand(ExecuteSaveAccountCommand));
 
-        public string Error => throw new NotImplementedException();
+        public string Error => "";
 
         public string this[string columnName]
         {
