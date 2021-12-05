@@ -1,21 +1,17 @@
 ﻿using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 
 namespace BankApp.Modules.Client.ViewModels
 {
-    public class AccountViewModel : BindableBase, IDialogAware,IDataErrorInfo
+    public class AccountViewModel : DialogViewModelBase,IDataErrorInfo
     {
         private readonly IAccountService _accountService;
         private readonly ITransactionManager<IAccount> _transactionManager;
@@ -29,10 +25,9 @@ namespace BankApp.Modules.Client.ViewModels
             _clientService = clientService;
         }
 
-        public string Title => "Account Dialog";
+        public override string Title => "Account Dialog";
 
-        public event Action<IDialogResult> RequestClose;
-
+       
         private AccountType _accountType;
         public AccountType AccountType
         {
@@ -94,20 +89,15 @@ namespace BankApp.Modules.Client.ViewModels
             _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);          
             dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
             dialogResult.Parameters.Add(CommonTypesPrism.ParameterOwner, _owner);
-            RequestClose?.Invoke(dialogResult);
+            RaiseRequestClose(dialogResult);            
         }
 
-        public bool CanCloseDialog()
+        public override bool CanCloseDialog()
         {
             return true;
         }
 
-        public void OnDialogClosed()
-        {
-            
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
+        public override void OnDialogOpened(IDialogParameters parameters)
         {
             _owner = parameters.GetValue<IStorableDoc>(CommonTypesPrism.ParameterOwner);
             Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>(CommonTypesPrism.ParameterAccounts));

@@ -123,8 +123,7 @@
                 </Grid>
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
-                         SelectedItem="{Binding SelectedAccount}"
-                         >
+                         SelectedItem="{Binding SelectedAccount}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -164,9 +163,7 @@
                                             </Button.DataContext>
                                         <materialDesign:PackIcon Kind="InfoCircle"/>
                                     </Button>
-
-                                </StackPanel>
-                                
+                                </StackPanel>                                
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

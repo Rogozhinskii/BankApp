@@ -1,24 +1,19 @@
 ﻿using BankUI.Core.Common;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Services.Dialogs;
-using System;
 
 namespace BankApp.Modules.Client.ViewModels
 {
-    public class ErrorDialogViewModel : BindableBase, IDialogAware
+    public class ErrorDialogViewModel : DialogViewModelBase
     {
         private string _message;
-
-        public event Action<IDialogResult> RequestClose;
-
         public string Message
         {
             get { return _message; }
             set { SetProperty(ref _message, value); }
         }
 
-        public string Title => "Error occured";
+        public override string Title => "Error occured";
 
         public ErrorDialogViewModel() { }
 
@@ -29,20 +24,15 @@ namespace BankApp.Modules.Client.ViewModels
         void ExecuteCloseCommand()
         {
             DialogResult dialogResult = new DialogResult(ButtonResult.OK);
-            RequestClose?.Invoke(dialogResult);
+            RaiseRequestClose(dialogResult);
         }
 
-        public bool CanCloseDialog()
+        public override bool CanCloseDialog()
         {
             return true;
         }
-
-        public void OnDialogClosed()
-        {
-            
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
+        
+        public override void OnDialogOpened(IDialogParameters parameters)
         {
             Message = parameters.GetValue<string>(CommonTypesPrism.ErrorMessage);
         }
