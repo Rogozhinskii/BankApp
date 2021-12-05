@@ -1,5 +1,7 @@
 ﻿using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel.Interfaces;
+using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -14,11 +16,16 @@ namespace BankApp.Modules.Client.ViewModels
 {
     public class AccountViewModel : BindableBase, IDialogAware,IDataErrorInfo
     {
-        
+        private readonly IAccountService _accountService;
+        private readonly ITransactionManager<IAccount> _transactionManager;
+        private readonly IClientService _clientService;
+        private IStorableDoc _owner;
 
-        public AccountViewModel()
+        public AccountViewModel(IAccountService accountService, ITransactionManager<IAccount> transactionManager,IClientService clientService)
         {
-                      
+            _accountService = accountService;
+            _transactionManager = transactionManager;
+            _clientService = clientService;
         }
 
         public string Title => "Account Dialog";
@@ -55,6 +62,8 @@ namespace BankApp.Modules.Client.ViewModels
 
 
         private DelegateCommand _saveNewAccount;
+        
+
         public DelegateCommand SaveNewAccount =>
             _saveNewAccount ?? (_saveNewAccount = new DelegateCommand(ExecuteSaveAccountCommand));
 
@@ -79,8 +88,11 @@ namespace BankApp.Modules.Client.ViewModels
         void ExecuteSaveAccountCommand()
         {
             IDialogResult dialogResult = new DialogResult();
-            var account = GetNewAccount(AccountType);
-            dialogResult.Parameters.Add("newAccount", account);
+            var accountManager = _accountService.GetAccountManager(AccountType);
+            var newAccount = accountManager.CreateNewAccount();
+            _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
+            _clientService.UpdateAccount(_owner.Id,FromAccount);
+            dialogResult.Parameters.Add("newAccount", newAccount);
             RequestClose?.Invoke(dialogResult);
         }
 
@@ -95,26 +107,17 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
-        {            
-            Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>("accounts"));                
+        {
+            _owner = parameters.GetValue<IStorableDoc>("owner");
+            Accounts = new ReadOnlyObservableCollection<IAccount>(parameters.GetValue<ObservableCollection<IAccount>>("accounts"));
         }
 
         private IAccount GetNewAccount(AccountType accountType)
         {
-            //switch (accountType)
-            //{
-            //    case AccountType.Deposit:
-            //        return new DepositAccount();
-            //    case AccountType.NonDeposit:
-            //        return new BankAccount();
-            //    default:
-            //        return null;
-            //}
-
             IAccount result = accountType switch
             {
                 AccountType.Deposit => new DepositAccount(),
-                AccountType.Savings => new BankAccount(),
+                AccountType.Savings => new SavingAccount(),
                 _ => null
             };
 

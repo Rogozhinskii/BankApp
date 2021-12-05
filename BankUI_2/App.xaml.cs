@@ -32,7 +32,8 @@ namespace BankUI
             string connectionString = ConfigurationManager.AppSettings.Get(path);
             containerRegistry.RegisterInstance(typeof(ILogger), logger);
             var repositoryManager = new RepositoryManager(logger, connectionString);
-            containerRegistry.RegisterInstance<IRepositoryManager>(repositoryManager);            
+            containerRegistry.RegisterInstance<IRepositoryManager>(repositoryManager);
+            
             
         }
 

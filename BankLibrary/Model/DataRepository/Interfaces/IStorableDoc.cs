@@ -9,9 +9,6 @@ namespace BankLibrary.Model.DataRepository.Interfaces
 {
     public interface IStorableDoc
     {
-        public Guid Id { get; set; }
-
-        public List<IAccount> Accounts { get; set; }
-        IStorableDoc Clone();
+        public Guid Id { get;}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

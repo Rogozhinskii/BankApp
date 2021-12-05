@@ -8,9 +8,11 @@ namespace BankLibrary.AccountModel.Interfaces
     {
         
         T CreateNewAccount(float sum);
-        
+        T CreateNewAccount();
+
         void CloseAccount();
 
+        //todo удоооолить  эту херню
         bool SendMoney(Guid fromAccountId, Guid toAccountId, float count);
         
         

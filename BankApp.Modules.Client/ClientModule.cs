@@ -1,6 +1,9 @@
 ﻿using BankApp.Modules.Client.Controls;
 using BankApp.Modules.Client.ViewModels;
 using BankApp.Modules.Client.Views;
+using BankLibrary.AccountModel.Interfaces;
+using BankLibrary.Model.AccountModel;
+using BankLibrary.Model.AccountModel.Interfaces;
 using BankUI.Core.Common;
 using BankUI.Core.Services;
 using BankUI.Core.Services.Interfaces;
@@ -30,6 +33,8 @@ namespace BankApp.Modules.Client
             containerRegistry.RegisterForNavigation<ClientList, ClientListViewModel>();
             containerRegistry.RegisterSingleton<IClientService, ClientService>();
             containerRegistry.RegisterDialog<AccountView, AccountViewModel>();
+            containerRegistry.RegisterSingleton<IAccountService, AccountService>();
+            containerRegistry.RegisterSingleton<ITransactionManager<IAccount>, TransactionManager<IAccount>>();
         }
     }
 }

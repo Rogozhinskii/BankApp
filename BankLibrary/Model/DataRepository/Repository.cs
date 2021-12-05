@@ -1,5 +1,6 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
+using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -28,42 +29,40 @@ namespace BankLibrary.Model.DataRepository
         }
 
         public IEnumerable<IStorableDoc> Deserialize(){
-            JsonSerializerSettings settings = new JsonSerializerSettings{
-                TypeNameHandling = TypeNameHandling.Auto               
-            };
+           
             string json = File.ReadAllText(repositoryManager.ConnectionString);
             JArray arr = JArray.Parse(json);
             List<IStorableDoc> docs = new List<IStorableDoc>(); 
-            foreach (var item in arr){                
-                if (item["ClientType"].ToString() == ((int)ClientType.Regular).ToString()){
-                    RegularClient client = new RegularClient{
-                        Name = item["Name"].ToString(),
-                        Surname = item["Surname"].ToString(),
-                        Id = new Guid(item["Id"].ToString()),
-                        ClientType= (ClientType)Enum.Parse(typeof(ClientType), item["ClientType"].ToString()),
-                        Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(), 
-                                                                                                    settings))
-                    };
-                    docs.Add(client);
-                }
-                else{
-                    if(item["ClientType"].ToString() == ((int)ClientType.Special).ToString()){
-                        SpecialClient client = new SpecialClient
-                        {
-                            Name = item["Name"].ToString(),
-                            Surname = item["Surname"].ToString(),
-                            Id = new Guid(item["Id"].ToString()),
-                            ClientType = (ClientType)Enum.Parse(typeof(ClientType), item["ClientType"].ToString()),
-                            Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(),
-                                                                                                    settings))
-                        };
-                        docs.Add(client);
-                    }
-                    else { continue; }
-                }
+            foreach (var item in arr){
+                var doc = DeserializeItem(item);
+                docs.Add(doc);               
             }
             return docs;
         }
+
+
+        private IStorableDoc DeserializeItem(JToken item)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings{
+                TypeNameHandling = TypeNameHandling.Auto
+            };
+            var clientType = Enum.Parse(typeof(ClientType), item["ClientType"].ToString());
+            IStorableDoc client = clientType switch
+            {
+                ClientType.Regular => new RegularClient(id:new Guid(item["Id"].ToString()),
+                                                        name:item["Name"].ToString(),
+                                                        surname:item["Surname"].ToString()),
+                ClientType.Special => new SpecialClient(id: new Guid(item["Id"].ToString()),
+                                                        name: item["Name"].ToString(),
+                                                        surname: item["Surname"].ToString()),
+                _ => null
+            };
+
+            ((IClient)client).Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(),
+                                                                                                    settings));
+            return client;
+        }
+
 
         public IStorableDoc GetClientById(Guid id)
         {

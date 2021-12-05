@@ -5,36 +5,29 @@ using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace BankLibrary.Model
 {
-    public abstract class ClientBase:IStorableDoc
+    public abstract class ClientBase:IStorableDoc,IClient
     {
-        private Guid id;
-        public Guid Id { get => id; set => id = value; }
+        private Guid _id;
+        public Guid Id => _id;
         public string Name { get; set; }
         public string Surname { get; set; }
-
+        
         public ClientType ClientType { get; set; }
 
-        public List<IAccount> Accounts { get; set; }
-       
+        public List<IAccount> Accounts { get; set; } = new List<IAccount>();
 
-        //public Client(string name,string surname,ClientType type)
-        //{
-            
-        //    Name = name;
-        //    Surname = surname;
-        //    ClientType = type;
-        //    Accounts = new List<IAccount>();
-        //}
-      
-      
-        public IStorableDoc Clone()
-        {
-            throw new NotImplementedException();
+        public ClientBase(Guid id, string name, string surname,ClientType clientType){
+            _id = id;
+            Name = name;
+            Surname = surname;
+            ClientType = clientType;
         }
 
+       
        
     }
 }

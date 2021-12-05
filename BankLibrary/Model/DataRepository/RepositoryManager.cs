@@ -1,4 +1,5 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using System;

@@ -12,8 +12,7 @@ namespace BankApp.Modules.Client.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            string accountType = string.Empty;
-            string balance = string.Empty;
+            string accountType = string.Empty;            
             string number = string.Empty;
             if (values != null){
                 if (values[0].ToString() == AccountType.Deposit.ToString()){
@@ -22,7 +21,7 @@ namespace BankApp.Modules.Client.Converters
                 else{
                     accountType = $"Накопительный счет";
                 }                
-                number = values[1].ToString().Split('-').LastOrDefault().Substring(4,4);
+                number = values[1].ToString().Split('-').LastOrDefault().Substring(7,4);
             }
             return $"Номер: ***{number}\n{accountType}";
         }

@@ -1,63 +1,60 @@
-﻿using BankLibrary.Model;
-using BankLibrary.Model.AccountModel;
-using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.DataRepository.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
 using Newtonsoft.Json;
 using System;
-using System.Text.Json.Serialization;
 
 namespace BankLibrary.Model.AccountModel
 {
-    public class BankAccount:IAccount
+    public abstract class BankAccount:IAccount
     {
        
         
-        private AccountType accountType;
+        private AccountType _accountType;
+        private float _balance;
+
         public Guid Id { get; set; }
+        public float Balance => _balance;
 
-        public float Balance { get; set; }
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AccountType AccountType => _accountType;
 
-        public AccountType AccountType { get; set; }
-
-
+        
 
         public BankAccount()
         {
+            
+        }
 
+        public BankAccount(AccountType type)
+        {
+            _accountType = type;
         }
 
         [JsonConstructor]
         public BankAccount(Guid id, float balance, AccountType type)
         {
             Id = id;
-            Balance = balance;
-            AccountType = type;
+            _balance = balance;
+            _accountType = type;
             
         }
     
-
-        public IStorableDoc Clone()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool CanReduceBalance(float count) =>
             Balance >= count;
         
 
-        public bool ReduceBalance(float count)
+        public virtual bool ReduceBalance(float count)
         {
             bool flag = default;
             if (CanReduceBalance(count))
             {
-                Balance -= count;
+                _balance -= count;
                 return true;
             }
             return flag;
         }
 
         public virtual void IncreaseBalance(float count) =>
-            Balance += count;
+            _balance += count;
         
     }
 }

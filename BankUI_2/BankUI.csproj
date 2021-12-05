@@ -6,6 +6,11 @@
     <AssemblyName>BankUI</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp3.1\Storage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using BankLibrary.Model;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
+using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Services.Interfaces;
 using System;
@@ -14,28 +15,77 @@ namespace BankUI.Core.Services
     {
         private readonly IRepositoryManager _repositoryManager;
         private List<IStorableDoc> _clients;
-        private List<IStorableDoc> _regularClientItems = new List<IStorableDoc>();
-        private List<IStorableDoc> _specialClientItems = new List<IStorableDoc>();
+        private List<IClient> _regularClientItems = new List<IClient>();
+        private List<IClient> _specialClientItems = new List<IClient>();
 
         public ClientService(IRepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
             _clients = _repositoryManager.ReadClientDataAsList().ToList();
-            _regularClientItems = _clients.Where(x => ((ClientBase)x).ClientType == ClientType.Regular).ToList();
-            _specialClientItems = _clients.Where(x => ((ClientBase)x).ClientType == ClientType.Special).ToList();
+            EnrichClietnLists();           
         }
 
-        public IList<IAccount> GetAccounts(IStorableDoc storableDoc)
+        private void EnrichClietnLists()
+        {
+            
+            foreach (var item in _clients)
+            {
+                if(item is IClient client)
+                {
+                    if (client.ClientType == ClientType.Regular)
+                    {
+                        _regularClientItems.Add(client);
+                    }
+                    if (client.ClientType == ClientType.Special)
+                    {
+                        _specialClientItems.Add(client);
+                    }
+                }
+            }
+        }
+
+        public void CommitChanges(IEnumerable<IStorableDoc> clients)
+        {
+            _repositoryManager.CommitChanges(clients);
+        }
+
+        public bool UpdateAccount(Guid ownerId, IAccount account) //todo это не надо
+        {
+            var found = _clients.FirstOrDefault(x => x.Id == ownerId);
+            if (found != null && found is IClient client)
+            {
+                int index = client.Accounts.IndexOf(account);
+                if (index == -1)
+                    return false;
+                client.Accounts[index] = account;
+                return true;
+            }
+            return false;
+
+        }
+
+        public bool SaveNewAccount(Guid ownerId,IAccount account)
+        {            
+            var found = _clients.FirstOrDefault(x => x.Id == ownerId);
+            if (found != null && found is IClient client)
+            {
+                client.Accounts.Add(account);
+                return true;
+            }
+            return false;
+        }
+
+        public IList<IAccount> GetAccounts(IClient storableDoc)
         {
             return storableDoc.Accounts;
         }
 
-        public IList<IStorableDoc> GetRegularClients()
+        public IList<IClient> GetRegularClients()
         {
             return _regularClientItems;
         }
 
-        public IList<IStorableDoc> GetSpecialClients()
+        public IList<IClient> GetSpecialClients()
         {
             return _specialClientItems;
         }

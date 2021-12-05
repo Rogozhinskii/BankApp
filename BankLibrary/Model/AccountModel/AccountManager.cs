@@ -7,7 +7,7 @@ using System;
 
 namespace BankLibrary.Model.AccountModel
 {
-    public class AccountManager<T> : IAccountManager<T> where T:BankAccount, new()
+    public class AccountManager<T> : IAccountManager<T> where T:IAccount, new()
     {
         
         private IRepositoryManager repositoryManager;
@@ -20,7 +20,7 @@ namespace BankLibrary.Model.AccountModel
 
         public AccountManager() { }
         public void CloseAccount(){
-            account = null;
+            
         }
 
        
@@ -51,5 +51,14 @@ namespace BankLibrary.Model.AccountModel
             acc.IncreaseBalance(sum);
             return acc;
         }
+
+        public T CreateNewAccount()
+        {
+            T acc = new T();
+            acc.Id = Guid.NewGuid();
+            account = acc;     //todo а нахера я это делаю?       
+            return acc;
+        }
+
     }
 }

@@ -78,7 +78,7 @@
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2">
             <ListBox x:Name="_accountList"
-                 ItemsSource="{Binding Accounts}"
+                 ItemsSource="{Binding Accounts,UpdateSourceTrigger=PropertyChanged}"
                  IsEnabled="{Binding ElementName=_tbtn,Path=IsChecked}"                 
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  SelectedItem="{Binding FromAccount}">

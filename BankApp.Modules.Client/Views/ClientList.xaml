@@ -101,11 +101,30 @@
                                Fill="Transparent"
                                SnapsToDevicePixels="True"
                                />
-                    <Button Content="New Acc" Grid.Column="0" Grid.Row="5" Command="{Binding CreateNewAccount}"/>
+
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="5" 
+                                Orientation="Horizontal">
+                        <Button
+                            Command="{Binding CreateNewAccount}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                            ToolTip="Открыть счет">
+                            <materialDesign:PackIcon Kind="Plus"/>
+                        </Button>
+                        <Button Margin="5,0,0,0"
+                            Command="{Binding CreateNewAccount}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                            ToolTip="Перевести">
+                            <materialDesign:PackIcon Kind="ArrowLeftRight"/>
+                        </Button>
+
+                    </StackPanel>
+                    
                 </Grid>
 
                 <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
-                         SelectedItem="{Binding SelectedAccount}">
+                         SelectedItem="{Binding SelectedAccount}"
+                         >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -137,12 +156,12 @@
                                         <materialDesign:PackIcon Kind="Close"/>
                                     </Button>
                                     <Button Margin="5,0,0,0"
-                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                    ToolTip="More Information"
-                                    Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
-                                        <Button.DataContext>
-                                            <local:ClientList/>
-                                        </Button.DataContext>
+                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                        ToolTip="More Information"
+                                        Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                            <Button.DataContext>
+                                                <local:ClientList/>
+                                            </Button.DataContext>
                                         <materialDesign:PackIcon Kind="InfoCircle"/>
                                     </Button>
 

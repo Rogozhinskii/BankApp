@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace BankLibrary.Model.ClientModel
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum ClientType
     {
+        [EnumMember(Value = "Regular")]
         Regular,
+        [EnumMember(Value = "Special")]
         Special
     }
 }

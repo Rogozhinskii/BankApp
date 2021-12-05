@@ -1,6 +1,7 @@
 ﻿using BankLibrary.Model;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
+using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core;
 using BankUI.Core.Common;
@@ -19,6 +20,7 @@ namespace BankApp.Modules.Client.ViewModels
         private string _message;
         private readonly IClientService _clientService;
         private readonly IDialogService _dialogService;
+        private string _currentFolder = FolderParameters.Regular;
 
         public string Message
         {
@@ -26,31 +28,41 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        private IStorableDoc _client;
-        public IStorableDoc Client
+        private IClient _client;
+        public IClient Client
         {
             get { return _client; }
-            set { 
-                    SetProperty(ref _client, value);
-                    if (_client != null)
-                    {
-                        Accounts = new ObservableCollection<IAccount>(_client.Accounts);
-                    }
+            set 
+            { 
+                SetProperty(ref _client, value);
+                if (_client != null)
+                {
+                    Accounts =GetAccountCollection();
+                }
             }
         }
 
-        private ObservableCollection<IStorableDoc> _bankClients;
-        public ObservableCollection<IStorableDoc> BankClients
+        /// <summary>
+        /// Жуткий костыль. RaisePropertyChanged не сработал
+        /// </summary>
+        /// <returns></returns>
+        private ObservableCollection<IAccount> GetAccountCollection()
+        {
+            return new ObservableCollection<IAccount>(_client.Accounts);
+        }
+
+        private ObservableCollection<IClient> _bankClients;
+        public ObservableCollection<IClient> BankClients
         {
             get { return _bankClients; }
-            set { SetProperty(ref _bankClients, value); }
+            set { SetProperty(ref _bankClients, value);}
         }
 
         private ObservableCollection<IAccount> _accounts;
         public ObservableCollection<IAccount> Accounts
         {
             get { return _accounts; }
-            set { SetProperty(ref _accounts, value); }
+            set {  SetProperty(ref _accounts, value); }
         }
 
         private IAccount _selectedAccount;
@@ -68,7 +80,7 @@ namespace BankApp.Modules.Client.ViewModels
         {
             if (_selectedAccount != null)
             {
-                Accounts.Remove(_selectedAccount);
+                Accounts.Remove(_selectedAccount);                
             }
         }
 
@@ -79,11 +91,14 @@ namespace BankApp.Modules.Client.ViewModels
         void ExecuteCreateNewAccount()
         {
             var dialogParameters = new DialogParameters();
-            dialogParameters.Add("accounts", _accounts);
+            dialogParameters.Add("accounts", Accounts);
+            dialogParameters.Add("owner", Client);
             _dialogService.Show("AccountView",dialogParameters, (result)=>
             {
                 var newAcc=result.Parameters.GetValue<IAccount>("newAccount");
-                Accounts.Add(newAcc);
+                _clientService.SaveNewAccount(((IStorableDoc)Client).Id,newAcc);
+                LoadClients(_currentFolder);
+                Accounts = GetAccountCollection();
             });
         }
 
@@ -95,10 +110,9 @@ namespace BankApp.Modules.Client.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            string tt = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
-            LoadClients(tt);
-            Client = BankClients.FirstOrDefault();
-
+            _currentFolder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
+            LoadClients(_currentFolder);
+            Client = BankClients.FirstOrDefault();            
         }
 
         private void LoadClients(string folder)
@@ -107,12 +121,12 @@ namespace BankApp.Modules.Client.ViewModels
             {
                 case FolderParameters.Regular:
                     {
-                        BankClients = new ObservableCollection<IStorableDoc>(_clientService.GetRegularClients());
+                        BankClients = new ObservableCollection<IClient>(_clientService.GetRegularClients());
                         break;
                     }
                 case FolderParameters.Special:
                     {
-                        BankClients = new ObservableCollection<IStorableDoc>(_clientService.GetSpecialClients());
+                        BankClients = new ObservableCollection<IClient>(_clientService.GetSpecialClients());
                         break;
                     }               
                 default:

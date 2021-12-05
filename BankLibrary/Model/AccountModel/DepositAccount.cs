@@ -17,7 +17,7 @@ namespace BankLibrary.Model.AccountModel
         }
 
         [JsonConstructor]
-        public DepositAccount(Guid id, float balance,AccountType type) : base(id, balance,type)
+        public DepositAccount(Guid id, float balance) : base(id, balance,AccountType.Deposit)
         {
         }
     }
