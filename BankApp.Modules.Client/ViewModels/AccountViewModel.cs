@@ -93,6 +93,7 @@ namespace BankApp.Modules.Client.ViewModels
             _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
             _clientService.UpdateAccount(_owner.Id,FromAccount);
             dialogResult.Parameters.Add("newAccount", newAccount);
+            dialogResult.Parameters.Add("owner", _owner);
             RequestClose?.Invoke(dialogResult);
         }
 

@@ -37,7 +37,7 @@ namespace BankApp.Modules.Client.ViewModels
                 SetProperty(ref _client, value);
                 if (_client != null)
                 {
-                    Accounts =GetAccountCollection();
+                    Accounts = new ObservableCollection<IAccount>(_client.Accounts);
                 }
             }
         }
@@ -96,9 +96,11 @@ namespace BankApp.Modules.Client.ViewModels
             _dialogService.Show("AccountView",dialogParameters, (result)=>
             {
                 var newAcc=result.Parameters.GetValue<IAccount>("newAccount");
+                var owner = result.Parameters.GetValue<IClient>("owner");
                 _clientService.SaveNewAccount(((IStorableDoc)Client).Id,newAcc);
                 LoadClients(_currentFolder);
-                Accounts = GetAccountCollection();
+                Client = owner;
+                //Accounts = GetAccountCollection();
             });
         }
 
