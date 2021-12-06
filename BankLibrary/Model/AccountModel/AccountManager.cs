@@ -8,26 +8,22 @@ using System;
 
 namespace BankLibrary.Model.AccountModel
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
+    
     public class AccountManager<T> : IAccountManager<T> where T:IAccount, new()
     {
         public AccountManager() { }
        
-        public T CreateNewAccount(ClientType type,float sum)
+        public T CreateNewAccount(float sum)
         {
-            T acc = CreateNewAccount(type);
+            T acc = CreateNewAccount();
             acc.IncreaseBalance(sum);
             return acc;
         }
 
-        public T CreateNewAccount(ClientType type)
+        public T CreateNewAccount()
         {
             T acc = new T();
-            acc.Id = Guid.NewGuid();
-            acc.ClientType = type;            
+            acc.Id = Guid.NewGuid();                      
             return acc;
         }
 

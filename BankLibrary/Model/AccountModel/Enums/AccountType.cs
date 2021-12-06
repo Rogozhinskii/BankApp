@@ -6,7 +6,9 @@ using System.Runtime.Serialization;
 
 namespace BankLibrary.Model.AccountModel
 {
-
+    /// <summary>
+    /// Перечисление возможных типов счета
+    /// </summary>
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AccountType

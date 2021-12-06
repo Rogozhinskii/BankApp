@@ -20,10 +20,7 @@ namespace BankLibrary.Model.AccountModel
 
         public ClientType ClientType { get; set; }
 
-        public BankAccount()
-        {
-            
-        }
+        public BankAccount() { }
 
         public BankAccount(AccountType type)
         {
@@ -36,7 +33,6 @@ namespace BankLibrary.Model.AccountModel
             Id = id;
             _balance = balance;
             _accountType = type;
-            
         }
     
         public bool CanReduceBalance(float count) =>
@@ -44,14 +40,13 @@ namespace BankLibrary.Model.AccountModel
         
 
         public virtual bool ReduceBalance(float count)
-        {
-            bool flag = default;
+        {           
             if (CanReduceBalance(count))
             {
                 _balance -= count;
                 return true;
             }
-            return flag;
+            return false;
         }
 
         public virtual void IncreaseBalance(float count) =>

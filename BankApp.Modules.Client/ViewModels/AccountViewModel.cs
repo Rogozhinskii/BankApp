@@ -90,9 +90,14 @@ namespace BankApp.Modules.Client.ViewModels
         {
             IDialogResult dialogResult = new DialogResult();
             var accountManager = _accountService.GetAccountManager(AccountType);
-            var newAccount = accountManager.CreateNewAccount(((IClient)_owner).ClientType);
+            var newAccount = accountManager.CreateNewAccount();
+            newAccount.ClientType = ((IClient)_owner).ClientType;
             if (FromAccount != null){
                 _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
+            }
+            if(Balance>0 && FromAccount == null)
+            {
+                _transactionManager.SendMoneyToAccount(newAccount, Balance);
             }
             if(newAccount is DepositAccount depositAccount){
                depositAccount.Term=Term;

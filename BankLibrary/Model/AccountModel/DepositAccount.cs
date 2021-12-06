@@ -10,7 +10,7 @@ namespace BankLibrary.Model.AccountModel
         {
             get
             {
-                if (this.ClientType == ClientModel.ClientType.Special)
+                if (ClientType == ClientModel.ClientType.Special)
                 {
                     return DepositRates.specialRate;
                 }

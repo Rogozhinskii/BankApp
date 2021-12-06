@@ -10,6 +10,11 @@ namespace BankUI.Core.Services
 {
     public class AccountService : IAccountService
     {
+        /// <summary>
+        ///  <see cref="IAccountService"/>
+        /// </summary>
+        /// <param name="accountType"></param>
+        /// <returns></returns>
         public IAccountManager<IAccount> GetAccountManager(AccountType accountType)
         {
             IAccountManager<IAccount> _accountManager = accountType switch

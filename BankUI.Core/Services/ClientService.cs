@@ -25,8 +25,10 @@ namespace BankUI.Core.Services
             EnrichClietnLists();           
         }
 
-        private void EnrichClietnLists()
-        {            
+        /// <summary>
+        /// Распределяет элементы коллекции _client по соответсвующим коллекциям в зависимости от типа хранимых клиентов
+        /// </summary>
+        private void EnrichClietnLists(){            
             foreach (var item in _clients){
                 if(item is IClient client){
                     if (client.ClientType == ClientType.Regular){
@@ -37,11 +39,6 @@ namespace BankUI.Core.Services
                     }
                 }
             }
-        }
-
-        public void CommitChanges(IEnumerable<IStorableDoc> clients)
-        {
-            _repositoryManager.CommitChanges(clients);
         }
 
         public bool SaveNewAccount(Guid ownerId,IAccount account)

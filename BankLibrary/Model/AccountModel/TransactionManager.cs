@@ -12,15 +12,12 @@ namespace BankLibrary.Model.AccountModel
         public bool SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum)
         {
             bool result = false;
-            if (fromAccaunt != null && toAccaunt != null)
-            {
-
-                if (fromAccaunt.CanReduceBalance(sum))
+            if (fromAccaunt != null && toAccaunt != null){
+                result = fromAccaunt.ReduceBalance(sum);
+                if (result)
                 {
-                    result = fromAccaunt.ReduceBalance(sum);
                     toAccaunt.IncreaseBalance(sum);
                 }
-
             }
             return result;
         }
