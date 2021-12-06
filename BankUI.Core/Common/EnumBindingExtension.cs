@@ -3,6 +3,9 @@ using System.Windows.Markup;
 
 namespace BankUI.Core.Common
 {
+    /// <summary>
+    /// расширение разметки для привязки перечислений
+    /// </summary>
     public class EnumBindingExtension : MarkupExtension
     {
         private Type _enumType;

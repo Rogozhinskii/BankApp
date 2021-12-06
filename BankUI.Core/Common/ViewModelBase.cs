@@ -6,6 +6,9 @@ using System.Text;
 
 namespace BankUI.Core.Common
 {
+    /// <summary>
+    /// Базовая viewmodel с возможностью применения навигации между views
+    /// </summary>
     public class ViewModelBase : BindableBase, IConfirmNavigationRequest
     {
         public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)

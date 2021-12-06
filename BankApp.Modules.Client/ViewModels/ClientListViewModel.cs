@@ -99,6 +99,18 @@ namespace BankApp.Modules.Client.ViewModels
             }
         }
 
+        private DelegateCommand _showAccountInfoCommand;
+        public DelegateCommand ShowAccountInfoCommand =>
+            _showAccountInfoCommand ?? (_showAccountInfoCommand = new DelegateCommand(ExecuteCommandName));
+
+        void ExecuteCommandName()
+        {
+            var dialogParameters = new DialogParameters();
+            dialogParameters.Add(CommonTypesPrism.SelectedAccount, SelectedAccount);
+            _dialogService.ShowDialog(CommonTypesPrism.AccountInfoView, dialogParameters, null);
+
+        }
+
         private DelegateCommand _createNewAccount;
         public DelegateCommand CreateNewAccount =>
             _createNewAccount ?? (_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount));

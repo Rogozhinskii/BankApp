@@ -141,7 +141,7 @@
                                     <Button Margin="5,0,0,0"
                                         Style="{StaticResource MaterialDesignIconForegroundButton}"
                                         ToolTip="More Information"                                        
-                                        Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+                                        Command="{Binding DataContext.ShowAccountInfoCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
                                         <Button.DataContext>
                                             <local:ClientList/>
                                         </Button.DataContext>

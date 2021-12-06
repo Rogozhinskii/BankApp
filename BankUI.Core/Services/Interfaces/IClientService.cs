@@ -9,14 +9,34 @@ using System.Text;
 
 namespace BankUI.Core.Services.Interfaces
 {
+    /// <summary>
+    /// Интерфейс доступа к хранимым данным о клиента
+    /// </summary>
     public interface IClientService
     {
-        //IList<IClient> GetAllClients();
+        /// <summary>
+        /// Возвращает коллекцию клиентов, у которых ClientType==ClientType.Regular
+        /// </summary>
+        /// <returns></returns>
         IList<IClient> GetRegularClients();
+        /// <summary>
+        /// Возвращает коллекцию клиентов, у которых ClientType==ClientType.Special
+        /// </summary>
+        /// <returns></returns>
         IList<IClient> GetSpecialClients();
 
-        IList<IAccount> GetAccounts(IClient storableDoc);
+        /// <summary>
+        /// Добавляет новых счет к коллекции счетов клиента
+        /// </summary>
+        /// <param name="ownerId">Id владельца счета</param>
+        /// <param name="account">сам счет</param>
+        /// <returns></returns>
         bool SaveNewAccount(Guid ownerId,IAccount account);
+
+        /// <summary>
+        /// Сохраняет изменения
+        /// </summary>
+        /// <returns></returns>
         bool SaveData();
        
     }

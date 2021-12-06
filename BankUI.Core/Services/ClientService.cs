@@ -26,18 +26,13 @@ namespace BankUI.Core.Services
         }
 
         private void EnrichClietnLists()
-        {
-            
-            foreach (var item in _clients)
-            {
-                if(item is IClient client)
-                {
-                    if (client.ClientType == ClientType.Regular)
-                    {
+        {            
+            foreach (var item in _clients){
+                if(item is IClient client){
+                    if (client.ClientType == ClientType.Regular){
                         _regularClientItems.Add(client);
                     }
-                    if (client.ClientType == ClientType.Special)
-                    {
+                    if (client.ClientType == ClientType.Special){
                         _specialClientItems.Add(client);
                     }
                 }
@@ -52,33 +47,23 @@ namespace BankUI.Core.Services
         public bool SaveNewAccount(Guid ownerId,IAccount account)
         {            
             var found = _clients.FirstOrDefault(x => x.Id == ownerId);
-            if (found != null && found is IClient client)
-            {
+            if (found != null && found is IClient client){
                 client.Accounts.Add(account);
                 return true;
             }
             return false;
         }
 
-        public IList<IAccount> GetAccounts(IClient storableDoc)
-        {
-            return storableDoc.Accounts;
-        }
-
-        public IList<IClient> GetRegularClients()
-        {
+        public IList<IClient> GetRegularClients(){
             return _regularClientItems;
         }
 
-        public IList<IClient> GetSpecialClients()
-        {
+        public IList<IClient> GetSpecialClients(){
             return _specialClientItems;
         }
 
-        public bool SaveData()
-        {            
-            try
-            {
+        public bool SaveData(){            
+            try{
                 _repositoryManager.CommitChanges(_clients);
                 return true;
             }

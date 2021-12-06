@@ -16,7 +16,7 @@ namespace BankUI.Core.Services
             {
                 AccountType.Deposit => new AccountManager<DepositAccount>(),
                 AccountType.Savings => new AccountManager<SavingAccount>(),
-                _ => null
+                _ => new AccountManager<SavingAccount>()
             };
 
             return _accountManager;

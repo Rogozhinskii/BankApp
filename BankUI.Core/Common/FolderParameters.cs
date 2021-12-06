@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BankUI.Core.Common
 {
+    /// <summary>
+    /// Константы для реализации навигации по модулям 
+    /// </summary>
     public class FolderParameters
     {
         public const string FolderKey = "Folder";
@@ -11,7 +14,5 @@ namespace BankUI.Core.Common
         public const string Special = "Special";
         public static string DefaultNavigationPath = $"ClientList?{FolderKey}={Regular}";
 
-
-        
     }
 }

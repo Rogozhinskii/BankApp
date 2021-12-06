@@ -7,35 +7,39 @@ using System.Linq;
 
 namespace BankUI.Core.Common
 {
+    /// <summary>
+    /// ViewModel для диалоговых окон
+    /// </summary>
     public class DialogViewModelBase : BindableBase,IDialogAware
     {
-        public DialogViewModelBase()
-        {
+        public DialogViewModelBase() { }
 
-        }
-
+        /// <summary>
+        /// Заголовок окна
+        /// </summary>
         public virtual string Title => "";
 
+        /// <summary>
+        /// Возникает при закрытии диалогового окна
+        /// </summary>
         public event Action<IDialogResult> RequestClose;
+
 
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
             RequestClose?.Invoke(dialogResult);
         }
 
-        public virtual bool CanCloseDialog()
-        {
-            return true;
-        }
+        /// <summary>
+        /// true когда диалоговое окно может быть закрыто, false иначе
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool CanCloseDialog() =>
+            true;
 
-        public virtual void OnDialogClosed()
-        {
-            
-        }
 
-        public virtual void OnDialogOpened(IDialogParameters parameters)
-        {
-            
-        }
+        public virtual void OnDialogClosed() { }
+
+        public virtual void OnDialogOpened(IDialogParameters parameters) { }
     }
 }

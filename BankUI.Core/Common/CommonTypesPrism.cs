@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BankUI.Core.Common
 {
+    /// <summary>
+    /// Общие типы и константы для навигации и dialogService
+    /// </summary>
     public class CommonTypesPrism
     {
         #region Regions
@@ -21,6 +24,9 @@ namespace BankUI.Core.Common
         public const string TransactionView = "TransactionView";
         public const string NotificationDialog = "NotificationDialog";
         public const string NotificationMessage = "NotificationMessage";
+        public const string SelectedAccount = "SelectedAccount";
+        public const string AccountInfoView = "AccountInfoView";
+
         #endregion
 
         #region other constants

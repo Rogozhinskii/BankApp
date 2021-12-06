@@ -15,6 +15,9 @@ using Xunit.Sdk;
 
 namespace BankAppTests
 {
+    /// <summary>
+    /// Песочница для экспериментов
+    /// </summary>
     [TestClass]
     public class ScrapBook
     {
@@ -49,10 +52,11 @@ namespace BankAppTests
             storable.AddRange(clients);
             storable.AddRange(specClients);
 
+            var rnd = new Random();
             foreach (var client in storable)
             {
                 var acc = new List<IAccount>();
-                var depAcc = Enumerable.Range(1, 5).Select(i => new DepositAccount(Guid.NewGuid(), 10f * i) {ClientType=((IClient)client).ClientType });
+                var depAcc = Enumerable.Range(1, 5).Select(i => new DepositAccount(Guid.NewGuid(), 10f * i) {ClientType=((IClient)client).ClientType,Term=rnd.Next(12,36) });
                 var savAcc = Enumerable.Range(1, 5).Select(i => new SavingAccount(Guid.NewGuid(), 10f * i) { ClientType = ((IClient)client).ClientType });
                 acc.AddRange(depAcc);
                 acc.AddRange(savAcc);
