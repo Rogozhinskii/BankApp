@@ -1,16 +1,30 @@
-﻿using BankLibrary.AccountModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BankLibrary.Model.AccountModel
 {
     public class DepositAccount:BankAccount
     {
+        public int Term { get; set; }
+        public float Rate
+        {
+            get
+            {
+                if (this.ClientType == ClientModel.ClientType.Special)
+                {
+                    return DepositRates.specialRate;
+                }
+                return DepositRates.regularRate;
+            }
+        }
+
+        public float TotalIncome
+        {
+            get
+            {
+                return Balance * Convert.ToSingle(Math.Pow(1 + Rate / 12, Term));
+            }
+        }
         public DepositAccount() : base(AccountType.Deposit) { }
 
         [JsonConstructor]

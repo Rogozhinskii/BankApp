@@ -1,27 +1,25 @@
-﻿using BankLibrary.Model.ClientModel;
+﻿using BankLibrary.Model.AccountModel;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
+using System.Windows;
 using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    class AccountTypeConverter : IValueConverter
+    public class AccoutTypeToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string type = string.Empty;
-            if (value != null)
+            if (value != null && value is AccountType accountType)
             {
-                if (value.ToString() == ClientType.Special.ToString())
+                if (accountType == AccountType.Deposit)
                 {
-                    type = "Привелегированный клиент";
-                }
-                else
-                {
-                    type = "Клиент без привелегий";
+                    return Visibility.Visible;
                 }
             }
-            return type;
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

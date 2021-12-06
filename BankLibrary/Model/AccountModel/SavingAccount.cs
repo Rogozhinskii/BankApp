@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BankLibrary.Model.ClientModel.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;

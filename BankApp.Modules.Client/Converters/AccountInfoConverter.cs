@@ -1,9 +1,7 @@
 ﻿using BankLibrary.Model.AccountModel;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
@@ -15,13 +13,14 @@ namespace BankApp.Modules.Client.Converters
             string accountType = string.Empty;            
             string number = string.Empty;
             if (values != null){
+                number = values[1].ToString().Split('-').LastOrDefault().Substring(7, 4);
                 if (values[0].ToString() == AccountType.Deposit.ToString()){
                     accountType = $"Депозитный счет";
                 }
                 else{
                     accountType = $"Накопительный счет";
                 }                
-                number = values[1].ToString().Split('-').LastOrDefault().Substring(7,4);
+                
             }
             return $"Номер: ***{number}\n{accountType}";
         }

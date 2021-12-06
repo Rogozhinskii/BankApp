@@ -1,4 +1,6 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel;
+using BankLibrary.Model.ClientModel.Interfaces;
 using Newtonsoft.Json;
 using System;
 
@@ -6,10 +8,9 @@ namespace BankLibrary.Model.AccountModel
 {
     public abstract class BankAccount:IAccount
     {
-       
-        
         private AccountType _accountType;
         private float _balance;
+        
 
         public Guid Id { get; set; }
         public float Balance => _balance;
@@ -17,7 +18,7 @@ namespace BankLibrary.Model.AccountModel
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public AccountType AccountType => _accountType;
 
-        
+        public ClientType ClientType { get; set; }
 
         public BankAccount()
         {

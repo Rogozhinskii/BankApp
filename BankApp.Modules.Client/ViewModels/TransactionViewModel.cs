@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.AccountModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel;
+using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
@@ -49,7 +50,7 @@ namespace BankApp.Modules.Client.ViewModels
         {
             var result = new ObservableCollection<IAccount>();
             if (_owner != null)
-                result = new ObservableCollection<IAccount>(_owner.Accounts);
+                result = new ObservableCollection<IAccount>(_owner.Accounts.Where(x=>x.AccountType!=AccountType.Deposit));
             return result;
         }
 

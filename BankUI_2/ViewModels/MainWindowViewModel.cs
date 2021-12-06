@@ -9,7 +9,7 @@ namespace BankUI.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly IRegionManager _regionManager;
-        private string _title = "blblblblbl";
+        private string _title = "Bank App";
         public string Title
         {
             get { return _title; }

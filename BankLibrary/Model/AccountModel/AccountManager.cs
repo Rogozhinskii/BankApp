@@ -1,6 +1,7 @@
 ﻿using BankLibrary.AccountModel;
 using BankLibrary.AccountModel.Interfaces;
 using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
@@ -10,8 +11,7 @@ namespace BankLibrary.Model.AccountModel
     public class AccountManager<T> : IAccountManager<T> where T:IAccount, new()
     {
         
-        private IRepositoryManager repositoryManager;
-        private T account;
+        private IRepositoryManager repositoryManager;        
         
         public AccountManager(IRepositoryManager repositoryManager){
             this.repositoryManager = repositoryManager ?? throw new ArgumentNullException($"{nameof(repositoryManager)} не может быть null");           
@@ -43,20 +43,18 @@ namespace BankLibrary.Model.AccountModel
 
         }
 
-        public T CreateNewAccount(float sum)
+        public T CreateNewAccount(ClientType type,float sum)
         {
-            T acc = new T();
-            acc.Id = Guid.NewGuid();
-            account = acc;
+            T acc = CreateNewAccount(type);
             acc.IncreaseBalance(sum);
             return acc;
         }
 
-        public T CreateNewAccount()
+        public T CreateNewAccount(ClientType type)
         {
             T acc = new T();
             acc.Id = Guid.NewGuid();
-            account = acc;     //todo а нахера я это делаю?       
+            acc.ClientType = type;            
             return acc;
         }
 

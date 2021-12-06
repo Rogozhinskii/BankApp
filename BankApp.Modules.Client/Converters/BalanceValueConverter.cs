@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
@@ -15,7 +13,7 @@ namespace BankApp.Modules.Client.Converters
                 float balance = 0f;
                 if (float.TryParse(value.ToString(), out balance))
                 {
-                    return $"{balance.ToString()}";
+                    return $"{balance}";
                 }
             }
             return string.Empty;

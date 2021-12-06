@@ -16,7 +16,7 @@
     <UserControl.Resources>
         <converters:FullNameConverter x:Key="FullNameConverter"/>
         <converters:ClientTypeConverter x:Key="ClientTypeConverter"/>
-        <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
+        <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>        
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -122,7 +122,7 @@
                     
                 </Grid>
 
-                <ListBox Grid.Row="1" ItemsSource="{Binding Accounts}"
+                <ListBox Grid.Row="1" ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding SelectedAccount}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -140,7 +140,7 @@
                                     </Button>
                                     <Button Margin="5,0,0,0"
                                         Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                        ToolTip="More Information"
+                                        ToolTip="More Information"                                        
                                         Command="{Binding DataContext.DeleteAccountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
                                         <Button.DataContext>
                                             <local:ClientList/>

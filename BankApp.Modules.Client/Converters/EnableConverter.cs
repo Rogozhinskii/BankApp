@@ -1,28 +1,29 @@
-﻿using BankLibrary.Model.AccountModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    class SelectedToEnableConverter : IValueConverter
+    public class EnableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value!=null && value is IAccount)
+            if(value!=null && value is AccountType accountType)
             {
-                return true;
+                if (accountType == AccountType.Deposit)
+                {
+                    return true;
+                }
             }
             return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value==null && value is IAccount)
-            {
-                return false;
-            }
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

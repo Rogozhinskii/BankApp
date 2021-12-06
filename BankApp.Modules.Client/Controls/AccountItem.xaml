@@ -11,6 +11,7 @@
 
     <UserControl.Resources> 
         <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
+        <converters:EnableConverter x:Key="TextBoxEnableConverter"/>
     </UserControl.Resources>
     
     <StackPanel Orientation="Horizontal">
@@ -28,7 +29,7 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>
+                <TextBlock Text="{Binding Balance, StringFormat=C}" Foreground="{StaticResource PrimaryHueDarkBrush}" FontSize="18"/>                
             </StackPanel>
         </materialDesign:Card>
     </StackPanel>

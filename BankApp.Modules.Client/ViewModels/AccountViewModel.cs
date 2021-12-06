@@ -6,7 +6,6 @@ using BankUI.Core.Common;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Services.Dialogs;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -15,15 +14,13 @@ namespace BankApp.Modules.Client.ViewModels
     public class AccountViewModel : DialogViewModelBase,IDataErrorInfo
     {
         private readonly IAccountService _accountService;
-        private readonly ITransactionManager<IAccount> _transactionManager;
-        private readonly IClientService _clientService;
+        private readonly ITransactionManager<IAccount> _transactionManager;        
         private IStorableDoc _owner;
 
         public AccountViewModel(IAccountService accountService, ITransactionManager<IAccount> transactionManager,IClientService clientService)
         {
             _accountService = accountService;
-            _transactionManager = transactionManager;
-            _clientService = clientService;
+            _transactionManager = transactionManager;            
         }
 
         public override string Title => "Account Dialog";
@@ -41,6 +38,13 @@ namespace BankApp.Modules.Client.ViewModels
         {
             get { return _accounts; }
             set { SetProperty(ref _accounts, value); }
+        }
+
+        private int _term;
+        public int Term
+        {
+            get { return _term; }
+            set { SetProperty(ref _term, value); }
         }
 
         private IAccount _fromAccount;
@@ -86,10 +90,14 @@ namespace BankApp.Modules.Client.ViewModels
         {
             IDialogResult dialogResult = new DialogResult();
             var accountManager = _accountService.GetAccountManager(AccountType);
-            var newAccount = accountManager.CreateNewAccount();
-            _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);          
-            dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
-            dialogResult.Parameters.Add(CommonTypesPrism.ParameterOwner, _owner);
+            var newAccount = accountManager.CreateNewAccount(((IClient)_owner).ClientType);
+            if (FromAccount != null){
+                _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
+            }
+            if(newAccount is DepositAccount depositAccount){
+               depositAccount.Term=Term;
+            }
+            dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);            
             RaiseRequestClose(dialogResult);            
         }
 

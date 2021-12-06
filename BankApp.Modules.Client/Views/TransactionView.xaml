@@ -29,7 +29,7 @@
                   Margin="10,0,0,0"
                   Header="From">
             <ListBox 
-                 ItemsSource="{Binding OwnerAccounts,UpdateSourceTrigger=PropertyChanged}"
+                 ItemsSource="{Binding OwnerAccounts}"
                  SelectedItem="{Binding FromAccount}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

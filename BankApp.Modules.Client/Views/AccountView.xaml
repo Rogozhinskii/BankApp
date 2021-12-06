@@ -13,6 +13,7 @@
         <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
         <converters:SelectedToEnableConverter x:Key="SelectedToBoolean"/>
         <converters:BalanceValueConverter x:Key="BalanceValueConverter"/>
+        <converters:EnableConverter x:Key="TextBoxEnableConverter"/>
     </UserControl.Resources>
         
        
@@ -75,7 +76,28 @@
             
         </StackPanel>
 
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    Orientation="Horizontal">
+            <TextBox Margin="20,0,0,0"
+                     Grid.ColumnSpan="2"
+                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                     Text="{Binding Term}"
+                     VerticalAlignment="Top"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap" 
+                     IsEnabled="{Binding AccountType, Converter={StaticResource TextBoxEnableConverter}}"
+                     materialDesign:HintAssist.Hint="Срок депозита"/>
+
+
+            
+        </StackPanel>
+
         
+
+
+
+
         <Border Grid.Row="2"
                 Grid.ColumnSpan="2">
             <ListBox x:Name="_accountList"

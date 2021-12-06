@@ -41,7 +41,7 @@ namespace BankApp.Modules.Client.ViewModels
                 SetProperty(ref _client, value);
                 if (_client != null)
                 {
-                    Accounts = new ObservableCollection<IAccount>(_client.Accounts); //костыль
+                    RaisePropertyChanged(nameof(Accounts));                    
                 }
             }
         }
@@ -54,11 +54,15 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _bankClients, value);}
         }
 
-        private ObservableCollection<IAccount> _accounts;
-        public ObservableCollection<IAccount> Accounts
+        public ObservableCollection<IAccount> Accounts => GetClientAccounts();
+
+
+        private ObservableCollection<IAccount> GetClientAccounts()
         {
-            get { return _accounts; }
-            set {  SetProperty(ref _accounts, value); }
+            var result = new ObservableCollection<IAccount>();
+            if (_client != null)
+                result = new ObservableCollection<IAccount>(_client.Accounts);
+            return result;
         }
 
         private IAccount _selectedAccount;
@@ -74,7 +78,6 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteDeleteAccountCommand()
         {
-
             if (_selectedAccount != null)
             {
                 if (_selectedAccount.Balance == CommonTypesPrism.zeroValue)
@@ -112,8 +115,7 @@ namespace BankApp.Modules.Client.ViewModels
                 var newAcc=result.Parameters.GetValue<IAccount>(CommonTypesPrism.ParameterNewAccount);
                 var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
                 _clientService.SaveNewAccount(((IStorableDoc)Client).Id,newAcc);
-                LoadClients(_currentFolder);
-                Client = owner;                
+                RaisePropertyChanged(nameof(Accounts));
             });
         }
 
@@ -130,7 +132,7 @@ namespace BankApp.Modules.Client.ViewModels
 
             _dialogService.Show(CommonTypesPrism.TransactionView, dialogParameters, (result) =>
              {
-
+                 RaisePropertyChanged(nameof(Accounts));
              });
         }
 
