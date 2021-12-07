@@ -8,7 +8,10 @@ using System;
 
 namespace BankLibrary.Model.AccountModel
 {
-    
+    /// <summary>
+    /// Отвечает за создание новый счетов
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class AccountManager<T> : IAccountManager<T> where T:IAccount, new()
     {
         public AccountManager() { }

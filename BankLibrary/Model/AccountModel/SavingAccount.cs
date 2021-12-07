@@ -6,16 +6,14 @@ using System.Text;
 
 namespace BankLibrary.Model.AccountModel
 {
+    /// <summary>
+    /// Накопительный счет
+    /// </summary>
     public class SavingAccount:BankAccount
     {
-        public SavingAccount() : base(AccountType.Savings)
-        {
-
-        }
+        public SavingAccount() : base(AccountType.Savings) { }
 
         [JsonConstructor]
-        public SavingAccount(Guid id, float balance) : base(id, balance, AccountType.Savings)
-        {
-        }
+        public SavingAccount(Guid id, float balance) : base(id, balance, AccountType.Savings) { }
     }
 }

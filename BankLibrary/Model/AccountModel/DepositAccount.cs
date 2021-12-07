@@ -5,7 +5,14 @@ namespace BankLibrary.Model.AccountModel
 {
     public class DepositAccount:BankAccount
     {
+        /// <summary>
+        /// Срок вклада
+        /// </summary>
         public int Term { get; set; }
+
+        /// <summary>
+        /// Ставка 
+        /// </summary>
         public float Rate
         {
             get
@@ -18,6 +25,9 @@ namespace BankLibrary.Model.AccountModel
             }
         }
 
+        /// <summary>
+        /// Общий эффект по истечению срока ставки
+        /// </summary>
         public float TotalIncome
         {
             get

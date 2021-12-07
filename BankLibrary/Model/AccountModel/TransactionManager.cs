@@ -2,6 +2,10 @@
 
 namespace BankLibrary.Model.AccountModel
 {
+    /// <summary>
+    /// Отвечает за переводы средств между счетами клиентов
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class TransactionManager<T> : ITransactionManager<T> where T : IAccount
     {
         public void SendMoneyToAccount(T account, float sum)

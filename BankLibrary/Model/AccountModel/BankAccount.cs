@@ -6,12 +6,13 @@ using System;
 
 namespace BankLibrary.Model.AccountModel
 {
+    /// <summary>
+    /// Абстрактный класс некого счета
+    /// </summary>
     public abstract class BankAccount:IAccount
     {
         private AccountType _accountType;
         private float _balance;
-        
-
         public Guid Id { get; set; }
         public float Balance => _balance;
 
@@ -51,6 +52,15 @@ namespace BankLibrary.Model.AccountModel
 
         public virtual void IncreaseBalance(float count) =>
             _balance += count;
-        
+
+
+        public override bool Equals(object obj)
+        {
+            if(obj !=null && obj is IAccount acc)
+            {
+                return acc.Id == this.Id;
+            }
+            return false;            
+        }
     }
 }

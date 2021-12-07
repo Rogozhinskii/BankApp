@@ -160,6 +160,7 @@ namespace BankApp.Modules.Client.ViewModels
             return true;
         }
 
+
         /// <summary>
         /// Вызываетс
         /// </summary>

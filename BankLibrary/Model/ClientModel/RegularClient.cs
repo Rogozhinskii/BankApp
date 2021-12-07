@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BankLibrary.Model
 {
+    /// <summary>
+    /// Клиент без привелегий
+    /// </summary>
     public class RegularClient : ClientBase
     {
         public RegularClient(Guid id,string name, string surname)

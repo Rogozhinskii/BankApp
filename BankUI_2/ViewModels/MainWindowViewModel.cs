@@ -17,6 +17,9 @@ namespace BankUI.ViewModels
         }
 
         private DelegateCommand<string> _navigationCommand;
+        /// <summary>
+        /// Осуществляет навигацию по "регионам"
+        /// </summary>
         public DelegateCommand<string> NavigationCommand =>
             _navigationCommand ?? (_navigationCommand = new DelegateCommand<string>(ExecuteNavigationCommand));
 

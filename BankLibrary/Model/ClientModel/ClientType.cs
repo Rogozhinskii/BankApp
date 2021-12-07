@@ -4,6 +4,9 @@ using System.Runtime.Serialization;
 
 namespace BankLibrary.Model.ClientModel
 {
+    /// <summary>
+    /// переисление возможных типов клиентов
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ClientType
     {

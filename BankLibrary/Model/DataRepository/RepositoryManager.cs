@@ -1,23 +1,23 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankLibrary.Model.DataRepository
 {
-    
+
     public class RepositoryManager:IRepositoryManager
     {
         private readonly string repositoryPath;
         private IRepository<IStorableDoc> repository;
         public string ConnectionString => repositoryPath;
 
+        /// <summary>
+        /// Логгер
+        /// </summary>
         private readonly ILogger logger;
 
         IEnumerable<IStorableDoc> clientsList;
@@ -31,7 +31,11 @@ namespace BankLibrary.Model.DataRepository
         }
 
         
-
+        /// <summary>
+        /// Осуществляет проверку существования файла по указанному пути
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private bool SimpleValidatePath(string path)
         {
             if (File.Exists(path))
@@ -40,11 +44,9 @@ namespace BankLibrary.Model.DataRepository
                 throw new ArgumentException("файл не существует");            
         }
 
-        public void AddToStarge(IStorableDoc doc){           
-            repository.AddToStorage(doc);
-        }
+       
 
-        public IEnumerable<IStorableDoc> ReadClientDataAsList(){
+        public IEnumerable<IStorableDoc> ReadStorableDataAsList(){
             
             logger?.Info("Попытка чтения репозитория");
             try{
@@ -57,11 +59,6 @@ namespace BankLibrary.Model.DataRepository
             return Enumerable.Empty<IStorableDoc>();
         }
 
-        public IAccount GetAccountById(Guid guid)=>
-                clientsList.SelectMany(r => (r as ClientBase).Accounts)
-                           .Where(x => x.Id == guid)
-                           .SingleOrDefault();
-
         public bool CommitChanges()
         {
             return CommitChanges(clientsList);
@@ -70,8 +67,7 @@ namespace BankLibrary.Model.DataRepository
         {
             bool flag;
             if (SimpleValidatePath(repositoryPath))
-            {
-                //todo добавить catch и лог              
+            {                             
                 try
                 {
                     repository.Serialize(storableDocs);

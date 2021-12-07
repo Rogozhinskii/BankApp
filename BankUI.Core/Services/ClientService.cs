@@ -11,6 +11,9 @@ using System.Text;
 
 namespace BankUI.Core.Services
 {
+    /// <summary>
+    /// Для взаимодействия UI и хранилищем 
+    /// </summary>
     public class ClientService : IClientService
     {
         private readonly IRepositoryManager _repositoryManager;
@@ -21,7 +24,7 @@ namespace BankUI.Core.Services
         public ClientService(IRepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
-            _clients = _repositoryManager.ReadClientDataAsList().ToList();
+            _clients = _repositoryManager.ReadStorableDataAsList().ToList();
             EnrichClietnLists();           
         }
 

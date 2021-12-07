@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.AccountModel;
+﻿using BankLibrary.Model;
+using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankUI.Core.Common;
@@ -11,14 +12,29 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 
 namespace BankApp.Modules.Client.ViewModels
 {
     public class TransactionViewModel : DialogViewModelBase, IDataErrorInfo
     {
+        /// <summary>
+        /// Сервис перевода средств между счетами клентов
+        /// </summary>
         private readonly ITransactionManager<IAccount> _transactionManager;
+
+        /// <summary>
+        /// Серввис доступа к хранилищу клиентов
+        /// </summary>
         private readonly IClientService _clientService;
+        /// <summary>
+        /// Сервис диалоговых окон
+        /// </summary>
         private readonly IDialogService _dialogService;
+
+        /// <summary>
+        /// Отправитель
+        /// </summary>
         private IClient _owner;
 
 
@@ -30,6 +46,9 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private float _amount;
+        /// <summary>
+        /// Сумма перевода
+        /// </summary>
         public float Amount
         {
             get { return _amount; }
@@ -37,24 +56,41 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private IAccount _fromAccount;
+
+        /// <summary>
+        /// Счет с которого делается перевод
+        /// </summary>
         public IAccount FromAccount
         {
             get { return _fromAccount; }
             set { SetProperty(ref _fromAccount, value); }
         }
 
-
+        /// <summary>
+        /// Коллекция счетов пользователя
+        /// </summary>
         public ObservableCollection<IAccount> OwnerAccounts => GetOwnerAccounts();
        
+        /// <summary>
+        /// Вернет коллекцию счетов пользователя
+        /// </summary>
+        /// <returns></returns>
         private ObservableCollection<IAccount> GetOwnerAccounts()
         {
             var result = new ObservableCollection<IAccount>();
             if (_owner != null)
-                result = new ObservableCollection<IAccount>(_owner.Accounts.Where(x=>x.AccountType!=AccountType.Deposit));
+            {
+                result = new ObservableCollection<IAccount>(_owner.Accounts.Where(x => x.AccountType != AccountType.Deposit));
+            }
+                
             return result;
         }
 
         private IClient _selectedRecipient;
+
+        /// <summary>
+        /// Получатель перевода
+        /// </summary>
         public IClient SelectedRecipient
         {
             get { return _selectedRecipient; }
@@ -70,6 +106,10 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private ReadOnlyCollection<IAccount> _recipientAccounts;
+
+        /// <summary>
+        /// Коллекция счетов получателя
+        /// </summary>
         public ReadOnlyCollection<IAccount> RecipientAccounts
         {
             get { return _recipientAccounts; }
@@ -77,19 +117,28 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private IAccount _toAccount;
+
+        /// <summary>
+        /// Счет на который делается перевод
+        /// </summary>
         public IAccount ToAccount
         {
             get { return _toAccount; }
             set { SetProperty(ref _toAccount, value); }
         }
 
-        private ReadOnlyCollection<IClient> _recipients;
-        public ReadOnlyCollection<IClient> Recipients
+        private List<IClient> _recipients=new List<IClient>();
+
+        /// <summary>
+        /// Коллекция возможных получателей
+        /// </summary>
+        public List<IClient> Recipients
         {
             get { return _recipients; }
             set { SetProperty(ref _recipients, value); }
         }
 
+        #region Обработка ошибок ввода данных
         public string Error => "";
 
         public string this[string columnName]
@@ -108,7 +157,14 @@ namespace BankApp.Modules.Client.ViewModels
             }
         }
 
+        #endregion
+
+
         private DelegateCommand _sendMoneyCommand;
+
+        /// <summary>
+        /// Выполняет перевод средств с выбранного счета на указанный счет
+        /// </summary>
         public DelegateCommand SendMoneyCommand =>
             _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
 
@@ -139,6 +195,10 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private DelegateCommand _exitCommand;
+
+        /// <summary>
+        /// Закрывает диалоговое окно
+        /// </summary>
         public DelegateCommand ExitCommand =>
             _exitCommand ?? (_exitCommand = new DelegateCommand(ExecuteExitCommand));
 
@@ -155,10 +215,55 @@ namespace BankApp.Modules.Client.ViewModels
             _owner = parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
             RaisePropertyChanged(nameof(OwnerAccounts));
             var tempList = new List<IClient>(_clientService.GetRegularClients());
-            tempList.AddRange(_clientService.GetSpecialClients());
-            tempList.Remove(_owner);
-            Recipients = new ReadOnlyCollection<IClient>(tempList);
-           
+            tempList.AddRange(_clientService.GetSpecialClients());            
+            Recipients = new List<IClient>(tempList);
+            RaisePropertyChanged(nameof(RecipientsFilteredCollection));
+
+
+        }
+
+        /// <summary>
+        /// Возвращает true если элемент соотвутсвует условии фильтрации, иначе false
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        private bool RecipientsFilter(IClient client)
+        {
+            if (string.IsNullOrWhiteSpace(_recipientsfilteredText))
+                return true;
+            if (client.Name == null)
+            {                
+                return false;
+            }
+
+            if (client.Name.Contains(_recipientsfilteredText, StringComparison.OrdinalIgnoreCase)) return true;
+            if (client.Surname.Contains(_recipientsfilteredText, StringComparison.OrdinalIgnoreCase)) return true;
+
+            return false;
+        }
+
+        private string _recipientsfilteredText;
+
+        /// <summary>
+        /// Текста для фильтрации
+        /// </summary>
+        public string RecipientsFilteredText
+        {
+            get { return _recipientsfilteredText; }
+            set { SetProperty(ref _recipientsfilteredText, value); 
+                  RaisePropertyChanged(nameof(RecipientsFilteredCollection));
+                }
+        }
+
+        /// <summary>
+        /// Отфильтрованная коллекция клиентов
+        /// </summary>
+        public ObservableCollection<IClient> RecipientsFilteredCollection
+        {
+            get
+            {
+                return new ObservableCollection<IClient>(Recipients.Where(i => RecipientsFilter(i)));                
+            }
         }
 
     }

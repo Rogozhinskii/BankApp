@@ -27,7 +27,7 @@ namespace BankAppTests
             var logger = LogManager.GetCurrentClassLogger();
             const string path = @"C:\Users\rogoz\source\repos\BankApp\BankUI_2\bin\Debug\netcoreapp3.1\Storage.json";
             RepositoryManager repositoryManager = new RepositoryManager(logger,path);
-            var list = repositoryManager.ReadClientDataAsList();
+            var list = repositoryManager.ReadStorableDataAsList();
             Assert.IsTrue(list.Any());
         }
 

@@ -115,7 +115,7 @@ namespace BankApp.Modules.Client.ViewModels
             {
                 if (_selectedAccount.Balance == CommonTypesPrism.zeroValue)
                 {
-                    Accounts.Remove(_selectedAccount);
+                    _client.Accounts.Remove(_selectedAccount);                    
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace BankApp.Modules.Client.ViewModels
 
                     });
                 }
-
+                RaisePropertyChanged(nameof(Accounts));
             }
         }
 
@@ -170,7 +170,10 @@ namespace BankApp.Modules.Client.ViewModels
             {
                 var newAcc = result.Parameters.GetValue<IAccount>(CommonTypesPrism.ParameterNewAccount);
                 var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
-                _clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc);
+                if (newAcc != null)
+                {
+                    _clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc);
+                }
                 RaisePropertyChanged(nameof(Accounts));
             });
         }

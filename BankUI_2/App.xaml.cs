@@ -24,6 +24,10 @@ namespace BankUI
             return Container.Resolve<MainWindow>();
         }
 
+        /// <summary>
+        /// Регистрацция сервисов
+        /// </summary>
+        /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             logger = LogManager.GetCurrentClassLogger();
@@ -41,7 +45,7 @@ namespace BankUI
         {
             if (moduleCatalog != null)
             {
-                moduleCatalog.AddModule<ClientModule>();
+                moduleCatalog.AddModule<ClientModule>(); //Добавляем модуль
             }
         }
     }

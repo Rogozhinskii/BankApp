@@ -23,11 +23,6 @@ namespace BankLibrary.Model.DataRepository
         }
 
 
-        public void AddToStorage(IStorableDoc obj)
-        {            
-            
-        }
-
         public IEnumerable<IStorableDoc> Deserialize(){
            
             string json = File.ReadAllText(repositoryManager.ConnectionString);
@@ -61,12 +56,6 @@ namespace BankLibrary.Model.DataRepository
             ((IClient)client).Accounts = new List<IAccount>(JsonConvert.DeserializeObject<List<IAccount>>(item["Accounts"].ToString(),
                                                                                                     settings));
             return client;
-        }
-
-
-        public IStorableDoc GetClientById(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public void Serialize(IEnumerable<IStorableDoc> enumerableObjects)

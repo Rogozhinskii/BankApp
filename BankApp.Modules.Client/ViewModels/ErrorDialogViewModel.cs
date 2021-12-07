@@ -4,6 +4,9 @@ using Prism.Services.Dialogs;
 
 namespace BankApp.Modules.Client.ViewModels
 {
+    /// <summary>
+    /// ViewModel диалогового окна об ошибках
+    /// </summary>
     public class ErrorDialogViewModel : DialogViewModelBase
     {
         private string _message;
@@ -17,7 +20,12 @@ namespace BankApp.Modules.Client.ViewModels
 
         public ErrorDialogViewModel() { }
 
+        
         private DelegateCommand _closeCommand;
+
+        /// <summary>
+        /// Зыкрывает диалог
+        /// </summary>
         public DelegateCommand CloseCommand =>
             _closeCommand ?? (_closeCommand = new DelegateCommand(ExecuteCloseCommand));
 
