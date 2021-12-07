@@ -11,8 +11,7 @@
     
     <UserControl.Resources>        
         <converters:AccountInfoConverter x:Key="AccountInfoConverter"/>
-        <converters:SelectedToEnableConverter x:Key="SelectedToBoolean"/>
-        <converters:BalanceValueConverter x:Key="BalanceValueConverter"/>
+        <converters:SelectedToEnableConverter x:Key="SelectedToBoolean"/>        
         <converters:EnableConverter x:Key="TextBoxEnableConverter"/>
     </UserControl.Resources>
         

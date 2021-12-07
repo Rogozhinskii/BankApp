@@ -38,8 +38,15 @@ namespace BankUI.Core.Common
             true;
 
 
+        /// <summary>
+        /// Вызывается при закрытии диалогового окна
+        /// </summary>
         public virtual void OnDialogClosed() { }
 
+        /// <summary>
+        /// Вызывается при открытии диалогового окна
+        /// </summary>
+        /// <param name="parameters"></param>
         public virtual void OnDialogOpened(IDialogParameters parameters) { }
     }
 }

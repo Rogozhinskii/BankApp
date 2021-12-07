@@ -5,9 +5,7 @@ using System.Reflection;
 
 namespace BankLibrary.Model.AccountModel
 {
-    /// <summary>
-    /// Конвертер перечислений, для корректного отображения в UI
-    /// </summary>
+    
     public class EnumDescriptionTypeConverter : EnumConverter
     {
         public EnumDescriptionTypeConverter(Type type):

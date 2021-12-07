@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.AccountModel;
+﻿using BankApp.Modules.Client.Converters.Base;
+using BankLibrary.Model.AccountModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,9 +9,12 @@ using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    public class AccoutTypeToVisibilityConverter : IValueConverter
+    /// <summary>
+    /// Преобразует значение типа счета в видимость объекта
+    /// </summary>
+    internal class AccoutTypeToVisibilityConverter : ValueConverterBase
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null && value is AccountType accountType)
             {
@@ -22,9 +26,9 @@ namespace BankApp.Modules.Client.Converters
             return Visibility.Hidden;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return base.ConvertBack(value, targetType, parameter, culture);
         }
     }
 }

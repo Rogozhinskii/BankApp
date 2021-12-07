@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.AccountModel;
+﻿using BankApp.Modules.Client.Converters.Base;
+using BankLibrary.Model.AccountModel;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,9 +8,18 @@ using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    public class EnableConverter : IValueConverter
+    
+    internal class EnableConverter : ValueConverterBase
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <summary>
+        /// возвращает true если счет депозитный, иначе false
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value!=null && value is AccountType accountType)
             {
@@ -21,9 +31,9 @@ namespace BankApp.Modules.Client.Converters
             return false;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return base.ConvertBack(value, targetType, parameter, culture);
         }
     }
 }

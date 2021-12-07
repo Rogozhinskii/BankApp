@@ -11,11 +11,24 @@ using System.Linq;
 
 namespace BankApp.Modules.Client.ViewModels
 {
+    /// <summary>
+    /// ViewModel отображаемого списка клентов и их счетов
+    /// </summary>
     class ClientListViewModel: ViewModelBase
     {
-        private string _message;
+        /// <summary>
+        /// Серввис доступа к хранилищу клиентов
+        /// </summary>
         private readonly IClientService _clientService;
+
+        /// <summary>
+        /// Сервис диалоговых окон
+        /// </summary>
         private readonly IDialogService _dialogService;
+
+        /// <summary>
+        /// Выбранный элемент в навигационном боковом баре
+        /// </summary>
         private string _currentFolder = FolderParameters.Regular;
 
 
@@ -25,38 +38,47 @@ namespace BankApp.Modules.Client.ViewModels
             _dialogService = dialogService;
         }
 
-
-        public string Message
-        {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
-        }
-
+        #region Свойства
         private IClient _client;
+
+        /// <summary>
+        /// Выбранный клиент
+        /// </summary>
         public IClient Client
         {
             get { return _client; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _client, value);
                 if (_client != null)
                 {
-                    RaisePropertyChanged(nameof(Accounts));                    
+                    RaisePropertyChanged(nameof(Accounts)); //дергаем зависимое свойство
                 }
             }
         }
-               
+
 
         private ObservableCollection<IClient> _bankClients;
+
+        /// <summary>
+        /// Коллекция отображаемых клиентов
+        /// </summary>
         public ObservableCollection<IClient> BankClients
         {
             get { return _bankClients; }
-            set { SetProperty(ref _bankClients, value);}
+            set { SetProperty(ref _bankClients, value); }
         }
 
+
+        /// <summary>
+        /// Коллекция счетов выбранного клиента
+        /// </summary>
         public ObservableCollection<IAccount> Accounts => GetClientAccounts();
 
-
+        /// <summary>
+        /// Вернет коллекцию счетов выбранного клиента
+        /// </summary>
+        /// <returns></returns>
         private ObservableCollection<IAccount> GetClientAccounts()
         {
             var result = new ObservableCollection<IAccount>();
@@ -66,13 +88,24 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private IAccount _selectedAccount;
+
+        /// <summary>
+        /// Выбранный счет клиента
+        /// </summary>
         public IAccount SelectedAccount
         {
             get { return _selectedAccount; }
             set { SetProperty(ref _selectedAccount, value); }
         }
 
+        #endregion
+
+        #region 
         private DelegateCommand _deleteAccountCommand;
+
+        /// <summary>
+        /// Реализует закрытие выбранного счета
+        /// </summary>
         public DelegateCommand DeleteAccountCommand =>
             _deleteAccountCommand ?? (_deleteAccountCommand = new DelegateCommand(ExecuteDeleteAccountCommand));
 
@@ -95,11 +128,17 @@ namespace BankApp.Modules.Client.ViewModels
 
                     });
                 }
-                                
+
             }
         }
 
+
+
         private DelegateCommand _showAccountInfoCommand;
+
+        /// <summary>
+        /// Реализует вызов диалогового окна с общей инфомрацией о выбранном счете
+        /// </summary>
         public DelegateCommand ShowAccountInfoCommand =>
             _showAccountInfoCommand ?? (_showAccountInfoCommand = new DelegateCommand(ExecuteCommandName));
 
@@ -111,7 +150,12 @@ namespace BankApp.Modules.Client.ViewModels
 
         }
 
+
         private DelegateCommand _createNewAccount;
+
+        /// <summary>
+        /// Реализует открытие нового счета клиента
+        /// </summary>
         public DelegateCommand CreateNewAccount =>
             _createNewAccount ?? (_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount));
 
@@ -121,43 +165,58 @@ namespace BankApp.Modules.Client.ViewModels
             {
                 {CommonTypesPrism.ParameterAccounts, Accounts },
                 {CommonTypesPrism.ParameterOwner, Client }
-            };            
-            _dialogService.Show(CommonTypesPrism.AccountView,dialogParameters, (result)=>
+            };
+            _dialogService.Show(CommonTypesPrism.AccountView, dialogParameters, (result) =>
             {
-                var newAcc=result.Parameters.GetValue<IAccount>(CommonTypesPrism.ParameterNewAccount);
+                var newAcc = result.Parameters.GetValue<IAccount>(CommonTypesPrism.ParameterNewAccount);
                 var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
-                _clientService.SaveNewAccount(((IStorableDoc)Client).Id,newAcc);
+                _clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc);
                 RaisePropertyChanged(nameof(Accounts));
             });
         }
 
+
+
         private DelegateCommand _sendMoneyCommand;
+
+        /// <summary>
+        /// Вызывает диалоговое окна переводов средств
+        /// </summary>
         public DelegateCommand SendMoneyCommand =>
             _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
 
         void ExecuteSendMoneyCommand()
         {
             var dialogParameters = new DialogParameters()
-            {              
+            {
                 {CommonTypesPrism.ParameterOwner, Client }
             };
 
             _dialogService.Show(CommonTypesPrism.TransactionView, dialogParameters, (result) =>
-             {
-                 RaisePropertyChanged(nameof(Accounts));
-             });
+            {
+                RaisePropertyChanged(nameof(Accounts));
+            });
         }
 
+
         private DelegateCommand _saveDataCommand;
+
+        /// <summary>
+        /// Сохраняет проведенный изменения
+        /// </summary>
         public DelegateCommand SaveDataCommand =>
             _saveDataCommand ?? (_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand));
 
         void ExecuteSaveDataCommand()
         {
-            var result=_clientService.SaveData();
+            var result = _clientService.SaveData();
             ShowDialog(result);
         }
 
+        /// <summary>
+        /// Вызывает диалоговое окна в зависимости от результата сохранения данных
+        /// </summary>
+        /// <param name="result"></param>
         private void ShowDialog(bool result)
         {
             var dialogParameters = new DialogParameters();
@@ -176,6 +235,8 @@ namespace BankApp.Modules.Client.ViewModels
             }
         }
 
+        #endregion
+
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
@@ -184,6 +245,10 @@ namespace BankApp.Modules.Client.ViewModels
             Client = BankClients.FirstOrDefault();            
         }
 
+        /// <summary>
+        /// Получает коллекцию клиентов выбранного в навигационном баре типа
+        /// </summary>
+        /// <param name="folder"></param>
         private void LoadClients(string folder)
         {
             switch (folder)

@@ -1,13 +1,14 @@
-﻿using BankLibrary.Model.ClientModel;
+﻿using BankApp.Modules.Client.Converters.Base;
+using BankLibrary.Model.ClientModel;
 using System;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    public class ClientTypeConverter : IValueConverter
+    internal class ClientTypeConverter : ValueConverterBase
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string type = string.Empty;
             if (value != null){
@@ -21,7 +22,7 @@ namespace BankApp.Modules.Client.Converters
             return type;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

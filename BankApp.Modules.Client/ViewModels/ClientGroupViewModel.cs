@@ -6,6 +6,9 @@ using BankUI.Core.Common;
 
 namespace BankApp.Modules.Client.ViewModels
 {
+    /// <summary>
+    /// ViewModel боковой панели выбора типа отображаемых клиентов
+    /// </summary>
     public class ClientGroupViewModel : BindableBase
     {
         private readonly IApplicationCommands _applicationCommand;
@@ -17,8 +20,13 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private DelegateCommand<NavigationItem> _selectedCommand;
+
+        /// <summary>
+        /// Реализует навигацию по выбранному элементу бокового бара. Устанавлиет  ContentRegion соответсвующее View
+        /// </summary>
         public DelegateCommand<NavigationItem> SelectedCommand =>
             _selectedCommand ?? (_selectedCommand = new DelegateCommand<NavigationItem>(SelectedItemNavigateCommand));
+
 
         void SelectedItemNavigateCommand(NavigationItem navigationItem)
         {
@@ -29,6 +37,10 @@ namespace BankApp.Modules.Client.ViewModels
         }
 
         private ObservableCollection<NavigationItem> _items;
+
+        /// <summary>
+        /// Элементы бокового бара
+        /// </summary>
         public ObservableCollection<NavigationItem> Items
         {
             get { return _items; }
@@ -40,6 +52,9 @@ namespace BankApp.Modules.Client.ViewModels
             _applicationCommand = applicationCommands;
         }
 
+        /// <summary>
+        /// Создает наполнение бокового бара
+        /// </summary>
         private void GenerateMenu()
         {
             Items = new ObservableCollection<NavigationItem>();
@@ -65,6 +80,11 @@ namespace BankApp.Modules.Client.ViewModels
             Items.Add(root);
         }
 
+        /// <summary>
+        /// Возвращает NavigationPath для элементов бокового бара
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns></returns>
         private string GetNavigationPath(string folder)
         {
             return $"ClientList?{FolderParameters.FolderKey}={folder}";

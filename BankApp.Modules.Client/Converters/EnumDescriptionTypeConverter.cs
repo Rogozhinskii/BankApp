@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace BankApp.Modules.Client.Converters
 {
+    /// <summary>
+    /// Конвертер перечислений, для корректного отображения в UI
+    /// </summary>
     public class EnumDescriptionTypeConverter : EnumConverter
     {
         public EnumDescriptionTypeConverter(Type type):

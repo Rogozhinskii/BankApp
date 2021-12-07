@@ -1,14 +1,17 @@
-﻿using BankLibrary.Model.AccountModel;
+﻿using BankApp.Modules.Client.Converters.Base;
+using BankLibrary.Model.AccountModel;
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    public class AccountInfoConverter : IMultiValueConverter
+    /// <summary>
+    /// Конвертация общей информации о счете
+    /// </summary>
+    internal class AccountInfoConverter : MultiValueConverterBase
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             string accountType = string.Empty;            
             string number = string.Empty;
@@ -25,9 +28,9 @@ namespace BankApp.Modules.Client.Converters
             return $"Номер: ***{number}\n{accountType}";
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public override object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            return null;
+            return base.ConvertBack(value, targetTypes, parameter, culture);
         }
     }
 }
