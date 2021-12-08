@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankUI.Core", "BankUI.Core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAppTests", "BankAppTests\BankAppTests.csproj", "{037EA1E6-2E5F-4097-970B-9275DBF0C16F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankApp.Modules.NotificationTools", "BankApp.Modules.NotificationTools\BankApp.Modules.NotificationTools.csproj", "{2CEC456E-7D15-4B21-B177-8D5440C815AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,12 +65,21 @@ Global
 		{037EA1E6-2E5F-4097-970B-9275DBF0C16F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{037EA1E6-2E5F-4097-970B-9275DBF0C16F}.Release|x64.ActiveCfg = Release|x64
 		{037EA1E6-2E5F-4097-970B-9275DBF0C16F}.Release|x64.Build.0 = Release|x64
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{195CF60D-28C4-4B36-A7E9-9EE743B0C6C3} = {D27A1B66-C0F0-4670-B6AC-A09BB6E04709}
+		{2CEC456E-7D15-4B21-B177-8D5440C815AD} = {D27A1B66-C0F0-4670-B6AC-A09BB6E04709}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35B3938A-CDE7-4BDC-BC9E-D1F37C6ACADF}

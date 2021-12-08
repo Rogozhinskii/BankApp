@@ -18,6 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankApp.Modules.Client\BankApp.Modules.Client.csproj" />
+    <ProjectReference Include="..\BankApp.Modules.NotificationTools\BankApp.Modules.NotificationTools.csproj" />
     <ProjectReference Include="..\BankLibrary\BankLibrary.csproj" />
     <ProjectReference Include="..\BankUI.Core\BankUI.Core.csproj" />
   </ItemGroup>

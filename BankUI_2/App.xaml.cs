@@ -1,7 +1,10 @@
 ﻿using BankApp.Modules.Client;
+using BankApp.Modules.NotificationTools;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Commands;
+using BankUI.Core.Services;
+using BankUI.Core.Services.Interfaces;
 using BankUI.Interfaces;
 using BankUI.Views;
 using DryIoc;
@@ -37,6 +40,7 @@ namespace BankUI
             containerRegistry.RegisterInstance(typeof(ILogger), logger);
             var repositoryManager = new RepositoryManager(logger, connectionString);
             containerRegistry.RegisterInstance<IRepositoryManager>(repositoryManager);
+            containerRegistry.RegisterSingleton<ILogService, LogService>();
             
             
         }
@@ -46,6 +50,7 @@ namespace BankUI
             if (moduleCatalog != null)
             {
                 moduleCatalog.AddModule<ClientModule>(); //Добавляем модуль
+                moduleCatalog.AddModule<NotificationToolsModule>();
             }
         }
     }

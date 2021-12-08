@@ -7,17 +7,31 @@
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Height="700" Width="1100" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         
-        <Border Grid.Column="0">
-            <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.cClientGroup}"/>
-        </Border>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
         
-        <Border Grid.Column="1">
-            <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.ContentRegion}"/>
+            <Border Grid.Column="0"
+                   >
+                <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.cClientGroup}"/>
+            </Border>
+        
+            <Border Grid.Column="1"
+                   >
+                <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.ContentRegion}"/>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1"
+                >
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:CommonTypesPrism.StatusBarRegion}"/>
         </Border>
     </Grid>
 </Window>

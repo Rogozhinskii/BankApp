@@ -3,7 +3,10 @@ using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
+using BankUI.Core.Common.Log;
+using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +19,15 @@ namespace BankUI.Core.Services
     /// </summary>
     public class ClientService : IClientService
     {
+        private readonly IEventAggregator _eventAggregator;
         private readonly IRepositoryManager _repositoryManager;
         private List<IStorableDoc> _clients;
         private List<IClient> _regularClientItems = new List<IClient>();
         private List<IClient> _specialClientItems = new List<IClient>();
 
-        public ClientService(IRepositoryManager repositoryManager)
+        public ClientService(IEventAggregator eventAggregator,IRepositoryManager repositoryManager)
         {
+            _eventAggregator = eventAggregator;
             _repositoryManager = repositoryManager;
             _clients = _repositoryManager.ReadStorableDataAsList().ToList();
             EnrichClietnLists();           
@@ -62,9 +67,14 @@ namespace BankUI.Core.Services
             return _specialClientItems;
         }
 
-        public bool SaveData(){            
+        public bool SaveData(){       //todo убрать в бар     
             try{
                 _repositoryManager.CommitChanges(_clients);
+                _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
+                {
+                    RecordLevel=LogRecordLevel.Info,
+                    Message="Данные сохранены"
+                });
                 return true;
             }
             catch(ArgumentException ex)

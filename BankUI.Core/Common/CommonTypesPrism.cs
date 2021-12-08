@@ -12,6 +12,7 @@ namespace BankUI.Core.Common
         #region Regions
         public const string ContentRegion = "ContentRegion"; 
         public const string cClientGroup = "ClientGroup";
+        public const string StatusBarRegion = "StatusBarRegion";
         #endregion
 
         #region Dialog Constants
@@ -26,6 +27,7 @@ namespace BankUI.Core.Common
         public const string NotificationMessage = "NotificationMessage";
         public const string SelectedAccount = "SelectedAccount";
         public const string AccountInfoView = "AccountInfoView";
+        public const string LogForm = "LogForm";
 
         #endregion
 
