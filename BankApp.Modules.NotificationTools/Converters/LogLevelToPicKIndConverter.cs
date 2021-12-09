@@ -8,6 +8,9 @@ using System.Text;
 
 namespace BankApp.Modules.NotificationTools.Converters
 {
+    /// <summary>
+    /// Конвертирует LogLevel в иконку
+    /// </summary>
     public class LogLevelToPicKIndConverter : ValueConverterBase
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)

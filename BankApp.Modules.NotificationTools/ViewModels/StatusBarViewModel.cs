@@ -1,7 +1,10 @@
 ﻿using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
+using BankUI.Core.Common.Log;
+using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -10,18 +13,27 @@ using System.Linq;
 
 namespace BankApp.Modules.NotificationTools.ViewModels
 {
+    /// <summary>
+    /// ViewModel статус бара
+    /// </summary>
     public class StatusBarViewModel : BindableBase
     {        
         private readonly ISaveService _saveService;
         private readonly IDialogService _dialogService;
+        private readonly IEventAggregator _eventAggregator;
 
-        public StatusBarViewModel(ISaveService saveService,IDialogService dialogService)
+        public StatusBarViewModel(ISaveService saveService,IDialogService dialogService,IEventAggregator eventAgregator)
         {
             _saveService = saveService;
-            _dialogService = dialogService;
+            _dialogService = dialogService;            
+            _eventAggregator = eventAgregator;
         }
 
         private DelegateCommand _showLogCommand;
+
+        /// <summary>
+        /// Вызывает диалоговое окно логов
+        /// </summary>
         public DelegateCommand ShowLogCommand =>
             _showLogCommand ?? (_showLogCommand = new DelegateCommand(ExecuteShowLogCommand));
 
@@ -44,6 +56,20 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         void ExecuteSaveDataCommand()
         {
             var result = _saveService.SaveData();
+            LogRecord logRecord;
+            if (result){
+                logRecord = new LogRecord{
+                    LogRecordLevel = LogRecordLevel.Info,
+                    Message = $"{DateTime.Now}-->Данные сохранены"
+                };
+            }
+            else{
+                logRecord = new LogRecord{
+                    LogRecordLevel = LogRecordLevel.Error,
+                    Message = $"{DateTime.Now}-->При сохранении произошла ошибка"
+                };
+            }
+            _eventAggregator.GetEvent<LogEvent>().Publish(logRecord);
             ShowDialog(result);
         }
 
@@ -54,15 +80,12 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         private void ShowDialog(bool result)
         {
             var dialogParameters = new DialogParameters();
-            if (result)
-            {
+            if (result){
                 string notifyMessage = "Данные сохранены";
                 dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
-
             }
-            else
-            {
+            else{
                 string errorMessage = "Сохранение не выполнено";
                 dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });

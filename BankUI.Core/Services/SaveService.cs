@@ -9,6 +9,9 @@ using System.Text;
 
 namespace BankUI.Core.Services
 {
+    /// <summary>
+    /// Для сохранения изменений данных о клиентах
+    /// </summary>
     public class SaveService : ISaveService
     {
         private readonly IClientService _clientService;
@@ -25,21 +28,7 @@ namespace BankUI.Core.Services
         {         
             try
             {
-                var result=_repositoryManager.CommitChanges(_clientService.GetAllClients());
-                LogRecord logRecord;
-                if (result){
-                    logRecord = new LogRecord{
-                        LogRecordLevel = LogRecordLevel.Info,
-                        Message = $"{DateTime.Now}-->Данные сохранены"
-                    };
-                }
-                else{
-                    logRecord = new LogRecord{
-                        LogRecordLevel = LogRecordLevel.Error,
-                        Message = $"{DateTime.Now}-->При сохранении произошла ошибка"
-                    };
-                }
-                _eventAggregator.GetEvent<LogEvent>().Publish(logRecord);
+                var result=_repositoryManager.CommitChanges(_clientService.GetAllClients()); 
                 return result;
             }
             catch (ArgumentException ex)

@@ -6,8 +6,14 @@ using System.Linq;
 
 namespace BankApp.Modules.NotificationTools.ViewModels
 {
+    /// <summary>
+    /// ViewModel окна логов
+    /// </summary>
     public class LogFormViewModel : DialogViewModelBase
     {
+        /// <summary>
+        /// сервис хранения и доступа к логам логов
+        /// </summary>
         private readonly ILogService _logService;
         public override string Title => "Логи";
         public LogFormViewModel(ILogService logService)
@@ -25,6 +31,9 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         }
 
         private ObservableCollection<LogRecord> _log = new ObservableCollection<LogRecord>();
+        /// <summary>
+        /// Записи логов
+        /// </summary>
         public ObservableCollection<LogRecord> Log
         {
             get

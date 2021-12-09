@@ -187,6 +187,14 @@ namespace BankApp.Modules.Client.ViewModels
                 RaisePropertyChanged(nameof(Accounts));
             });
         }
+
+        /// <summary>
+        /// Запись по результатам создания счете
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="newAccount"></param>
+        /// <param name="client"></param>
+        /// <returns></returns>
         private LogRecord GetLogRecord(bool result,IAccount newAccount,IClient client){
             LogRecord record = new LogRecord();
             if (result){
