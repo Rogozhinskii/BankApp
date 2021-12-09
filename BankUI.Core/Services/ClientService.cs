@@ -52,17 +52,22 @@ namespace BankUI.Core.Services
         public bool SaveNewAccount(Guid ownerId,IAccount account)
         {            
             var found = _clients.FirstOrDefault(x => x.Id == ownerId);
+            
+            
             if (found != null && found is IClient client){
                 client.Accounts.Add(account);
-                _eventAggregator.GetEvent<LogEvent>().Publish(
-                    new LogRecord
-                    {
-                        LogRecordLevel = LogRecordLevel.Info,
-                        Message = $"Счет номер: {account.Id} создан. Баланс: {account.Balance}. Владелец {client.Name} {client.Surname} номер:{found.Id}"
-                    }
-                    );
+                _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
+                {
+                    LogRecordLevel = LogRecordLevel.Info,
+                    Message = $"Время: {DateTime.Now}-->Счет номер: {account.Id} создан. Баланс: {account.Balance}$. Владелец {client.Name} {client.Surname} номер:{found.Id}"
+                });
                 return true;
             }
+            _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
+            {
+                LogRecordLevel = LogRecordLevel.Error,
+                Message = $"Время: {DateTime.Now}--> Ошибка открытия счета"
+            });            
             return false;
         }
 
@@ -74,27 +79,10 @@ namespace BankUI.Core.Services
             return _specialClientItems;
         }
 
-        public bool SaveData(){       //todo убрать в бар     
-            try{
-                _repositoryManager.CommitChanges(_clients);
-                _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
-                {
-                    LogRecordLevel=LogRecordLevel.Info,
-                    Message="Данные сохранены"
-                });
-                return true;
-            }
-            catch(ArgumentException ex)
-            {
-                throw new ArgumentException(ex.Message);
-            }
-            catch(UnauthorizedAccessException ex)
-            {
-                throw new UnauthorizedAccessException(ex.Message);
-            }
-            
+       
+        public IList<IStorableDoc> GetAllClients()
+        {
+            return _clients;
         }
-
-        
     }
 }

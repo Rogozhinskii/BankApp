@@ -6,7 +6,7 @@
              xmlns:core="clr-namespace:BankUI.Core.Common.Log;assembly=BankUI.Core"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:converters="clr-namespace:BankApp.Modules.NotificationTools.Converters"
-             MinWidth="400" MinHeight="600">
+             Width="600" Height="600" >
     <UserControl.Resources>
         <converters:LogLevelToPicKIndConverter x:Key="PicKIndConverter"/>
     </UserControl.Resources>
@@ -15,12 +15,22 @@
         <ListView ItemsSource="{Binding Log}">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type core:LogRecord}">
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Kind="{Binding LogRecordLevel,Converter={StaticResource PicKIndConverter}}"/>
-                        <TextBlock Text="{Binding Message}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <md:PackIcon Grid.Column="0" 
+                                     Kind="{Binding LogRecordLevel,Converter={StaticResource PicKIndConverter}}"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" 
+                                   Text="{Binding Message}"
                                    Margin="10,0,0,0"
-                                   TextWrapping="Wrap"/>
-                    </StackPanel>
+                                   TextWrapping="Wrap"
+                                   Padding="10"
+                                   MaxWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=ActualWidth}"/>                       
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

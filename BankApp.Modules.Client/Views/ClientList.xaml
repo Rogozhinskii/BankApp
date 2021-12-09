@@ -111,13 +111,6 @@
                             ToolTip="Send">
                             <materialDesign:PackIcon Kind="ArrowLeftRight"/>
                         </Button>
-                        <Button Margin="5,0,0,0"
-                            Command="{Binding SaveDataCommand}"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                            ToolTip="Save all changes">
-                            <materialDesign:PackIcon Kind="ContentSaveAll"/>
-                        </Button>
-
                     </StackPanel>
                     
                 </Grid>

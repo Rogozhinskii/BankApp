@@ -31,13 +31,13 @@ namespace BankUI.Core.Services.Interfaces
         /// <param name="ownerId">Id владельца счета</param>
         /// <param name="account">сам счет</param>
         /// <returns></returns>
-        bool SaveNewAccount(Guid ownerId,IAccount account);
+        bool SaveNewAccount(Guid ownerId,IAccount account);       
 
         /// <summary>
-        /// Сохраняет изменения
+        /// Возвращает коллекцию всех пользователей
         /// </summary>
         /// <returns></returns>
-        bool SaveData();
-       
+        IList<IStorableDoc> GetAllClients();
+
     }
 }

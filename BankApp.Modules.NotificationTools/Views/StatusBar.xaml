@@ -8,9 +8,16 @@
     <ToolBarTray>
         <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
             <Button Content="{materialDesign:PackIcon Kind=Book}"
-                    Command="{Binding ShowLogCommand}">
-                
+                    Command="{Binding ShowLogCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"/>
+            <Separator/>
+            <Button Command="{Binding SaveDataCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                    ToolTip="Save all changes">
+                    <materialDesign:PackIcon Kind="ContentSaveAll"/>
             </Button>
+
+
         </ToolBar>
     </ToolBarTray>
 </UserControl>

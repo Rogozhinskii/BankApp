@@ -41,6 +41,7 @@ namespace BankUI
             var repositoryManager = new RepositoryManager(logger, connectionString);
             containerRegistry.RegisterInstance<IRepositoryManager>(repositoryManager);
             containerRegistry.RegisterSingleton<ILogService, LogService>();
+            containerRegistry.RegisterSingleton<ISaveService, SaveService>();
             
             
         }

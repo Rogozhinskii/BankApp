@@ -19,6 +19,7 @@ namespace BankApp.Modules.NotificationTools
         public void OnInitialized(IContainerProvider containerProvider)
         {
             containerProvider.Resolve<ILogService>();
+            containerProvider.Resolve<ISaveService>();
             _regionManager.RegisterViewWithRegion(CommonTypesPrism.StatusBarRegion, typeof(StatusBar));
         }
 

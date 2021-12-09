@@ -172,12 +172,34 @@ namespace BankApp.Modules.Client.ViewModels
                 var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
                 if (newAcc != null)
                 {
-                    _clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc);
+                    ShowDialog(_clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc));
                 }
                 RaisePropertyChanged(nameof(Accounts));
             });
         }
 
+
+        /// <summary>
+        /// Вызывает диалоговое окна, в зависимости от рзультата создания счета
+        /// </summary>
+        /// <param name="result"></param>
+        private void ShowDialog(bool result)
+        {
+            var dialogParameters = new DialogParameters();
+            if (result)
+            {
+                string notifyMessage = "Счет открыт!";
+                dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
+
+            }
+            else
+            {
+                string errorMessage = "Ошибка открытия счета!";
+                dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
+                _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
+            }
+        }
 
 
         private DelegateCommand _sendMoneyCommand;
@@ -199,43 +221,6 @@ namespace BankApp.Modules.Client.ViewModels
             {
                 RaisePropertyChanged(nameof(Accounts));
             });
-        }
-
-
-        private DelegateCommand _saveDataCommand;
-
-        /// <summary>
-        /// Сохраняет проведенный изменения
-        /// </summary>
-        public DelegateCommand SaveDataCommand =>
-            _saveDataCommand ?? (_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand));
-
-        void ExecuteSaveDataCommand()
-        {
-            var result = _clientService.SaveData();
-            ShowDialog(result);
-        }
-
-        /// <summary>
-        /// Вызывает диалоговое окна в зависимости от результата сохранения данных
-        /// </summary>
-        /// <param name="result"></param>
-        private void ShowDialog(bool result)
-        {
-            var dialogParameters = new DialogParameters();
-            if (result)
-            {
-                string notifyMessage = "Данные сохранены";
-                dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
-                _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
-
-            }
-            else
-            {
-                string errorMessage = "Сохранение не выполнено";
-                dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
-                _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
-            }
         }
 
         #endregion
