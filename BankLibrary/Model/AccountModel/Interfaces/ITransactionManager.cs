@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="accaunt"></param>
         /// <param name="sum"></param>
-        void SendMoneyToAccount(T accaunt, float sum);
+        bool SendMoneyToAccount(T accaunt, float sum);
 
         /// <summary>
         /// Осуществляет перевод со счета fromAccaunt на счет toAccaunt равный сумме sum. Если перевод произведен возвращает true, иначе false

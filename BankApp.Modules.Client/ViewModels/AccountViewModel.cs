@@ -3,9 +3,13 @@ using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
+using BankUI.Core.Common.Log;
+using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Services.Dialogs;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -19,22 +23,18 @@ namespace BankApp.Modules.Client.ViewModels
         /// <summary>
         /// сервис открытия счетов
         /// </summary>
-        private readonly IAccountService _accountService;
+        private readonly IAccountService<IAccount> _accountService;
+        private readonly IEventAggregator _eventAggregator;
 
-        /// <summary>
-        /// Сервис переводов средств между счетами
-        /// </summary>
-        private readonly ITransactionManager<IAccount> _transactionManager;  
-        
         /// <summary>
         /// Хозяин счета
         /// </summary>
         private IStorableDoc _owner;
 
-        public AccountViewModel(IAccountService accountService, ITransactionManager<IAccount> transactionManager,IClientService clientService)
+        public AccountViewModel(IAccountService<IAccount> accountService,IEventAggregator eventAggregator)
         {
             _accountService = accountService;
-            _transactionManager = transactionManager;            
+            _eventAggregator = eventAggregator;
         }
 
         #region Свойства
@@ -129,27 +129,72 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteSaveAccountCommand()
         {
-            IDialogResult dialogResult = new DialogResult();
-            var accountManager = _accountService.GetAccountManager(AccountType);
-            var newAccount = accountManager.CreateNewAccount();
+            IDialogResult dialogResult = new DialogResult(); 
+            var newAccount = _accountService.CreateNewAccount(AccountType);
             newAccount.ClientType = ((IClient)_owner).ClientType;
-            if (FromAccount != null)
-            {
-                _transactionManager.SendMoneyToAccount(FromAccount, newAccount, Balance);
+            LogRecord record = new LogRecord();
+            if (FromAccount != null){
+                var result=_accountService.SendMoneyToAccount(FromAccount, newAccount, Balance);
+                record = GetLogRecord(result,FromAccount, newAccount, Balance);
             }
-            if (Balance > 0 && FromAccount == null)
-            {
-                _transactionManager.SendMoneyToAccount(newAccount, Balance);
+            if (Balance > 0 && FromAccount == null){
+                var result=_accountService.SendMoneyToAccount(newAccount, Balance);
+                record = GetLogRecord(result,newAccount, Balance);
             }
-            if (newAccount is DepositAccount depositAccount)
-            {
+            if (newAccount is DepositAccount depositAccount){
                 depositAccount.Term = Term;
             }
+            if (record.LogRecordLevel != LogRecordLevel.None)
+                _eventAggregator.GetEvent<LogEvent>().Publish(record);            
             dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
             RaiseRequestClose(dialogResult);
         }
         #endregion
 
+        /// <summary>
+        /// Возвращает лог запись при переводе средств с одного счета на другой
+        /// </summary>
+        /// <param name="result">результат операции перевода</param>
+        /// <param name="fromAccount"></param>
+        /// <param name="newAccount"></param>
+        /// <param name="balance"></param>
+        /// <returns></returns>
+        private LogRecord GetLogRecord(bool result, IAccount fromAccount, IAccount newAccount, float balance)
+        {
+            LogRecord record = new LogRecord();
+            if (fromAccount!=null && result){
+                record.LogRecordLevel = LogRecordLevel.Info;
+                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} ";
+            }
+            else{
+                record.LogRecordLevel = LogRecordLevel.Error;
+                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} " +
+                    $"завершился ошибкой";
+            }
+            return record;
+        }
+
+        /// <summary>
+        /// Возвращает лог запись при переводе средств на счет
+        /// </summary>
+        /// <param name="result">результат операции перевода</param>
+        /// <param name="toAccount"></param>
+        /// <param name="balance"></param>
+        /// <returns></returns>
+        private LogRecord GetLogRecord(bool result, IAccount toAccount, float balance)
+        {
+            LogRecord record = new LogRecord();
+            if (result){
+                record.LogRecordLevel = LogRecordLevel.Info;
+                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}.На счет: {toAccount.Id} ";
+            }
+            else{
+                record.LogRecordLevel = LogRecordLevel.Error;
+                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. На счет: {toAccount.Id} " +
+                    $"завершился ошибкой";
+            }
+            return record; 
+        }
 
         /// <summary>
         /// Отвечает за возможность закрытия диалогового окна

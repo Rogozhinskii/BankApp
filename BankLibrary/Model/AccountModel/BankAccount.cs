@@ -50,8 +50,12 @@ namespace BankLibrary.Model.AccountModel
             return false;
         }
 
-        public virtual void IncreaseBalance(float count) =>
+        public virtual bool IncreaseBalance(float count)
+        {
             _balance += count;
+            return true;
+        }
+            
 
 
         public override bool Equals(object obj)

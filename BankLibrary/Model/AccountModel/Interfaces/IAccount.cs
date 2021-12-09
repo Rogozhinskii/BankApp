@@ -42,6 +42,6 @@ namespace BankLibrary.Model.AccountModel.Interfaces
         /// увеличивает количество средств на счету на количество равное count
         /// </summary>
         /// <param name="count"></param>
-        void IncreaseBalance(float count);
+        bool IncreaseBalance(float count);
     }
 }

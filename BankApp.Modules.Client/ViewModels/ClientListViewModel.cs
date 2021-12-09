@@ -2,10 +2,14 @@
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
+using BankUI.Core.Common.Log;
+using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -25,6 +29,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Сервис диалоговых окон
         /// </summary>
         private readonly IDialogService _dialogService;
+        private readonly IEventAggregator _eventAgregator;
 
         /// <summary>
         /// Выбранный элемент в навигационном боковом баре
@@ -32,10 +37,11 @@ namespace BankApp.Modules.Client.ViewModels
         private string _currentFolder = FolderParameters.Regular;
 
 
-        public ClientListViewModel(IClientService clientService, IDialogService dialogService)
+        public ClientListViewModel(IClientService clientService, IDialogService dialogService,IEventAggregator eventAgregator)
         {
             _clientService = clientService;
             _dialogService = dialogService;
+            _eventAgregator = eventAgregator;
         }
 
         #region Свойства
@@ -122,6 +128,8 @@ namespace BankApp.Modules.Client.ViewModels
                     var dialogParameters = new DialogParameters();
                     string errorMessage = $"Счет {_selectedAccount.Id} не может быть закрыт. На счету имеются средства: {_selectedAccount.Balance}. " +
                                           $"Для закрытия счета переведите средства на другой счет";
+                    _eventAgregator.GetEvent<LogEvent>().Publish(new LogRecord {LogRecordLevel=LogRecordLevel.Error, Message=$"Время {DateTime.Now}-->" +
+                        $" Ошибка закрытия счета: {_selectedAccount.Id}" });
                     dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
                     _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, (result) =>
                     {
@@ -172,10 +180,25 @@ namespace BankApp.Modules.Client.ViewModels
                 var owner = result.Parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
                 if (newAcc != null)
                 {
-                    ShowDialog(_clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc));
+                    var isSaved = _clientService.SaveNewAccount(((IStorableDoc)Client).Id, newAcc);
+                    ShowDialog(isSaved);
+                    _eventAgregator.GetEvent<LogEvent>().Publish(GetLogRecord(isSaved,newAcc,owner));
                 }
                 RaisePropertyChanged(nameof(Accounts));
             });
+        }
+        private LogRecord GetLogRecord(bool result,IAccount newAccount,IClient client){
+            LogRecord record = new LogRecord();
+            if (result){
+                record.LogRecordLevel = LogRecordLevel.Info;
+                record.Message = $"Время: {DateTime.Now}-->Счет номер: {newAccount.Id} создан. Баланс: {newAccount.Balance}$. " +
+                    $"Владелец {client.Name} {client.Surname} номер:{((IStorableDoc)client).Id}";
+            }
+            else{
+                record.LogRecordLevel = LogRecordLevel.Error;
+                record.Message = $"Время: {DateTime.Now}--> Ошибка открытия счета";
+            }
+            return record;
         }
 
 

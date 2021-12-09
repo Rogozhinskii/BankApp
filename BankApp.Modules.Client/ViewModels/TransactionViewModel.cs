@@ -2,9 +2,13 @@
 using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
+using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Common;
+using BankUI.Core.Common.Log;
+using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -18,10 +22,8 @@ namespace BankApp.Modules.Client.ViewModels
 {
     public class TransactionViewModel : DialogViewModelBase, IDataErrorInfo
     {
-        /// <summary>
-        /// Сервис перевода средств между счетами клентов
-        /// </summary>
-        private readonly ITransactionManager<IAccount> _transactionManager;
+        
+        private readonly IAccountService<IAccount> _accountService;
 
         /// <summary>
         /// Серввис доступа к хранилищу клиентов
@@ -31,6 +33,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Сервис диалоговых окон
         /// </summary>
         private readonly IDialogService _dialogService;
+        private readonly IEventAggregator _eventAgreggator;
 
         /// <summary>
         /// Отправитель
@@ -38,11 +41,15 @@ namespace BankApp.Modules.Client.ViewModels
         private IClient _owner;
 
 
-        public TransactionViewModel(ITransactionManager<IAccount> transactionManager, IClientService clientService,IDialogService dialogService)
+        public TransactionViewModel(IAccountService<IAccount> accountService, 
+                                    IClientService clientService,
+                                    IDialogService dialogService,
+                                    IEventAggregator eventAgreggator)
         {
-            _transactionManager = transactionManager;
+            _accountService = accountService;
             _clientService = clientService;
             _dialogService = dialogService;
+            _eventAgreggator = eventAgreggator;
         }
 
         private float _amount;
@@ -170,10 +177,31 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteSendMoneyCommand()
         {
-            var result=_transactionManager.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+            var result=_accountService.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+            _eventAgreggator.GetEvent<LogEvent>().Publish(GetLogRecord(result));
             RaisePropertyChanged(nameof(OwnerAccounts));
             ShowDialog(result);
             Amount = 0f;
+        }
+
+        /// <summary>
+        /// Возвращает лог запись о транзакции между счетами клиентов
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private LogRecord GetLogRecord(bool result)
+        {
+            LogRecord record = new LogRecord();
+            if (result){
+                record.LogRecordLevel = LogRecordLevel.Info;
+                record.Message = $"{DateTime.Now}-->Слиент:{((IStorableDoc)_owner).Id} выполнил перевод со счета {FromAccount.Id} " +
+                    $" на {ToAccount.Id} сумму {Amount}";
+            }else{
+                record.LogRecordLevel = LogRecordLevel.Error;
+                record.Message = $"{DateTime.Now}-->Ошибка перевода. Со счета {FromAccount.Id} Слиент:{((IStorableDoc)_owner).Id}" +
+                    $" на счет {ToAccount.Id} сумма{Amount}";
+            }
+            return record;
         }
 
         private void ShowDialog(bool result)

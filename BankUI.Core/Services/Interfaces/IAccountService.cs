@@ -7,15 +7,29 @@ namespace BankUI.Core.Services.Interfaces
     /// <summary>
     /// Интерфейс для реализаии возможности создания пользовательских счетов в UI
     /// </summary>
-    public interface IAccountService
+    public interface IAccountService<T>
     {
         /// <summary>
-        /// Возвращает параметризированный,экземпляр класса, реализиющий интерфейс IAccountManager - отвечает за создание новых счетов соответсвующего типа
-        /// Если AccountType=AccountType.Deposit, вернет объект, способный создать DepositAccount.
-        /// По умолчанию вернет IAccountManager<SavingAccount>
-        /// </summary>
-        /// <param name="accountType">тип счета, которым нужно параметризировать IAccount</param>
+        /// Создает и возвращает счет типа Т, и начисляет на него количество средств равное sum
+        /// </summary>      
+        /// <param name="sum"></param>
         /// <returns></returns>
-        IAccountManager<IAccount> GetAccountManager(AccountType accountType);
+        T CreateNewAccount(AccountType accountType);
+
+        /// <summary>
+        /// Осущесвтляет перевод со счет T, равный сумме sum.
+        /// </summary>
+        /// <param name="accaunt"></param>
+        /// <param name="sum"></param>
+        bool SendMoneyToAccount(T accaunt, float sum);
+
+        /// <summary>
+        /// Осуществляет перевод со счета fromAccaunt на счет toAccaunt равный сумме sum. Если перевод произведен возвращает true, иначе false
+        /// </summary>
+        /// <param name="fromAccaunt"></param>
+        /// <param name="toAccaunt"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
+        bool SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum);
     }
 }

@@ -49,25 +49,12 @@ namespace BankUI.Core.Services
             }
         }
 
-        public bool SaveNewAccount(Guid ownerId,IAccount account)
-        {            
+        public bool SaveNewAccount(Guid ownerId,IAccount account){            
             var found = _clients.FirstOrDefault(x => x.Id == ownerId);
-            
-            
             if (found != null && found is IClient client){
-                client.Accounts.Add(account);
-                _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
-                {
-                    LogRecordLevel = LogRecordLevel.Info,
-                    Message = $"Время: {DateTime.Now}-->Счет номер: {account.Id} создан. Баланс: {account.Balance}$. Владелец {client.Name} {client.Surname} номер:{found.Id}"
-                });
+                client.Accounts.Add(account);               
                 return true;
-            }
-            _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
-            {
-                LogRecordLevel = LogRecordLevel.Error,
-                Message = $"Время: {DateTime.Now}--> Ошибка открытия счета"
-            });            
+            }       
             return false;
         }
 

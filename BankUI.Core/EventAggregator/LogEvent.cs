@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BankUI.Core.EventAggregator
 {
-    class LogEvent: PubSubEvent<LogRecord>
+    public class LogEvent: PubSubEvent<LogRecord>
     {
     }
 }
