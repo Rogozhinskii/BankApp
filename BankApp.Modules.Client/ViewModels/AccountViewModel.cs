@@ -147,6 +147,7 @@ namespace BankApp.Modules.Client.ViewModels
             if (record.LogRecordLevel != LogRecordLevel.None)
                 _eventAggregator.GetEvent<LogEvent>().Publish(record);            
             dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
+            dialogResult.Parameters.Add(CommonTypesPrism.ParameterOwner, _owner);
             RaiseRequestClose(dialogResult);
         }
         #endregion
