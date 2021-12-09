@@ -54,6 +54,13 @@ namespace BankUI.Core.Services
             var found = _clients.FirstOrDefault(x => x.Id == ownerId);
             if (found != null && found is IClient client){
                 client.Accounts.Add(account);
+                _eventAggregator.GetEvent<LogEvent>().Publish(
+                    new LogRecord
+                    {
+                        LogRecordLevel = LogRecordLevel.Info,
+                        Message = $"Счет номер: {account.Id} создан. Баланс: {account.Balance}. Владелец {client.Name} {client.Surname} номер:{found.Id}"
+                    }
+                    );
                 return true;
             }
             return false;
@@ -72,7 +79,7 @@ namespace BankUI.Core.Services
                 _repositoryManager.CommitChanges(_clients);
                 _eventAggregator.GetEvent<LogEvent>().Publish(new LogRecord
                 {
-                    RecordLevel=LogRecordLevel.Info,
+                    LogRecordLevel=LogRecordLevel.Info,
                     Message="Данные сохранены"
                 });
                 return true;

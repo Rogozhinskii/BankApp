@@ -1,4 +1,4 @@
-﻿using BankApp.Modules.Client.Converters.Base;
+﻿using BankUI.Core.Common;
 using System;
 using System.Globalization;
 using System.Linq;

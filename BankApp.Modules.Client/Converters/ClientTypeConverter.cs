@@ -1,8 +1,8 @@
-﻿using BankApp.Modules.Client.Converters.Base;
-using BankLibrary.Model.ClientModel;
+﻿using BankLibrary.Model.ClientModel;
+using BankUI.Core.Common;
 using System;
 using System.Globalization;
-using System.Windows.Data;
+
 
 namespace BankApp.Modules.Client.Converters
 {

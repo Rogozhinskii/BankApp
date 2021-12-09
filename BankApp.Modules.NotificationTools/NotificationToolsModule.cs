@@ -1,6 +1,7 @@
 ﻿using BankApp.Modules.NotificationTools.ViewModels;
 using BankApp.Modules.NotificationTools.Views;
 using BankUI.Core.Common;
+using BankUI.Core.Services.Interfaces;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -17,6 +18,7 @@ namespace BankApp.Modules.NotificationTools
         }
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            containerProvider.Resolve<ILogService>();
             _regionManager.RegisterViewWithRegion(CommonTypesPrism.StatusBarRegion, typeof(StatusBar));
         }
 

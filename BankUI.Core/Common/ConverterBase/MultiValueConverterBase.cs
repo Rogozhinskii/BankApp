@@ -4,12 +4,12 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Data;
 
-namespace BankApp.Modules.Client.Converters.Base
+namespace BankUI.Core.Common
 {
     /// <summary>
     /// Базовый класс для конвертации множественных привязок
     /// </summary>
-    internal abstract class MultiValueConverterBase : IMultiValueConverter
+    public abstract class MultiValueConverterBase : IMultiValueConverter
     {
         /// <summary>
         /// Реализует прямое преобразование входных парамметров

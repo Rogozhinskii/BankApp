@@ -1,14 +1,11 @@
-﻿using BankApp.Modules.Client.Converters.Base;
-using BankLibrary.Model.AccountModel;
+﻿using BankLibrary.Model.AccountModel;
+using BankUI.Core.Common;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
-using System.Windows.Data;
 
 namespace BankApp.Modules.Client.Converters
 {
-    
+
     internal class EnableConverter : ValueConverterBase
     {
         /// <summary>

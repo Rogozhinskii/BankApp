@@ -1,10 +1,29 @@
 ﻿<UserControl x:Class="BankApp.Modules.NotificationTools.Views.LogForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"             
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             xmlns:prism="http://prismlibrary.com/"  
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:core="clr-namespace:BankUI.Core.Common.Log;assembly=BankUI.Core"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:BankApp.Modules.NotificationTools.Converters"
+             MinWidth="400" MinHeight="600">
+    <UserControl.Resources>
+        <converters:LogLevelToPicKIndConverter x:Key="PicKIndConverter"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <ListView ItemsSource="{Binding Log}"/>
+        <ListView ItemsSource="{Binding Log}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type core:LogRecord}">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="{Binding LogRecordLevel,Converter={StaticResource PicKIndConverter}}"/>
+                        <TextBlock Text="{Binding Message}"
+                                   Margin="10,0,0,0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </UserControl>

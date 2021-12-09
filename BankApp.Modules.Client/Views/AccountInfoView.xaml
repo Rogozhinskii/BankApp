@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:converters="clr-namespace:BankApp.Modules.Client.Converters">
     <UserControl.Resources>
-        <converters:AccoutTypeToVisibilityConverter x:Key="VisibilityConverter"/>
+        <converters:AccoutTypeToVisibilityConverter x:Key="VisibilityConverter"/>        
         <Style x:Key="margin" TargetType="TextBlock">
             <Setter Property="Margin" Value="10,0,0,0"/>
         </Style>
