@@ -37,6 +37,7 @@ namespace BankApp.Modules.Client
             containerRegistry.RegisterDialog<TransactionView, TransactionViewModel>();
             containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();
             containerRegistry.RegisterDialog<AccountInfoView, AccountInfoViewModel>();
+            containerRegistry.RegisterDialog<AccountConsolidationView, AccountConsolidationViewModel>();
             containerRegistry.RegisterSingleton<IAccountService<IAccount>, AccountService<IAccount>>();            
         }
     }

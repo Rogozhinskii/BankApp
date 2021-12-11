@@ -2,6 +2,7 @@
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
+using BankLibrary.Model.Exceptions;
 using BankUI.Core.Common;
 using BankUI.Core.Common.Log;
 using BankUI.Core.EventAggregator;
@@ -18,23 +19,25 @@ namespace BankApp.Modules.Client.ViewModels
     /// <summary>
     /// ViewModel диалогового окна открытия счетов
     /// </summary>
-    public class AccountViewModel : DialogViewModelBase,IDataErrorInfo
+    public class AccountViewModel : DialogViewModelBase
     {
         /// <summary>
         /// сервис открытия счетов
         /// </summary>
         private readonly IAccountService<IAccount> _accountService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDialogService _dialogService;
 
         /// <summary>
         /// Хозяин счета
         /// </summary>
         private IStorableDoc _owner;
 
-        public AccountViewModel(IAccountService<IAccount> accountService,IEventAggregator eventAggregator)
+        public AccountViewModel(IAccountService<IAccount> accountService,IEventAggregator eventAggregator, IDialogService dialogService)
         {
             _accountService = accountService;
             _eventAggregator = eventAggregator;
+            _dialogService = dialogService;
         }
 
         #region Свойства
@@ -94,27 +97,6 @@ namespace BankApp.Modules.Client.ViewModels
         }
         #endregion
 
-        #region Обработка ошибок при вводе значений в TextBox
-        public string Error => "";
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = string.Empty;
-                switch (columnName)
-                {
-                    case "Balance":
-                        if (FromAccount != null && FromAccount.Balance < _balance)
-                            error = "Не достаточно средств";
-                        break;
-                }
-                return error;
-            }
-        }
-
-        #endregion
-
         #region Commands
 
         private DelegateCommand _saveNewAccount;
@@ -133,17 +115,25 @@ namespace BankApp.Modules.Client.ViewModels
             var newAccount = _accountService.CreateNewAccount(AccountType);
             newAccount.ClientType = ((IClient)_owner).ClientType;
             LogRecord record = new LogRecord();
-            if (FromAccount != null){
-                var result=_accountService.SendMoneyToAccount(FromAccount, newAccount, Balance);
-                record = GetLogRecord(result,FromAccount, newAccount, Balance);
+            bool result = default(bool);
+            if (FromAccount != null){                
+                try{
+                    result = FromAccount.Transaction(newAccount, Balance);
+                }
+                catch (NotEnoughBalanceException ex){
+                    var dialogParameters = new DialogParameters();
+                    dialogParameters.Add(CommonTypesPrism.ErrorMessage, ex.Message);
+                    _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
+                    RaiseRequestClose(dialogResult);
+                }
             }
             if (Balance > 0 && FromAccount == null){
-                var result=_accountService.SendMoneyToAccount(newAccount, Balance);
-                record = GetLogRecord(result,newAccount, Balance);
+                result = newAccount.Transaction(Balance);  
             }
             if (newAccount is DepositAccount depositAccount){
                 depositAccount.Term = Term;
             }
+            GetLogRecord(result, FromAccount, newAccount, Balance,out record);
             if (record.LogRecordLevel != LogRecordLevel.None)
                 _eventAggregator.GetEvent<LogEvent>().Publish(record);            
             dialogResult.Parameters.Add(CommonTypesPrism.ParameterNewAccount, newAccount);
@@ -152,6 +142,7 @@ namespace BankApp.Modules.Client.ViewModels
         }
         #endregion
 
+        
         /// <summary>
         /// Возвращает лог запись при переводе средств с одного счета на другой
         /// </summary>
@@ -160,19 +151,24 @@ namespace BankApp.Modules.Client.ViewModels
         /// <param name="newAccount"></param>
         /// <param name="balance"></param>
         /// <returns></returns>
-        private LogRecord GetLogRecord(bool result, IAccount fromAccount, IAccount newAccount, float balance)
+        private void GetLogRecord(bool result, IAccount fromAccount, IAccount newAccount, float balance,out LogRecord logRecord)
         {
             LogRecord record = new LogRecord();
-            if (fromAccount!=null && result){
-                record.LogRecordLevel = LogRecordLevel.Info;
-                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} ";
+            if (fromAccount == null){
+                GetLogRecord(result, newAccount, balance ,out record);
             }
             else{
-                record.LogRecordLevel = LogRecordLevel.Error;
-                record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} " +
-                    $"завершился ошибкой";
-            }
-            return record;
+                if (fromAccount != null && result){
+                    record.LogRecordLevel = LogRecordLevel.Info;
+                    record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} ";
+                }
+                else{
+                    record.LogRecordLevel = LogRecordLevel.Error;
+                    record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. Со счета: {fromAccount.Id} на счет: {newAccount.Id} " +
+                        $"завершился ошибкой";
+                }
+            }            
+            logRecord = record;
         }
 
         /// <summary>
@@ -182,7 +178,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// <param name="toAccount"></param>
         /// <param name="balance"></param>
         /// <returns></returns>
-        private LogRecord GetLogRecord(bool result, IAccount toAccount, float balance)
+        private void GetLogRecord(bool result, IAccount toAccount, float balance,out LogRecord logRecord)
         {
             LogRecord record = new LogRecord();
             if (result){
@@ -194,7 +190,7 @@ namespace BankApp.Modules.Client.ViewModels
                 record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}. На счет: {toAccount.Id} " +
                     $"завершился ошибкой";
             }
-            return record; 
+            logRecord = record;
         }
 
         /// <summary>

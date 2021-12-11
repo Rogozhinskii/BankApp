@@ -6,6 +6,7 @@ using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Data;
 using BankLibrary.Model.DataRepository.Interfaces;
+using BankLibrary.Model.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog;
 using System;
@@ -15,12 +16,34 @@ using Xunit.Sdk;
 
 namespace BankAppTests
 {
+
     /// <summary>
     /// Песочница для экспериментов
     /// </summary>
     [TestClass]
     public class ScrapBook
     {
+        [TestMethod]
+        public void ExcceprionTest()
+        {
+            var from = new SavingAccount(Guid.NewGuid(), 15);
+            var to = new SavingAccount(Guid.NewGuid(), 55);
+
+            from.Transaction(500);
+
+            try
+            {
+                from.Transaction(to, 20);
+            }catch(NotEnoughBalanceException ex)
+            {
+               var tt=ex.Message;
+            }
+
+            
+            
+        }
+
+
        [TestMethod]
         public void RepositoryTest()
         {

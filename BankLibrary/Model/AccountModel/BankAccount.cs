@@ -1,6 +1,7 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
+using BankLibrary.Model.Exceptions;
 using Newtonsoft.Json;
 using System;
 
@@ -36,20 +37,23 @@ namespace BankLibrary.Model.AccountModel
             _accountType = type;
         }
     
-        public bool CanReduceBalance(float count) =>
+        private bool CanReduceBalance(float count) =>
             Balance >= count;
         
 
         public virtual bool ReduceBalance(float count)
         {           
-            if (CanReduceBalance(count))
-            {
+            if (CanReduceBalance(count)){
                 _balance -= count;
                 return true;
             }
-            return false;
+            else{
+                throw new NotEnoughBalanceException();
+            }
+            
         }
 
+        [Obsolete]
         public virtual bool IncreaseBalance(float count)
         {
             _balance += count;
@@ -66,5 +70,6 @@ namespace BankLibrary.Model.AccountModel
             }
             return false;            
         }
+
     }
 }

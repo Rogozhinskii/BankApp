@@ -20,7 +20,7 @@ using System.Windows.Data;
 
 namespace BankApp.Modules.Client.ViewModels
 {
-    public class TransactionViewModel : DialogViewModelBase, IDataErrorInfo
+    public class TransactionViewModel : DialogViewModelBase
     {
         
         private readonly IAccountService<IAccount> _accountService;
@@ -145,28 +145,6 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _recipients, value); }
         }
 
-        #region Обработка ошибок ввода данных
-        public string Error => "";
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = string.Empty;
-                switch (columnName)
-                {
-                    case "Amount":
-                        if (FromAccount != null && FromAccount.Balance < _amount)
-                            error = "Не достаточно средств";
-                        break;
-                }
-                return error;
-            }
-        }
-
-        #endregion
-
-
         private DelegateCommand _sendMoneyCommand;
 
         /// <summary>
@@ -177,7 +155,8 @@ namespace BankApp.Modules.Client.ViewModels
 
         void ExecuteSendMoneyCommand()
         {
-            var result=_accountService.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+            //var result=_accountService.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+            var result = FromAccount.Transaction(ToAccount, Amount);
             _eventAgreggator.GetEvent<LogEvent>().Publish(GetLogRecord(result));
             RaisePropertyChanged(nameof(OwnerAccounts));
             ShowDialog(result);

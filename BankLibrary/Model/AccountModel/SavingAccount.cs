@@ -1,4 +1,5 @@
-﻿using BankLibrary.Model.ClientModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
+using BankLibrary.Model.ClientModel.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,22 @@ namespace BankLibrary.Model.AccountModel
 
         [JsonConstructor]
         public SavingAccount(Guid id, float balance) : base(id, balance, AccountType.Savings) { }
+
+
+        /// <summary>
+        /// Перегрузка оператора + , как бы имитация процесса слияния счетов. Будет работать только с накопительными счетами, т.к. вряд ли можно сложить депозиты))
+        /// </summary>
+        /// <param name="firstAccount"></param>
+        /// <param name="secondAccount"></param>
+        /// <returns></returns>
+        public static IAccount operator + (SavingAccount firstAccount, SavingAccount secondAccount)
+        {
+            return new SavingAccount(Guid.NewGuid(), firstAccount.Balance + secondAccount.Balance);            
+        }
+
+       
     }
+
+
+    
 }

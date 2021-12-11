@@ -29,7 +29,7 @@ namespace BankLibrary.Model.AccountModel.Interfaces
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        bool CanReduceBalance(float count);
+        //bool CanReduceBalance(float count);
 
         /// <summary>
         /// уменьшает количество средств на счету на количество равное count

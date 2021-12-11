@@ -111,6 +111,13 @@
                             ToolTip="Send">
                             <materialDesign:PackIcon Kind="ArrowLeftRight"/>
                         </Button>
+
+                        <Button Margin="5,0,0,0"
+                            Command="{Binding ConsolidateAccounts}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                            ToolTip="Consolidate Accounts">
+                            <materialDesign:PackIcon Kind="Consolidate"/>
+                        </Button>
                     </StackPanel>
                     
                 </Grid>

@@ -188,6 +188,22 @@ namespace BankApp.Modules.Client.ViewModels
             });
         }
 
+
+        private DelegateCommand _consolidateAccountsCommand;
+        public DelegateCommand ConsolidateAccountsCommand =>
+            _consolidateAccountsCommand ?? (_consolidateAccountsCommand = new DelegateCommand(ExecuteConsolidateAccountsCommand));
+
+        void ExecuteConsolidateAccountsCommand()
+        {
+            var dialogParameters = new DialogParameters()
+            {
+                {CommonTypesPrism.ParameterAccounts, Accounts },
+                {CommonTypesPrism.ParameterOwner, Client }
+            };
+
+            _dialogService.Show();
+        }
+
         /// <summary>
         /// Запись по результатам создания счете
         /// </summary>
