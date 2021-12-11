@@ -113,7 +113,7 @@
                         </Button>
 
                         <Button Margin="5,0,0,0"
-                            Command="{Binding ConsolidateAccounts}"
+                            Command="{Binding ConsolidateAccountsCommand}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
                             ToolTip="Consolidate Accounts">
                             <materialDesign:PackIcon Kind="Consolidate"/>

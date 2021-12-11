@@ -1,5 +1,6 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
+using BankLibrary.Model.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace BankLibrary.Model.AccountModel
         /// <returns></returns>
         public static IAccount operator + (SavingAccount firstAccount, SavingAccount secondAccount)
         {
+            if (firstAccount.Id == secondAccount.Id)
+                throw new SameAccountsException();
             return new SavingAccount(Guid.NewGuid(), firstAccount.Balance + secondAccount.Balance);            
         }
 

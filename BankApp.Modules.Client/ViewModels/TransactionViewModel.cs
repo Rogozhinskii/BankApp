@@ -23,10 +23,8 @@ namespace BankApp.Modules.Client.ViewModels
     public class TransactionViewModel : DialogViewModelBase
     {
         
-        private readonly IAccountService<IAccount> _accountService;
-
         /// <summary>
-        /// Серввис доступа к хранилищу клиентов
+        /// Сервис доступа к хранилищу клиентов
         /// </summary>
         private readonly IClientService _clientService;
         /// <summary>
@@ -45,8 +43,7 @@ namespace BankApp.Modules.Client.ViewModels
                                     IClientService clientService,
                                     IDialogService dialogService,
                                     IEventAggregator eventAgreggator)
-        {
-            _accountService = accountService;
+        {           
             _clientService = clientService;
             _dialogService = dialogService;
             _eventAgreggator = eventAgreggator;
@@ -154,8 +151,7 @@ namespace BankApp.Modules.Client.ViewModels
             _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
 
         void ExecuteSendMoneyCommand()
-        {
-            //var result=_accountService.SendMoneyToAccount(FromAccount, ToAccount, Amount);
+        {            
             var result = FromAccount.Transaction(ToAccount, Amount);
             _eventAgreggator.GetEvent<LogEvent>().Publish(GetLogRecord(result));
             RaisePropertyChanged(nameof(OwnerAccounts));

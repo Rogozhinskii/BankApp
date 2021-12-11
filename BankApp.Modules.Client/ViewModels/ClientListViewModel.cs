@@ -196,12 +196,14 @@ namespace BankApp.Modules.Client.ViewModels
         void ExecuteConsolidateAccountsCommand()
         {
             var dialogParameters = new DialogParameters()
-            {
-                {CommonTypesPrism.ParameterAccounts, Accounts },
+            {              
                 {CommonTypesPrism.ParameterOwner, Client }
             };
 
-            _dialogService.Show();
+            _dialogService.Show(CommonTypesPrism.AccountConsolidationView,dialogParameters, result=> 
+            {
+                RaisePropertyChanged(nameof(Accounts));
+            });
         }
 
         /// <summary>

@@ -28,10 +28,10 @@
 
         <GroupBox Grid.Column="0"
                   Margin="10,0,0,0"
-                  Header="From">
+                  Header="Select First Account">
             <ListBox 
                  ItemsSource="{Binding OwnerAccounts}"
-                 SelectedItem="{Binding FromAccount}">
+                 SelectedItem="{Binding FirstAccount}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <controls:AccountItem/>
@@ -57,49 +57,28 @@
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="From:"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="To:"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="First:"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Second:"/>
                 <TextBox Grid.Column="1" Grid.Row="0" 
-                         Text="{Binding FromAccount.Id}"                        
+                         Text="{Binding FirstAccount.Id}"                        
                          HorizontalContentAlignment="Right"
                          VerticalContentAlignment="Bottom"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ToAccount.Id}"
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SecondAccount.Id}"
                          HorizontalContentAlignment="Right"
                          VerticalContentAlignment="Bottom"/>
-
-                <TextBox Grid.Column="0" Grid.Row="2"
-                         Margin="0,10,0,0"
-                         Grid.ColumnSpan="2"
-                         Style="{StaticResource MaterialDesignFilledTextBox}"
-                         VerticalAlignment="Top"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         MaxWidth="400"
-                         materialDesign:HintAssist.Hint="Сумма перевода"
-                         >
-
-                    <TextBox.Text>
-                        <Binding Path="Amount"
-                                 UpdateSourceTrigger="PropertyChanged"
-                                 StringFormat="C">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                
                 <UniformGrid Columns="2"
                              Grid.Row="4"
                              Grid.ColumnSpan="2">
                     <Button  Margin="0,20,0,0"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Width="80"
-                        Content="Send" 
-                        Command="{Binding SendMoneyCommand}"/>
+                        Width="110"
+                        Content="Consolidate" 
+                        Command="{Binding ConsolidateAccounts}"/>
 
                     <Button  Margin="0,20,0,0"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Width="80"
+                        Width="110"
                         Content="Exit" 
                         Command="{Binding ExitCommand}"/>
                 </UniformGrid>
@@ -107,38 +86,15 @@
 
         </GroupBox>
 
-
-
         <GroupBox Grid.Column="2"
-                Margin="10,0,0,0"
-                 Header="Whom">
-            <StackPanel Orientation="Vertical">
-                <TextBox Grid.Column="0"
-                         Grid.Row="3"
-                         Text="{Binding RecipientsFilteredText, UpdateSourceTrigger=PropertyChanged}"/>
-                <ListView ItemsSource="{Binding RecipientsFilteredCollection}"
-                      SelectedItem="{Binding SelectedRecipient}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <controls:ClientItem/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListView>
-            </StackPanel>
-
-        </GroupBox>
-
-
-
-        <GroupBox Grid.Column="3"
                   Margin="10,0,0,0"
-                  Header="To">
+                  Header="Select Second Account">
             <ListBox 
-                 ItemsSource="{Binding RecipientAccounts}"
-                 SelectedItem="{Binding ToAccount}">
+                 ItemsSource="{Binding OwnerAccounts}"
+                 SelectedItem="{Binding SecondAccount}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <controls:AccountItemShort/>
+                        <controls:AccountItem/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
