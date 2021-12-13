@@ -1,0 +1,1808 @@
+[
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "4d6ff024-00a8-4948-8a6d-640928868830",
+    "Name": "Петр",
+    "Surname": "Абалдуев",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.05,
+        "TotalIncome": 32.19736,
+        "Id": "3fc15a2d-539a-4013-b179-c96bdaa62d67",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.05,
+        "TotalIncome": 21.287144,
+        "Id": "2c138307-eb5a-41c0-b9ef-cf3dcd4f1a31",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 22,
+        "Rate": 0.05,
+        "TotalIncome": 35.065346,
+        "Id": "d26a1ba2-4e67-4217-8cf6-87b5aebff2bd",
+        "Balance": 32.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 34,
+        "Rate": 0.05,
+        "TotalIncome": 46.074223,
+        "Id": "d05ba0a5-b0e8-47eb-94f4-dd3dd871eeaf",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 30,
+        "Rate": 0.05,
+        "TotalIncome": 56.642807,
+        "Id": "026871e8-d304-4008-a449-5d1d1123f02c",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.05,
+        "TotalIncome": 13.836643,
+        "Id": "e3afa633-0581-42bf-bb7b-1712d6333b4f",
+        "Balance": 13.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "3595e289-922b-4da1-a16d-5076c4c5cc90",
+        "Balance": 93.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "c630535a-fb94-4ba9-85b4-5a825104e2a7",
+    "Name": "Игорь",
+    "Surname": "Хайт",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.05,
+        "TotalIncome": 11.188125,
+        "Id": "921c9134-cecf-4907-9084-5a3e4ceddff6",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 47.382526,
+        "Id": "1e37daab-b416-403a-b5bc-b058b7af0084",
+        "Balance": 42.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 13,
+        "Rate": 0.05,
+        "TotalIncome": 31.666275,
+        "Id": "c452c0df-99cf-4bd5-abf3-265397297acc",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 28,
+        "Rate": 0.05,
+        "TotalIncome": 44.93897,
+        "Id": "38609019-b886-487c-884b-d383d589cec5",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.05,
+        "TotalIncome": 53.66227,
+        "Id": "aa3da5a2-b06b-4f7d-8bb3-f58e43516f78",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "631781b5-12f7-44cd-943c-ee99f1b61053",
+        "Balance": 150.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "ecb875ab-03c3-4d98-8b4d-da97f8a2c142",
+    "Name": "Иван",
+    "Surname": "Галаев",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 13,
+        "Rate": 0.05,
+        "TotalIncome": 10.555425,
+        "Id": "8e7022ad-f0df-4f96-bfb2-18bbb28b7bd8",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.05,
+        "TotalIncome": 21.287144,
+        "Id": "1ffb681a-8d4a-4759-8f0f-78830fa29d15",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.05,
+        "TotalIncome": 34.412285,
+        "Id": "764e35a8-f470-4594-a5a9-4f0f2a904a3b",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 14,
+        "Rate": 0.05,
+        "TotalIncome": 42.39763,
+        "Id": "02d63cbe-c912-45eb-b626-ace23dce313b",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 56.40777,
+        "Id": "37f779ff-53d8-4c62-a44b-1cd4d4a7dc4f",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "1fc70e95-7cb7-4eda-8fca-d09b6ca4bfeb",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "d881ba85-ad69-43e8-a521-fee7ea171237",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "8dd80072-6366-4540-820a-65d055bdd666",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "796ba7cd-a4df-4c02-96a6-6891df1a695e",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "ce9c5861-7dd0-4973-97d6-4975c0f60861",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "7a7bcc48-0f3d-41c8-b134-fc36f5701180",
+    "Name": "Любовь",
+    "Surname": "Хаймин",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 24,
+        "Rate": 0.05,
+        "TotalIncome": 11.049428,
+        "Id": "ee5fe3bf-8dfc-4b0f-8cc7-eff7952d4098",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.05,
+        "TotalIncome": 21.464909,
+        "Id": "8ce4f216-3b54-4048-afa7-425041e48797",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.05,
+        "TotalIncome": 34.412285,
+        "Id": "167ac771-ae48-4b6d-a85c-9e499c0f49a4",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 25,
+        "Rate": 0.05,
+        "TotalIncome": 44.38187,
+        "Id": "fcbcb392-c87d-4676-8c31-9ab4f6ab77ef",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 12,
+        "Rate": 0.05,
+        "TotalIncome": 52.55813,
+        "Id": "3658d4eb-2656-44f1-8a62-f099f8897623",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "12aa760f-8d8a-40e3-bc12-94a3b44c4a43",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "960dc619-2ca8-4b0e-9d8d-26c837deb572",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "09e04d9c-6aa0-45d7-9615-a4be1bf2623d",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a96c2cb8-417d-48c9-b63b-054eba7ac183",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "04c0aa46-45fe-4be7-8c1f-b15fb8a99656",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "c2b27630-6bd2-4bf1-905c-581295f43b98",
+    "Name": "Яков",
+    "Surname": "Бабухин",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 21,
+        "Rate": 0.05,
+        "TotalIncome": 10.912452,
+        "Id": "976e3a74-17e6-4f42-9f2d-4f1653b4bfa0",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 22.563107,
+        "Id": "dcc44af3-6f6f-4b42-87d8-212e3c079801",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.05,
+        "TotalIncome": 32.19736,
+        "Id": "1811cbc4-34d7-41f0-b6e1-4bec9216963a",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 22,
+        "Rate": 0.05,
+        "TotalIncome": 43.83168,
+        "Id": "eb590832-cbb9-43c8-95aa-bd353d488ada",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 56.40777,
+        "Id": "cfd19769-d0b0-481a-a7de-68ab0611825a",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "9c82d692-e44d-4f25-a9b9-f6af4746d7c7",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "78118a38-b15e-47a3-bf2f-6178a8c18f38",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7a59df7d-4152-46bd-84f1-a460ebdec4fe",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "b2993b87-1993-4291-b7dc-be7c264b23b8",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "25209c8b-bd2e-4a02-b489-68432e2eb5b3",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "8e477624-6e1d-49e8-b947-b4cc8efe6dc8",
+    "Name": "Дарья",
+    "Surname": "Баборыко",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 30,
+        "Rate": 0.05,
+        "TotalIncome": 11.328562,
+        "Id": "c87c6c1b-b31c-46b3-a6f7-887668cb342c",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 23,
+        "Rate": 0.05,
+        "TotalIncome": 22.007158,
+        "Id": "035b8260-f4fa-43d3-9ab9-e94d4c3eba7e",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 24,
+        "Rate": 0.05,
+        "TotalIncome": 33.148285,
+        "Id": "15833573-5cd4-44c6-bedd-938eb511ba60",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.05,
+        "TotalIncome": 44.7525,
+        "Id": "0a2cf7f2-b680-4b8b-aa3e-351dc9958151",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 28,
+        "Rate": 0.05,
+        "TotalIncome": 56.173714,
+        "Id": "bc0c73af-ffa2-4abe-9ce6-9238482abd3e",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "2bc769e4-da68-453c-a6af-54f5eb82f842",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a9795782-182f-41db-bbd7-64a52ad8b66e",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "09bf17bc-a66a-4413-93eb-887f8cc58b19",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "4dca0c3c-3c73-48f7-8ad0-94b40287f9d9",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "d84dec9b-b279-4b62-a6d1-fecfbb5a9319",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "2f87167f-d95d-4327-bf9d-44a0083f39f2",
+    "Name": "Диана",
+    "Surname": "Яковенко",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 16,
+        "Rate": 0.05,
+        "TotalIncome": 10.68792,
+        "Id": "9a42524a-83fe-46ea-b5dd-bf4494379788",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.05,
+        "TotalIncome": 22.751526,
+        "Id": "b001675f-82f2-4cef-a097-b48a232d050d",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 35,
+        "Rate": 0.05,
+        "TotalIncome": 34.699654,
+        "Id": "0535e3e6-a350-425c-a58d-b69d12acc232",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 16,
+        "Rate": 0.05,
+        "TotalIncome": 42.75168,
+        "Id": "d67cc036-a9e0-4bac-92f4-5d06b9ddda0d",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.05,
+        "TotalIncome": 56.87882,
+        "Id": "3d39691e-3dc1-4715-b351-afb4742ed8d3",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "dd8f915f-e822-458a-8bae-933530fcbb57",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "670fbbbe-f610-4127-aa6f-15870401cd97",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "56263687-8697-4d3d-905d-d205864b79d9",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7602321a-0b4b-4d8a-a726-2d2c2a5d4c9b",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "18774ff3-ae5d-4e65-b0f5-efc5aea5cd41",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "9a63004a-bacb-465d-9244-7164026122ea",
+    "Name": "Лариса",
+    "Surname": "Абакумов",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.05,
+        "TotalIncome": 11.375763,
+        "Id": "1772180a-3c24-45d1-993f-8cda60d69841",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 30,
+        "Rate": 0.05,
+        "TotalIncome": 22.657124,
+        "Id": "edd0403f-a3e2-4264-b857-94d40bf67bb2",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.05,
+        "TotalIncome": 32.601513,
+        "Id": "6207fa28-d9bb-44d6-80f3-174416692b5f",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 26,
+        "Rate": 0.05,
+        "TotalIncome": 44.5668,
+        "Id": "28e191b8-60d8-4e7d-8e75-06a8df5c485c",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 28,
+        "Rate": 0.05,
+        "TotalIncome": 56.173714,
+        "Id": "2d1c771a-97a4-48ed-b028-e3c6acd425c9",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "45259726-032f-4e99-bbb1-7f121f31b38e",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a7a35bfe-06fc-4558-b803-e63879661e93",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "5e4e4320-2c9d-4357-bd8e-08291a401974",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "0e881864-9b04-4101-bf6d-0a5979b803b0",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7d339383-16dc-4a59-a406-e23dc95acf9c",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "d1dc22b5-93fb-4a33-8fc4-8c8718cbd740",
+    "Name": "Илья",
+    "Surname": "Хаймин",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.05,
+        "TotalIncome": 11.375763,
+        "Id": "88e2afaa-95a0-4cb8-9200-efafd1f05def",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 22.563107,
+        "Id": "305be789-b404-4b3f-8621-39757467f600",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.05,
+        "TotalIncome": 32.601513,
+        "Id": "188ed9fa-1082-4d57-aa4c-d5e4ac7d63b5",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.05,
+        "TotalIncome": 44.7525,
+        "Id": "3b2e3b0d-158f-4071-b2b0-11173161f283",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.05,
+        "TotalIncome": 56.87882,
+        "Id": "1efb19e9-d38c-47cc-b7af-d47c2536eff0",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "6073e19d-1293-4269-b22c-371c6ba7604c",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "bc99a5c1-4418-4e1b-a73d-43c993eb3e27",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "49bd8600-d800-4f79-a88a-fdc40c894bed",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "bc20215d-726b-4d05-993d-76fad1ff59d4",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "f87099ae-9862-402f-9521-36c1b1c705f9",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.RegularClient, BankLibrary",
+    "Id": "6dcb820d-54ec-47ec-b09a-04de852cb6b6",
+    "Name": "Игорь",
+    "Surname": "Абалдуев",
+    "ClientType": "Regular",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.05,
+        "TotalIncome": 11.281553,
+        "Id": "a3833e5f-596a-4077-af48-3bf381c7a317",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.05,
+        "TotalIncome": 22.37625,
+        "Id": "edaf9012-027b-42b9-8b62-955a7163d60f",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 34,
+        "Rate": 0.05,
+        "TotalIncome": 34.555668,
+        "Id": "33dbc44e-ceb3-4a1e-a0e1-532a692d13f2",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 25,
+        "Rate": 0.05,
+        "TotalIncome": 44.38187,
+        "Id": "3202b387-4bb6-4939-928d-72c2606b326a",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.05,
+        "TotalIncome": 57.353806,
+        "Id": "eeeab420-9b42-456a-b311-89ab3277a09a",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Regular"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "348b13b6-0874-4d6d-96bb-bd8195b3c822",
+        "Balance": 150.0,
+        "AccountType": "Savings",
+        "ClientType": "Regular"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "77b35e75-f050-44ae-b385-529460ef0b78",
+    "Name": "Диана",
+    "Surname": "Бадаев",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 22,
+        "Rate": 0.2,
+        "TotalIncome": 14.385624,
+        "Id": "74cda34f-3c96-4051-928b-53bf4a43eb7a",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 30,
+        "Rate": 0.2,
+        "TotalIncome": 32.838806,
+        "Id": "424f4ee4-f36d-4630-9b91-414350dd6353",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.2,
+        "TotalIncome": 46.87517,
+        "Id": "ad35a1c5-baa2-4582-9442-9a28bb112598",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.2,
+        "TotalIncome": 55.671326,
+        "Id": "92c30221-031b-4e06-9562-267b461f41dc",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 32,
+        "Rate": 0.2,
+        "TotalIncome": 84.85638,
+        "Id": "6b92c4f5-b97b-47df-974b-f9404175bc32",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a1a4547b-8b9a-498d-93a3-be49a52ae9a0",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "723bdb86-813b-47d3-b6e8-3592e8f86d45",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7617f3f5-fb3f-4138-a03a-62b9c4720c72",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7f3b0ad7-a37d-4df4-a9ac-caa01aad17e6",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "fc691532-73f8-44cb-844b-08ddbed12156",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "22911dc3-3308-43f8-8d0b-422d0ea586de",
+    "Name": "Лиана",
+    "Surname": "Абалаков",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 24,
+        "Rate": 0.2,
+        "TotalIncome": 14.869141,
+        "Id": "c2232535-34c8-4b0a-9ad6-b4d736ae8365",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 34,
+        "Rate": 0.2,
+        "TotalIncome": 35.083397,
+        "Id": "2c71cc45-9640-47ed-a6c5-2609aafaa012",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 35,
+        "Rate": 0.2,
+        "TotalIncome": 53.502182,
+        "Id": "627b2a1d-e566-4e1d-99f5-588121649d04",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.2,
+        "TotalIncome": 52.978027,
+        "Id": "1ce2a873-5365-447a-9e9d-46346faaf30e",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 35,
+        "Rate": 0.2,
+        "TotalIncome": 89.1703,
+        "Id": "44973ca0-c922-44bc-9fde-cf4a0c86f205",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "ff2f6a27-8be9-4dce-86e5-cd0c896d23d3",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "27865409-b797-4b72-a11e-2419f4b39ca9",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "f9ae0519-a2b7-4ffc-8ec5-9c14cfe438bc",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "f9ac94a3-3dc0-4c5b-a7c7-dd19cdf2eeda",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "9c6118e1-ae1a-47b7-8cfc-5a4a804669dd",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "dfe225ad-c19e-4eda-83e6-f3f9f727f880",
+    "Name": "Инна",
+    "Surname": "Бадаев",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.2,
+        "TotalIncome": 12.813821,
+        "Id": "782404d4-c0f2-4170-911c-fe759f34abe6",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 16,
+        "Rate": 0.2,
+        "TotalIncome": 26.054771,
+        "Id": "6837fb8d-a3ce-4208-abc8-8a91eb096ac4",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 21,
+        "Rate": 0.2,
+        "TotalIncome": 42.449383,
+        "Id": "ad7cdf4d-f9af-4447-a8ec-d5a5eb54ded2",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 35,
+        "Rate": 0.2,
+        "TotalIncome": 71.33624,
+        "Id": "07cc778e-99c4-4ce9-a5b0-0d5baee8b96f",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 13,
+        "Rate": 0.2,
+        "TotalIncome": 61.985703,
+        "Id": "f38aecdd-d466-42e0-b127-607b4a695cff",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "d70f1222-63dd-4205-91ca-9edd3d22b83e",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "9ee8caf2-faba-404a-b19d-bc8b1214bb46",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "8df3d137-de9b-4732-960c-09626d1e8942",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "1acc32c4-168c-4c51-9228-52fca2c92253",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "34351046-a958-43d3-8cca-b020bf63a70a",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "0a38328b-245f-4aa5-a1db-9e8175c38852",
+    "Name": "Лидия",
+    "Surname": "Бабурин",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.2,
+        "TotalIncome": 13.244507,
+        "Id": "b43a980e-ce98-4629-b211-ebc75da53679",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.2,
+        "TotalIncome": 25.627642,
+        "Id": "7ed6a32f-52ae-4794-b2b3-2cecf7d0acbc",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.2,
+        "TotalIncome": 48.450695,
+        "Id": "55387b27-4891-49bb-ae91-32275bda8658",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 19,
+        "Rate": 0.2,
+        "TotalIncome": 54.758682,
+        "Id": "6a222b16-6484-4736-b785-546028f2a4ec",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.2,
+        "TotalIncome": 86.270645,
+        "Id": "be736edf-b734-449a-a950-54d89d13d982",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "263101a2-0c03-4205-bedc-0b265d754dd6",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "bef5fea9-336d-45be-b9e1-aaf40b282079",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "b7a797d1-0b75-426e-9683-5d6d988b3268",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "f5ff7ffd-20ba-49c2-a125-a96bdb3ae6f7",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "12e20bca-df01-4d0e-9e54-5876bdec29ee",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "99d17be9-b42b-4641-beec-6cad89a0bb53",
+    "Name": "Дарья",
+    "Surname": "Хаймин",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.2,
+        "TotalIncome": 16.15023,
+        "Id": "9fd2de2b-76a4-45dc-8053-c2680f79640a",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.2,
+        "TotalIncome": 34.50826,
+        "Id": "62a710be-0e41-4061-abb7-55227ba38cde",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 19,
+        "Rate": 0.2,
+        "TotalIncome": 41.06901,
+        "Id": "8a7ee38f-2b7b-4172-908f-b8892b30aac0",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.2,
+        "TotalIncome": 69.01652,
+        "Id": "98cd9d97-9e35-4a8e-92d8-381ea570e165",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 17,
+        "Rate": 0.2,
+        "TotalIncome": 66.222534,
+        "Id": "a494b6f2-4c94-4faa-a809-adcd91926c88",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "68abe50e-c83a-4024-9773-131c68835b2e",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "1da241e3-29b7-4c76-904f-3d7b93976caf",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "778c77a6-98ae-469e-8aaf-d21647108f81",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "e1bab0e5-9408-40ed-9579-b1d76d9fc461",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "4faeeb24-fff9-4293-88aa-2574dc78d1b5",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "21a5b658-00a8-4918-9a0e-10f25338cbe7",
+    "Name": "Лиана",
+    "Surname": "Хаймин",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.2,
+        "TotalIncome": 15.625057,
+        "Id": "9f06408c-2bb4-442b-bf4e-034866a4a592",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.2,
+        "TotalIncome": 27.835663,
+        "Id": "1d46d30c-248c-4327-bc42-dfc616d1ae07",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 26,
+        "Rate": 0.2,
+        "TotalIncome": 46.106728,
+        "Id": "e705cc7a-a0da-4efc-8f53-e05d8e913890",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.2,
+        "TotalIncome": 62.50023,
+        "Id": "4f3a4819-d387-4a36-8f18-82a798982399",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 12,
+        "Rate": 0.2,
+        "TotalIncome": 60.969543,
+        "Id": "52c1b5cf-5da9-4331-b7a3-f58405475579",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a58e1691-35f1-4d1a-b4ec-0062fe5103fc",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "161515b6-44b2-4bce-88da-53264f2ec31a",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7c5e2ee3-f833-4d78-b5ef-8f8ccf0467b1",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "09921de7-89a2-4556-8f7b-8eeef205b986",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "6667a60e-5a88-4551-b2e1-cd0299782ede",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "36690e2f-9af6-4739-afa1-defb28eca485",
+    "Name": "Гавриил",
+    "Surname": "Абалаков",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 14,
+        "Rate": 0.2,
+        "TotalIncome": 12.603759,
+        "Id": "d8ff9d99-3a76-4011-929e-ddd724d67473",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 24,
+        "Rate": 0.2,
+        "TotalIncome": 29.738281,
+        "Id": "9127e6d7-64ae-43e9-9eba-f31f29e88b23",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 34,
+        "Rate": 0.2,
+        "TotalIncome": 52.625095,
+        "Id": "ab14f58a-6e02-4176-9405-540f8d92f0f2",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 29,
+        "Rate": 0.2,
+        "TotalIncome": 64.60092,
+        "Id": "2a1311fd-7282-4377-a32b-dbe6b3afdc3d",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 18,
+        "Rate": 0.2,
+        "TotalIncome": 67.32625,
+        "Id": "c6cc9b98-eb4c-49cf-b527-2b3d14ad0cac",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "7d2581e0-0a5c-486d-b529-deb1047ec5ac",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "d03e4c96-0df2-4bcf-bcf2-e0b48f934720",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "baf239f2-c497-4349-add6-6434f5141fda",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "897cbc65-070d-4ee3-87ba-628ea762ab5f",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "af79a171-4b12-4968-91d6-c0c2a965f190",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "01960be5-3858-4d4d-800f-a3be23736427",
+    "Name": "Галина",
+    "Surname": "Разгилдеев",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 22,
+        "Rate": 0.2,
+        "TotalIncome": 14.385624,
+        "Id": "0510c448-0949-4564-97c4-0fab46b03c06",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 16,
+        "Rate": 0.2,
+        "TotalIncome": 26.054771,
+        "Id": "1a5f9892-10ef-42f0-9f59-4986e985feb4",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.2,
+        "TotalIncome": 46.87517,
+        "Id": "5190c737-dd68-43dd-a4e7-3a55073890f7",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 19,
+        "Rate": 0.2,
+        "TotalIncome": 54.758682,
+        "Id": "d0abd09e-d909-45d6-9074-89f9b7a5f0d7",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 18,
+        "Rate": 0.2,
+        "TotalIncome": 67.32625,
+        "Id": "2b46466b-8ef5-4d96-9dbe-4728c017d3d5",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "3b5381e7-8b3b-47e9-a0ce-057835785061",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "0ded1aee-4ff4-42e7-96c6-c89d3e43a609",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "dbbadaa6-9754-41f0-b4b0-7d4c12a6e93f",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "b533fc94-8427-4c7f-a6ee-6c34f62dbf9b",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "c93a7d10-4035-4713-bedc-b9530f00aed7",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "eef78a5c-377c-4ac0-a737-d0ac469e15f6",
+    "Name": "Гавриил",
+    "Surname": "Хаит",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 33,
+        "Rate": 0.2,
+        "TotalIncome": 17.25413,
+        "Id": "42090e14-4cc5-4ab2-8043-e330b769b262",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 31,
+        "Rate": 0.2,
+        "TotalIncome": 33.386116,
+        "Id": "42bf93dd-c755-4975-bd51-a4a337b4a3b2",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 15,
+        "Rate": 0.2,
+        "TotalIncome": 38.441463,
+        "Id": "22a956bf-c892-496f-bd73-9a91e9ef2daa",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 27,
+        "Rate": 0.2,
+        "TotalIncome": 62.50023,
+        "Id": "adcda4f0-368e-4b55-80a3-60f06483db35",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 24,
+        "Rate": 0.2,
+        "TotalIncome": 74.3457,
+        "Id": "a7d3c6ae-7e59-4cc9-a092-af72e0cf43ad",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "19eca57b-9ed3-4dee-a8fc-cfb1c1e55b2d",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "47ee319d-ccab-4e41-a23b-79f0570f2eef",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "d65464c3-f4d4-490f-9e4a-9737d79ce69f",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "4310377e-d777-4806-9b13-c09080185eb5",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "ee3f5bca-adc0-4084-83e9-bdb02c5edb39",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  },
+  {
+    "$type": "BankLibrary.Model.ClientModel.SpecialClient, BankLibrary",
+    "Id": "550476b2-a106-44d5-9300-455e1370a498",
+    "Name": "Регина",
+    "Surname": "Якимычев",
+    "ClientType": "Special",
+    "Accounts": [
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 26,
+        "Rate": 0.2,
+        "TotalIncome": 15.368909,
+        "Id": "c191ed91-ff02-40c1-a961-c256fdf93a01",
+        "Balance": 10.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.2,
+        "TotalIncome": 27.835663,
+        "Id": "c4104214-a769-4c67-aa19-7d11de3c7007",
+        "Balance": 20.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 20,
+        "Rate": 0.2,
+        "TotalIncome": 41.753494,
+        "Id": "ddf76a8f-8f6b-4717-89b2-6141a61ed1fa",
+        "Balance": 30.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 25,
+        "Rate": 0.2,
+        "TotalIncome": 60.46784,
+        "Id": "19627f39-c0dc-4d8a-8317-f5fc8dc0d372",
+        "Balance": 40.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
+        "Term": 25,
+        "Rate": 0.2,
+        "TotalIncome": 75.5848,
+        "Id": "52e491fb-37d4-474b-ae2c-9947ca81f1f7",
+        "Balance": 50.0,
+        "AccountType": "Deposit",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "c0fc3ca1-e2c2-49f1-acbc-5fb6a4eb02a7",
+        "Balance": 10.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "1fc3e63b-c1ae-4a3b-b90a-24ec0c0681d6",
+        "Balance": 20.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "a79066b3-40a1-4b69-bfea-ef10bc540fdd",
+        "Balance": 30.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "03040917-853e-41f4-8235-6d53de19f19b",
+        "Balance": 40.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      },
+      {
+        "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
+        "Id": "52001a14-e5d8-485a-b414-51f4e56a5386",
+        "Balance": 50.0,
+        "AccountType": "Savings",
+        "ClientType": "Special"
+      }
+    ]
+  }
+]

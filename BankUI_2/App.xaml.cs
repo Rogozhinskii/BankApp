@@ -55,11 +55,9 @@ namespace BankUI
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             logger = LogManager.GetCurrentClassLogger();
-            containerRegistry.RegisterSingleton<IApplicationCommands,ApplicationCommand>();
-            const string path = "ConnectionString";
-            string connectionString = ConfigurationManager.AppSettings.Get(path);
+            containerRegistry.RegisterSingleton<IApplicationCommands,ApplicationCommand>();            
             containerRegistry.RegisterInstance(typeof(ILogger), logger);
-            var repositoryManager = new RepositoryManager(logger, connectionString);
+            var repositoryManager = new RepositoryManager(logger);
             containerRegistry.RegisterInstance<IRepositoryManager>(repositoryManager);
             containerRegistry.RegisterSingleton<ILogService, LogService>();
             containerRegistry.RegisterSingleton<ISaveService, SaveService>();

@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace BankLibrary.Model.DataRepository
 {
 
     public class RepositoryManager:IRepositoryManager
-    {
+    {        
         private readonly string repositoryPath;
         private IRepository<IStorableDoc> repository;
         public string ConnectionString => repositoryPath;
@@ -22,14 +23,18 @@ namespace BankLibrary.Model.DataRepository
 
         IEnumerable<IStorableDoc> clientsList;
 
-        public RepositoryManager(ILogger log,string path)
+        public RepositoryManager(ILogger log)
         {
             logger = log ?? throw new ArgumentNullException($"{nameof(log)} логгер не инициирован");
-            repositoryPath = path ?? throw new NullReferenceException($"{nameof(path)} пустая строка подключения");
+            repositoryPath = GetFilePath();            
             repository = new Repository(this);            
             clientsList = new List<IStorableDoc>();
         }
 
+        private static string GetFilePath()
+        {
+            return $"..\\..\\..\\..\\BankLibrary\\{Resource.RepositoryPath}\\{Resource.RepositoryFileName}";            
+        }
         
         /// <summary>
         /// Осуществляет проверку существования файла по указанному пути
