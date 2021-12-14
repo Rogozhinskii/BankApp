@@ -2,6 +2,7 @@
 using BankUI.Core.Services.Interfaces;
 using Prism.Events;
 using System;
+using System.Threading.Tasks;
 
 namespace BankUI.Core.Services
 {
@@ -35,6 +36,14 @@ namespace BankUI.Core.Services
                 throw new UnauthorizedAccessException(ex.Message);
             }
 
+        }
+
+        public async Task<bool> SaveDataAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return SaveData();
+            });
         }
     }
 }

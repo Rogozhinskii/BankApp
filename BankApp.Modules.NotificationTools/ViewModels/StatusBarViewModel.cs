@@ -7,6 +7,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace BankApp.Modules.NotificationTools.ViewModels
@@ -63,24 +64,39 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         public DelegateCommand SaveDataCommand =>
             _saveDataCommand ??=_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand);
 
-        void ExecuteSaveDataCommand()
+        async void ExecuteSaveDataCommand()
         {
-            var result = _saveService.SaveData();
+            ProgressBarVisibility = Visibility.Visible;
+            var result =await _saveService.SaveData();
             LogRecord logRecord;
-            if (result){
-                logRecord = new LogRecord{
+            if (result)
+            {
+                logRecord = new LogRecord
+                {
                     LogRecordLevel = LogRecordLevel.Info,
                     Message = $"{DateTime.Now}-->Данные сохранены"
                 };
             }
-            else{
-                logRecord = new LogRecord{
+            else
+            {
+                logRecord = new LogRecord
+                {
                     LogRecordLevel = LogRecordLevel.Error,
                     Message = $"{DateTime.Now}-->При сохранении произошла ошибка"
                 };
             }
             _eventAggregator.GetEvent<LogEvent>().Publish(logRecord);
+            ProgressBarVisibility = Visibility.Hidden;
+            //Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    ShowDialog(result);
+            //});
             ShowDialog(result);
+            //Task.Run(() =>
+            //{
+                
+            //}).ConfigureAwait(true);
+            
         }
 
         /// <summary>

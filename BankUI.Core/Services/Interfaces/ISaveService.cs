@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace BankUI.Core.Services.Interfaces
 {
@@ -11,6 +9,8 @@ namespace BankUI.Core.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         bool SaveData();
+
+        Task<bool> SaveDataAsync();
 
     }
 }
