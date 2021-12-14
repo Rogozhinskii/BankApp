@@ -20,12 +20,20 @@
         </Grid.ColumnDefinitions>
         <Grid Background="White"
               Margin="5,0,0,0">
-            <ListView ItemsSource="{Binding BankClients}" SelectedItem="{Binding Client}" Style="{StaticResource MaterialDesignListView}">
+            <ListView ItemsSource="{Binding BankClients}" SelectedItem="{Binding Client}" Style="{StaticResource MaterialDesignListView}"
+                     VirtualizingPanel.IsVirtualizing="True" 
+                      VirtualizingPanel.VirtualizationMode="Recycling"
+                      VirtualizingPanel.CacheLength="30" VirtualizingPanel.CacheLengthUnit="Item">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <controls:ClientItem/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
             </ListView>
         </Grid>
 
