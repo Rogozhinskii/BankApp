@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankLibrary.Model.AccountModel
+﻿namespace BankLibrary.Model.AccountModel
 {
     /// <summary>
     /// Возможные ставки депозита

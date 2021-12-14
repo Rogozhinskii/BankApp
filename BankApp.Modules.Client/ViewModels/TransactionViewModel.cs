@@ -1,5 +1,4 @@
-﻿using BankLibrary.Model;
-using BankLibrary.Model.AccountModel;
+﻿using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
@@ -9,14 +8,11 @@ using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Commands;
 using Prism.Events;
-using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 
 namespace BankApp.Modules.Client.ViewModels
 {
