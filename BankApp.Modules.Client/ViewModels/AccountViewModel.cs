@@ -128,7 +128,7 @@ namespace BankApp.Modules.Client.ViewModels
                     RaiseRequestClose(dialogResult);
                 }
             }
-            if (Balance > 0 && FromAccount == null){
+            if (Balance >= 0 && FromAccount == null){
                 result = newAccount.Transaction(Balance);  
             }
             if (newAccount is DepositAccount depositAccount){
