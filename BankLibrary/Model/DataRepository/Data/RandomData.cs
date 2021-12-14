@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BankLibrary.Model.DataRepository.Data
 {
@@ -20,7 +18,7 @@ namespace BankLibrary.Model.DataRepository.Data
         /// <summary>
         /// Генератор псевдослучайных чисел
         /// </summary>
-        private static Random rnd;
+        private static readonly Random rnd;
 
         static RandomData()
         {

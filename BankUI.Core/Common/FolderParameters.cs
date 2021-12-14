@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankUI.Core.Common
+﻿namespace BankUI.Core.Common
 {
     /// <summary>
     /// Константы для реализации навигации по модулям 
@@ -12,7 +8,7 @@ namespace BankUI.Core.Common
         public const string FolderKey = "Folder";
         public const string Regular = "Regular";
         public const string Special = "Special";
-        public static string DefaultNavigationPath = $"ClientList?{FolderKey}={Regular}";
+        public const string DefaultNavigationPath = $"ClientList?{FolderKey}={Regular}";
 
     }
 }

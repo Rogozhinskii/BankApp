@@ -12,8 +12,7 @@ namespace BankApp.Modules.Client.Converters
         {
             string name = string.Empty;
             string surname = string.Empty;
-            if (values != null)
-            {
+            if (values != null){
                 name = values.FirstOrDefault().ToString();
                 surname = values.LastOrDefault().ToString();
             }

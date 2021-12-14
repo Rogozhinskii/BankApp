@@ -1,17 +1,15 @@
-﻿using BankLibrary.AccountModel;
-using BankLibrary.Model.AccountModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BankLibrary.Model
 {
     public abstract class ClientBase:IStorableDoc,IClient
     {
-        private Guid _id;
+        private readonly Guid _id;
         public Guid Id => _id;
         public string Name { get; set; }
         public string Surname { get; set; }

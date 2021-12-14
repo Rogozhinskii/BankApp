@@ -1,5 +1,4 @@
-﻿using BankLibrary.Model.DataRepository.Interfaces;
-using BankUI.Core.Common;
+﻿using BankUI.Core.Common;
 using BankUI.Core.Common.Log;
 using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
@@ -8,8 +7,6 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BankApp.Modules.NotificationTools.ViewModels
 {
@@ -35,7 +32,7 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         /// Вызывает диалоговое окно логов
         /// </summary>
         public DelegateCommand ShowLogCommand =>
-            _showLogCommand ?? (_showLogCommand = new DelegateCommand(ExecuteShowLogCommand));
+            _showLogCommand ??=_showLogCommand = new DelegateCommand(ExecuteShowLogCommand);
 
         void ExecuteShowLogCommand()
         {
@@ -51,7 +48,7 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         /// Сохраняет проведенный изменения
         /// </summary>
         public DelegateCommand SaveDataCommand =>
-            _saveDataCommand ?? (_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand));
+            _saveDataCommand ??=_saveDataCommand = new DelegateCommand(ExecuteSaveDataCommand);
 
         void ExecuteSaveDataCommand()
         {

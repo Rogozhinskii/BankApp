@@ -1,9 +1,5 @@
-﻿using BankLibrary.AccountModel;
-using BankLibrary.AccountModel.Interfaces;
+﻿using BankLibrary.AccountModel.Interfaces;
 using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel;
-using BankLibrary.Model.DataRepository;
-using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 
 namespace BankLibrary.Model.AccountModel
@@ -25,8 +21,10 @@ namespace BankLibrary.Model.AccountModel
 
         public T CreateNewAccount()
         {
-            T acc = new T();
-            acc.Id = Guid.NewGuid();                      
+            T acc = new()
+            {
+                Id = Guid.NewGuid()
+            };
             return acc;
         }
 

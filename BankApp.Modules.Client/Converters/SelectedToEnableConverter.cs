@@ -12,8 +12,7 @@ namespace BankApp.Modules.Client.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value!=null && value is SavingAccount)
-            {
+            if(value!=null && value is SavingAccount){
                 return true;
             }
             return false;

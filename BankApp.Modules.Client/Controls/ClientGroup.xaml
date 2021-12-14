@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:core="clr-namespace:BankUI.Core.Common;assembly=BankUI.Core"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:i1="http://schemas.microsoft.com/xaml/behaviors">
+             xmlns:i1="http://schemas.microsoft.com/xaml/behaviors">
     
     <Border>
         <Border.Resources>

@@ -11,12 +11,9 @@ namespace BankApp.Modules.Client.Converters
     /// </summary>
     internal class AccoutTypeToVisibilityConverter : ValueConverterBase
     {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null && value is AccountType accountType)
-            {
-                if (accountType == AccountType.Deposit)
-                {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture){
+            if (value != null && value is AccountType accountType){
+                if (accountType == AccountType.Deposit){
                     return Visibility.Visible;
                 }
             }

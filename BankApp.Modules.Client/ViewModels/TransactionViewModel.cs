@@ -39,8 +39,7 @@ namespace BankApp.Modules.Client.ViewModels
         private IClient _owner;
 
 
-        public TransactionViewModel(IAccountService<IAccount> accountService, 
-                                    IClientService clientService,
+        public TransactionViewModel(IClientService clientService,
                                     IDialogService dialogService,
                                     IEventAggregator eventAgreggator)
         {           
@@ -131,7 +130,7 @@ namespace BankApp.Modules.Client.ViewModels
             set { SetProperty(ref _toAccount, value); }
         }
 
-        private List<IClient> _recipients=new List<IClient>();
+        private List<IClient> _recipients=new();
 
         /// <summary>
         /// Коллекция возможных получателей
@@ -148,7 +147,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Выполняет перевод средств с выбранного счета на указанный счет
         /// </summary>
         public DelegateCommand SendMoneyCommand =>
-            _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
+            _sendMoneyCommand ??=_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand);
 
         void ExecuteSendMoneyCommand()
         {            
@@ -166,7 +165,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// <returns></returns>
         private LogRecord GetLogRecord(bool result)
         {
-            LogRecord record = new LogRecord();
+            LogRecord record = new();
             if (result){
                 record.LogRecordLevel = LogRecordLevel.Info;
                 record.Message = $"{DateTime.Now}-->Слиент:{((IStorableDoc)_owner).Id} выполнил перевод со счета {FromAccount.Id} " +
@@ -182,15 +181,13 @@ namespace BankApp.Modules.Client.ViewModels
         private void ShowDialog(bool result)
         {
             var dialogParameters = new DialogParameters();
-            if (result)
-            {
+            if (result){
                 string notifyMessage = "Перевод выполнен успешно";
                 dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
 
             }
-            else
-            {
+            else{
                 string errorMessage = "Перевод выполнить не возможно";
                 dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
@@ -203,7 +200,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Закрывает диалоговое окно
         /// </summary>
         public DelegateCommand ExitCommand =>
-            _exitCommand ?? (_exitCommand = new DelegateCommand(ExecuteExitCommand));
+            _exitCommand ??=_exitCommand = new DelegateCommand(ExecuteExitCommand);
 
         
 
@@ -213,16 +210,13 @@ namespace BankApp.Modules.Client.ViewModels
             RaiseRequestClose(dialogResult);
         }
 
-        public override void OnDialogOpened(IDialogParameters parameters)
-        {
+        public override void OnDialogOpened(IDialogParameters parameters){
             _owner = parameters.GetValue<IClient>(CommonTypesPrism.ParameterOwner);
             RaisePropertyChanged(nameof(OwnerAccounts));
             var tempList = new List<IClient>(_clientService.GetRegularClients());
             tempList.AddRange(_clientService.GetSpecialClients());            
             Recipients = new List<IClient>(tempList);
             RaisePropertyChanged(nameof(RecipientsFilteredCollection));
-
-
         }
 
         /// <summary>
@@ -234,14 +228,11 @@ namespace BankApp.Modules.Client.ViewModels
         {
             if (string.IsNullOrWhiteSpace(_recipientsfilteredText))
                 return true;
-            if (client.Name == null)
-            {                
+            if (client.Name == null){                
                 return false;
             }
-
             if (client.Name.Contains(_recipientsfilteredText, StringComparison.OrdinalIgnoreCase)) return true;
             if (client.Surname.Contains(_recipientsfilteredText, StringComparison.OrdinalIgnoreCase)) return true;
-
             return false;
         }
 

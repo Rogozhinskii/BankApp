@@ -1,11 +1,9 @@
-﻿using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.DataRepository.Interfaces;
+﻿using BankLibrary.Model.DataRepository.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace BankLibrary.Model.DataRepository
 {
@@ -13,15 +11,14 @@ namespace BankLibrary.Model.DataRepository
     public class RepositoryManager:IRepositoryManager
     {        
         private readonly string repositoryPath;
-        private IRepository<IStorableDoc> repository;
+        private readonly IRepository<IStorableDoc> repository;
         public string ConnectionString => repositoryPath;
 
         /// <summary>
         /// Логгер
         /// </summary>
         private readonly ILogger logger;
-
-        IEnumerable<IStorableDoc> clientsList;
+        readonly IEnumerable<IStorableDoc> clientsList;
 
         public RepositoryManager(ILogger log)
         {

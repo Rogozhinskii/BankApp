@@ -5,7 +5,6 @@ using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BankUI.Core.Services
 {
@@ -13,7 +12,7 @@ namespace BankUI.Core.Services
     {
         private readonly IEventAggregator _eventAggregator;
 
-        private readonly List<LogRecord> _records = new List<LogRecord>();
+        private readonly List<LogRecord> _records = new();
         public event EventHandler UpdateLogEvent;
 
         public LogRecord LastMessage

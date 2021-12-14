@@ -2,7 +2,6 @@
 using BankApp.Modules.NotificationTools;
 using BankLibrary.Model.DataRepository;
 using BankLibrary.Model.DataRepository.Interfaces;
-using BankLibrary.Model.Exceptions;
 using BankUI.Core.Commands;
 using BankUI.Core.Common;
 using BankUI.Core.Services;
@@ -15,7 +14,6 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Services.Dialogs;
 using System;
-using System.Configuration;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -42,8 +40,10 @@ namespace BankUI
         /// <param name="e"></param>
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            DialogParameters dialogParameters = new DialogParameters();
-            dialogParameters.Add(CommonTypesPrism.ErrorMessage, e.Exception.Message);
+            DialogParameters dialogParameters = new()
+            {
+                { CommonTypesPrism.ErrorMessage, e.Exception.Message }
+            };
             _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
             e.Handled = true;
         }

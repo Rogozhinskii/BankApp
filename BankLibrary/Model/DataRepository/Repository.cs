@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace BankLibrary.Model.DataRepository
 {
@@ -27,7 +26,7 @@ namespace BankLibrary.Model.DataRepository
            
             string json = File.ReadAllText(repositoryManager.ConnectionString);
             JArray arr = JArray.Parse(json);
-            List<IStorableDoc> docs = new List<IStorableDoc>(); 
+            List<IStorableDoc> docs = new(); 
             foreach (var item in arr){
                 var doc = DeserializeItem(item);
                 docs.Add(doc);               
@@ -38,7 +37,8 @@ namespace BankLibrary.Model.DataRepository
 
         private IStorableDoc DeserializeItem(JToken item)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings{
+            JsonSerializerSettings settings = new()
+            {
                 TypeNameHandling = TypeNameHandling.Auto
             };
             var clientType = Enum.Parse(typeof(ClientType), item["ClientType"].ToString());
@@ -60,7 +60,8 @@ namespace BankLibrary.Model.DataRepository
 
         public void Serialize(IEnumerable<IStorableDoc> enumerableObjects)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings{
+            JsonSerializerSettings settings = new()
+            {
                 TypeNameHandling = TypeNameHandling.Auto,
                 Formatting = Formatting.Indented 
             };

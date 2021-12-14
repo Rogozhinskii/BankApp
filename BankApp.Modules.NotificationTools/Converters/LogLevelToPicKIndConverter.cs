@@ -2,9 +2,7 @@
 using BankUI.Core.Common.Log;
 using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace BankApp.Modules.NotificationTools.Converters
 {

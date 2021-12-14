@@ -69,7 +69,7 @@
       {
         "$type": "BankLibrary.Model.AccountModel.SavingAccount, BankLibrary",
         "Id": "3595e289-922b-4da1-a16d-5076c4c5cc90",
-        "Balance": 93.0,
+        "Balance": 73.0,
         "AccountType": "Savings",
         "ClientType": "Regular"
       }
@@ -266,9 +266,9 @@
         "$type": "BankLibrary.Model.AccountModel.DepositAccount, BankLibrary",
         "Term": 33,
         "Rate": 0.05,
-        "TotalIncome": 34.412285,
+        "TotalIncome": 57.353806,
         "Id": "167ac771-ae48-4b6d-a85c-9e499c0f49a4",
-        "Balance": 30.0,
+        "Balance": 50.0,
         "AccountType": "Deposit",
         "ClientType": "Regular"
       },

@@ -27,18 +27,17 @@ namespace BankApp.Modules.Client.ViewModels
         /// Зыкрывает диалог
         /// </summary>
         public DelegateCommand CloseCommand =>
-            _closeCommand ?? (_closeCommand = new DelegateCommand(ExecuteCloseCommand));
+                _closeCommand ??= new DelegateCommand(ExecuteCloseCommand);
 
         void ExecuteCloseCommand()
         {
-            DialogResult dialogResult = new DialogResult(ButtonResult.OK);
+            DialogResult dialogResult = new(ButtonResult.OK);
             RaiseRequestClose(dialogResult);
         }
 
         public override bool CanCloseDialog()
-        {
-            return true;
-        }
+            =>true;
+        
         
         public override void OnDialogOpened(IDialogParameters parameters)
         {

@@ -16,13 +16,10 @@ namespace BankApp.Modules.Client.Converters
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (destinationType == typeof(string))
-            {
-                if (value != null)
-                {
+            if (destinationType == typeof(string)){
+                if (value != null)                {
                     FieldInfo info = value.GetType().GetField(value.ToString());
-                    if (info != null)
-                    {
+                    if (info != null){
                         var attributes = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
                         return ((attributes.Length > 0) && string.IsNullOrEmpty(attributes[0].Description)) ? attributes[0].Description : value.ToString();
                     }

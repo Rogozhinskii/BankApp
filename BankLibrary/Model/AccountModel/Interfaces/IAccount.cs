@@ -1,6 +1,4 @@
 ﻿using BankLibrary.Model.ClientModel;
-using BankLibrary.Model.ClientModel.Interfaces;
-using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 
 namespace BankLibrary.Model.AccountModel.Interfaces

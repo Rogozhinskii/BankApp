@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankUI.Core.Common
+﻿namespace BankUI.Core.Common
 {
     /// <summary>
     /// Общие типы и константы для навигации и dialogService

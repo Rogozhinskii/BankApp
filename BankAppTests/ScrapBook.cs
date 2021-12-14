@@ -36,7 +36,7 @@ namespace BankAppTests
                 from.Transaction(to, 20);
             }catch(NotEnoughBalanceException ex)
             {
-               var tt=ex.Message;
+                _ = ex.Message;
             }
 
             
@@ -47,9 +47,8 @@ namespace BankAppTests
        [TestMethod]
         public void RepositoryTest()
         {
-            var logger = LogManager.GetCurrentClassLogger();
-            const string path = @"C:\Users\rogoz\source\repos\BankApp\BankUI_2\bin\Debug\netcoreapp3.1\Storage.json";
-            RepositoryManager repositoryManager = new RepositoryManager(logger,path);
+            var logger = LogManager.GetCurrentClassLogger();           
+            RepositoryManager repositoryManager = new(logger);
             var list = repositoryManager.ReadStorableDataAsList();
             Assert.IsTrue(list.Any());
         }
@@ -57,8 +56,6 @@ namespace BankAppTests
         [TestMethod]
         public void SerializeTest()
         {
-            const string path = @"C:\Users\rogoz\source\repos\BankApp\BankUI_2\bin\Debug\netcoreapp3.1\Storage.json";
-           
             var clients = Enumerable.Range(1,10).Select(i=>new RegularClient(Guid.NewGuid(),RandomData.GetRandomName(),RandomData.GetRandomSurname())
             {   
                 Name = RandomData.GetRandomName(),
@@ -86,7 +83,7 @@ namespace BankAppTests
                 ((IClient)client).Accounts = new List<IAccount>(acc);
             }
             var logger = LogManager.GetCurrentClassLogger();
-            RepositoryManager repositoryManager = new RepositoryManager(logger, path);
+            RepositoryManager repositoryManager = new(logger);
             repositoryManager.CommitChanges(storable);
 
 

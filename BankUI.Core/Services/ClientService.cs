@@ -1,16 +1,12 @@
-﻿using BankLibrary.Model;
-using BankLibrary.Model.AccountModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
-using BankUI.Core.Common.Log;
-using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BankUI.Core.Services
 {
@@ -19,15 +15,14 @@ namespace BankUI.Core.Services
     /// </summary>
     public class ClientService : IClientService
     {
-        private readonly IEventAggregator _eventAggregator;
+        
         private readonly IRepositoryManager _repositoryManager;
         private List<IStorableDoc> _clients;
-        private List<IClient> _regularClientItems = new List<IClient>();
-        private List<IClient> _specialClientItems = new List<IClient>();
+        private List<IClient> _regularClientItems = new();
+        private List<IClient> _specialClientItems = new();
 
-        public ClientService(IEventAggregator eventAggregator,IRepositoryManager repositoryManager)
-        {
-            _eventAggregator = eventAggregator;
+        public ClientService(IRepositoryManager repositoryManager)
+        {           
             _repositoryManager = repositoryManager;
             _clients = _repositoryManager.ReadStorableDataAsList().ToList();
             EnrichClietnLists();           

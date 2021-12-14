@@ -1,11 +1,7 @@
 ﻿using BankLibrary.Model.DataRepository.Interfaces;
-using BankUI.Core.Common.Log;
-using BankUI.Core.EventAggregator;
 using BankUI.Core.Services.Interfaces;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BankUI.Core.Services
 {
@@ -16,13 +12,12 @@ namespace BankUI.Core.Services
     {
         private readonly IClientService _clientService;
         private readonly IRepositoryManager _repositoryManager;
-        private readonly IEventAggregator _eventAggregator;
+        
 
         public SaveService(IClientService clientService, IRepositoryManager repositoryManager, IEventAggregator eventAggregator)
         {
             _clientService = clientService;
-            _repositoryManager = repositoryManager;
-            _eventAggregator = eventAggregator;
+            _repositoryManager = repositoryManager;            
         }
         public bool SaveData()
         {         

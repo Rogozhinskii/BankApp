@@ -30,7 +30,7 @@ namespace BankApp.Modules.NotificationTools.ViewModels
             };
         }
 
-        private ObservableCollection<LogRecord> _log = new ObservableCollection<LogRecord>();
+        private ObservableCollection<LogRecord> _log = new();
         /// <summary>
         /// Записи логов
         /// </summary>

@@ -1,9 +1,4 @@
-﻿using BankLibrary.Model.AccountModel;
-using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel;
-using System;
-
-namespace BankLibrary.AccountModel.Interfaces
+﻿namespace BankLibrary.AccountModel.Interfaces
 {
     /// <summary>
     /// Ковариантный интерфейс создания счетов

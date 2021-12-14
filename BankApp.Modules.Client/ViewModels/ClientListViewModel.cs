@@ -113,18 +113,16 @@ namespace BankApp.Modules.Client.ViewModels
         /// Реализует закрытие выбранного счета
         /// </summary>
         public DelegateCommand DeleteAccountCommand =>
-            _deleteAccountCommand ?? (_deleteAccountCommand = new DelegateCommand(ExecuteDeleteAccountCommand));
+            _deleteAccountCommand ??=_deleteAccountCommand = new DelegateCommand(ExecuteDeleteAccountCommand);
 
         void ExecuteDeleteAccountCommand()
         {
             if (_selectedAccount != null)
             {
-                if (_selectedAccount.Balance == CommonTypesPrism.zeroValue)
-                {
+                if (_selectedAccount.Balance == CommonTypesPrism.zeroValue){
                     _client.Accounts.Remove(_selectedAccount);                    
                 }
-                else
-                {
+                else{
                     var dialogParameters = new DialogParameters();
                     string errorMessage = $"Счет {_selectedAccount.Id} не может быть закрыт. На счету имеются средства: {_selectedAccount.Balance}. " +
                                           $"Для закрытия счета переведите средства на другой счет";
@@ -148,12 +146,14 @@ namespace BankApp.Modules.Client.ViewModels
         /// Реализует вызов диалогового окна с общей инфомрацией о выбранном счете
         /// </summary>
         public DelegateCommand ShowAccountInfoCommand =>
-            _showAccountInfoCommand ?? (_showAccountInfoCommand = new DelegateCommand(ExecuteCommandName));
+            _showAccountInfoCommand ??=_showAccountInfoCommand = new DelegateCommand(ExecuteCommandName);
 
         void ExecuteCommandName()
         {
-            var dialogParameters = new DialogParameters();
-            dialogParameters.Add(CommonTypesPrism.SelectedAccount, SelectedAccount);
+            var dialogParameters = new DialogParameters
+            {
+                { CommonTypesPrism.SelectedAccount, SelectedAccount }
+            };
             _dialogService.ShowDialog(CommonTypesPrism.AccountInfoView, dialogParameters, null);
 
         }
@@ -165,12 +165,11 @@ namespace BankApp.Modules.Client.ViewModels
         /// Реализует открытие нового счета клиента
         /// </summary>
         public DelegateCommand CreateNewAccount =>
-            _createNewAccount ?? (_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount));
+            _createNewAccount ??=_createNewAccount = new DelegateCommand(ExecuteCreateNewAccount);
 
         void ExecuteCreateNewAccount()
         {
-            var dialogParameters = new DialogParameters()
-            {
+            var dialogParameters = new DialogParameters(){
                 {CommonTypesPrism.ParameterAccounts, Accounts },
                 {CommonTypesPrism.ParameterOwner, Client }
             };
@@ -191,12 +190,11 @@ namespace BankApp.Modules.Client.ViewModels
 
         private DelegateCommand _consolidateAccountsCommand;
         public DelegateCommand ConsolidateAccountsCommand =>
-            _consolidateAccountsCommand ?? (_consolidateAccountsCommand = new DelegateCommand(ExecuteConsolidateAccountsCommand));
+            _consolidateAccountsCommand ??=_consolidateAccountsCommand = new DelegateCommand(ExecuteConsolidateAccountsCommand);
 
         void ExecuteConsolidateAccountsCommand()
         {
-            var dialogParameters = new DialogParameters()
-            {              
+            var dialogParameters = new DialogParameters(){              
                 {CommonTypesPrism.ParameterOwner, Client }
             };
 
@@ -214,7 +212,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// <param name="client"></param>
         /// <returns></returns>
         private LogRecord GetLogRecord(bool result,IAccount newAccount,IClient client){
-            LogRecord record = new LogRecord();
+            LogRecord record = new();
             if (result){
                 record.LogRecordLevel = LogRecordLevel.Info;
                 record.Message = $"Время: {DateTime.Now}-->Счет номер: {newAccount.Id} создан. Баланс: {newAccount.Balance}$. " +
@@ -235,15 +233,13 @@ namespace BankApp.Modules.Client.ViewModels
         private void ShowDialog(bool result)
         {
             var dialogParameters = new DialogParameters();
-            if (result)
-            {
+            if (result){
                 string notifyMessage = "Счет открыт!";
                 dialogParameters.Add(CommonTypesPrism.NotificationMessage, notifyMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.NotificationDialog, dialogParameters, result => { });
 
             }
-            else
-            {
+            else{
                 string errorMessage = "Ошибка открытия счета!";
                 dialogParameters.Add(CommonTypesPrism.ErrorMessage, errorMessage);
                 _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
@@ -257,7 +253,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Вызывает диалоговое окна переводов средств
         /// </summary>
         public DelegateCommand SendMoneyCommand =>
-            _sendMoneyCommand ?? (_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand));
+            _sendMoneyCommand ??=_sendMoneyCommand = new DelegateCommand(ExecuteSendMoneyCommand);
 
         void ExecuteSendMoneyCommand()
         {
@@ -275,8 +271,7 @@ namespace BankApp.Modules.Client.ViewModels
         #endregion
 
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
+        public override void OnNavigatedTo(NavigationContext navigationContext){
             _currentFolder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
             LoadClients(_currentFolder);
             Client = BankClients.FirstOrDefault();            

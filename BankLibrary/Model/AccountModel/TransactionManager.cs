@@ -10,10 +10,7 @@ namespace BankLibrary.Model.AccountModel
     public class TransactionManager<T> : ITransactionManager<T> where T : IAccount
     {
         [Obsolete]
-        public bool SendMoneyToAccount(T account, float sum)
-        {
-            return account.IncreaseBalance(sum);
-        }
+        public bool SendMoneyToAccount(T account, float sum) => account.IncreaseBalance(sum);
 
         [Obsolete]
         public bool SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum)

@@ -105,7 +105,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Выполняет сохранение нового счета, по результату окно закрывается
         /// </summary>
         public DelegateCommand SaveNewAccount =>
-            _saveNewAccount ?? (_saveNewAccount = new DelegateCommand(ExecuteSaveAccountCommand));
+            _saveNewAccount ??=_saveNewAccount = new DelegateCommand(ExecuteSaveAccountCommand);
 
 
 
@@ -114,15 +114,17 @@ namespace BankApp.Modules.Client.ViewModels
             IDialogResult dialogResult = new DialogResult(); 
             var newAccount = _accountService.CreateNewAccount(AccountType);
             newAccount.ClientType = ((IClient)_owner).ClientType;
-            LogRecord record = new LogRecord();
-            bool result = default(bool);
+            LogRecord record = new();
+            bool result = default;
             if (FromAccount != null){                
                 try{
                     result = FromAccount.Transaction(newAccount, Balance);
                 }
                 catch (NotEnoughBalanceException ex){
-                    var dialogParameters = new DialogParameters();
-                    dialogParameters.Add(CommonTypesPrism.ErrorMessage, ex.Message);
+                    var dialogParameters = new DialogParameters
+                    {
+                        { CommonTypesPrism.ErrorMessage, ex.Message }
+                    };
                     _dialogService.ShowDialog(CommonTypesPrism.ErrorDialog, dialogParameters, result => { });
                     RaiseRequestClose(dialogResult);
                 }
@@ -153,7 +155,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// <returns></returns>
         private void GetLogRecord(bool result, IAccount fromAccount, IAccount newAccount, float balance,out LogRecord logRecord)
         {
-            LogRecord record = new LogRecord();
+            LogRecord record = new();
             if (fromAccount == null){
                 GetLogRecord(result, newAccount, balance ,out record);
             }
@@ -180,7 +182,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// <returns></returns>
         private void GetLogRecord(bool result, IAccount toAccount, float balance,out LogRecord logRecord)
         {
-            LogRecord record = new LogRecord();
+            LogRecord record = new();
             if (result){
                 record.LogRecordLevel = LogRecordLevel.Info;
                 record.Message = $"Время: {DateTime.Now}-->Сумма перевода: {balance}.На счет: {toAccount.Id} ";
@@ -198,17 +200,15 @@ namespace BankApp.Modules.Client.ViewModels
         /// </summary>
         /// <returns></returns>
         public override bool CanCloseDialog()
-        {
-            return true;
-        }
+            => true;
+        
 
 
         /// <summary>
         /// Вызываетс
         /// </summary>
         /// <param name="parameters"></param>
-        public override void OnDialogOpened(IDialogParameters parameters)
-        {
+        public override void OnDialogOpened(IDialogParameters parameters){
             _owner = parameters.GetValue<IStorableDoc>(CommonTypesPrism.ParameterOwner);
             Accounts = new ReadOnlyCollection<IAccount>(((IClient)_owner).Accounts);            
         }

@@ -1,10 +1,7 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
-using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.Exceptions;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BankLibrary.Model.AccountModel
 {

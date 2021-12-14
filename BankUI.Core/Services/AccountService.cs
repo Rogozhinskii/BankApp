@@ -2,16 +2,13 @@
 using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankUI.Core.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BankUI.Core.Services
 {
     public class AccountService<T> : IAccountService<T> where T:IAccount
     {
         private IAccountManager<IAccount> _accountManager;
-        ITransactionManager<IAccount> _transactionManager;
+        readonly ITransactionManager<IAccount> _transactionManager;
 
         public AccountService()
         {
@@ -23,15 +20,13 @@ namespace BankUI.Core.Services
             return (T)_accountManager.CreateNewAccount();
         }
 
-        public bool SendMoneyToAccount(T accaunt, float sum)
-        {
-            return _transactionManager.SendMoneyToAccount(accaunt, sum);
-        }
+        public bool SendMoneyToAccount(T accaunt, float sum)=> 
+            _transactionManager.SendMoneyToAccount(accaunt, sum);
+        
 
         public bool SendMoneyToAccount(T fromAccaunt, T toAccaunt, float sum)
-        {
-            return _transactionManager.SendMoneyToAccount(fromAccaunt, toAccaunt, sum);
-        }
+            =>_transactionManager.SendMoneyToAccount(fromAccaunt, toAccaunt, sum);
+        
 
 
         /// <summary>

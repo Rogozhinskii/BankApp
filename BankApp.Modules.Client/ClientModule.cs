@@ -1,8 +1,6 @@
 ﻿using BankApp.Modules.Client.Controls;
 using BankApp.Modules.Client.ViewModels;
 using BankApp.Modules.Client.Views;
-using BankLibrary.AccountModel.Interfaces;
-using BankLibrary.Model.AccountModel;
 using BankLibrary.Model.AccountModel.Interfaces;
 using BankUI.Core.Common;
 using BankUI.Core.Services;

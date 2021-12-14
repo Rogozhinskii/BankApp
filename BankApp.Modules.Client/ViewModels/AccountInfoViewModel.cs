@@ -91,10 +91,9 @@ namespace BankApp.Modules.Client.ViewModels
         /// Закрывает диалоговое окно 
         /// </summary>
         public DelegateCommand CloseCommand =>
-            _closeCommand ?? (_closeCommand = new DelegateCommand(ExecuteCloseCommand));
+            _closeCommand ??=_closeCommand = new DelegateCommand(ExecuteCloseCommand);
 
-        void ExecuteCloseCommand()
-        {
+        void ExecuteCloseCommand(){
             IDialogResult dialogResult = new DialogResult();
             RaiseRequestClose(dialogResult);
         }
@@ -104,16 +103,14 @@ namespace BankApp.Modules.Client.ViewModels
         /// Вызывается при открытии окна
         /// </summary>
         /// <param name="parameters">параметры диалогового окна</param>
-        public override void OnDialogOpened(IDialogParameters parameters)
-        {
+        public override void OnDialogOpened(IDialogParameters parameters){
             _account = parameters.GetValue<IAccount>(CommonTypesPrism.SelectedAccount);
             if (_account == null)
                 return;
             Id = _account.Id;
             Balance = _account.Balance;
             AccountType = _account.AccountType;
-            if(_account is DepositAccount depositAccount)
-            {
+            if(_account is DepositAccount depositAccount){
                 TotalIncome = depositAccount.TotalIncome;
                 Rate = depositAccount.Rate*100;
                 Term = depositAccount.Term;

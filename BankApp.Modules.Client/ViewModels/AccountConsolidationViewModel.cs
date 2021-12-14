@@ -7,10 +7,7 @@ using BankUI.Core.Common.Log;
 using BankUI.Core.EventAggregator;
 using Prism.Commands;
 using Prism.Events;
-using Prism.Mvvm;
 using Prism.Services.Dialogs;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -83,7 +80,7 @@ namespace BankApp.Modules.Client.ViewModels
         /// Закрывает диалоговое окно
         /// </summary>
         public DelegateCommand ExitCommand =>
-            _exitCommand ?? (_exitCommand = new DelegateCommand(ExecuteExitCommand));
+                _exitCommand ??= new DelegateCommand(ExecuteExitCommand);
 
 
 
@@ -99,12 +96,12 @@ namespace BankApp.Modules.Client.ViewModels
         /// Выполняет объединения счетов пользователя
         /// </summary>
         public DelegateCommand ConsolidateAccounts =>
-            _consolidateAccounts ?? (_consolidateAccounts = new DelegateCommand(ExecuteConsolidateAccounts));
+            _consolidateAccounts ??=_consolidateAccounts = new DelegateCommand(ExecuteConsolidateAccounts);
 
         void ExecuteConsolidateAccounts()
         {
-            DialogParameters parameters = new DialogParameters();
-            LogRecord logRecord = new LogRecord();
+            DialogParameters parameters = new();
+            LogRecord logRecord = new();
             try
             {
                 var newAccount = (SavingAccount)FirstAccount + (SavingAccount)SecondAccount;
@@ -128,9 +125,8 @@ namespace BankApp.Modules.Client.ViewModels
             _eventAgreggator.GetEvent<LogEvent>().Publish(logRecord);
         }
 
-        public override void OnDialogOpened(IDialogParameters parameters)
-        {
-            parameters.TryGetValue<IClient>(CommonTypesPrism.ParameterOwner,out _owner);
+        public override void OnDialogOpened(IDialogParameters parameters){
+            parameters.TryGetValue(CommonTypesPrism.ParameterOwner,out _owner);
             if (_owner != null)
             {
                 RaisePropertyChanged(nameof(OwnerAccounts));

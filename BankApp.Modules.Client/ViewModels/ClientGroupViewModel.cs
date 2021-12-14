@@ -25,13 +25,12 @@ namespace BankApp.Modules.Client.ViewModels
         /// Реализует навигацию по выбранному элементу бокового бара. Устанавлиет  ContentRegion соответсвующее View
         /// </summary>
         public DelegateCommand<NavigationItem> SelectedCommand =>
-            _selectedCommand ?? (_selectedCommand = new DelegateCommand<NavigationItem>(SelectedItemNavigateCommand));
+            _selectedCommand ??=_selectedCommand = new DelegateCommand<NavigationItem>(SelectedItemNavigateCommand);
 
 
         void SelectedItemNavigateCommand(NavigationItem navigationItem)
         {
-            if (navigationItem != null)
-            {
+            if (navigationItem != null){
                 _applicationCommand.NavigateCommand.Execute(navigationItem.NavigationPath);
             }
         }
@@ -86,9 +85,8 @@ namespace BankApp.Modules.Client.ViewModels
         /// <param name="folder"></param>
         /// <returns></returns>
         private string GetNavigationPath(string folder)
-        {
-            return $"ClientList?{FolderParameters.FolderKey}={folder}";
-        }
+            => $"ClientList?{FolderParameters.FolderKey}={folder}";
+        
 
     }
 }

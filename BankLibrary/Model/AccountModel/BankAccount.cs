@@ -1,6 +1,5 @@
 ﻿using BankLibrary.Model.AccountModel.Interfaces;
 using BankLibrary.Model.ClientModel;
-using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.Exceptions;
 using Newtonsoft.Json;
 using System;
@@ -12,7 +11,7 @@ namespace BankLibrary.Model.AccountModel
     /// </summary>
     public abstract class BankAccount:IAccount
     {
-        private AccountType _accountType;
+        private readonly AccountType _accountType;
         private float _balance;
         public Guid Id { get; set; }
         public float Balance => _balance;
