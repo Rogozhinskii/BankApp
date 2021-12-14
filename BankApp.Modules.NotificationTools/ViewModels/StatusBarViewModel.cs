@@ -67,7 +67,7 @@ namespace BankApp.Modules.NotificationTools.ViewModels
         async void ExecuteSaveDataCommand()
         {
             ProgressBarVisibility = Visibility.Visible;
-            var result =await _saveService.SaveData();
+            var result =await _saveService.SaveDataAsync();
             LogRecord logRecord;
             if (result)
             {
@@ -87,16 +87,7 @@ namespace BankApp.Modules.NotificationTools.ViewModels
             }
             _eventAggregator.GetEvent<LogEvent>().Publish(logRecord);
             ProgressBarVisibility = Visibility.Hidden;
-            //Application.Current.Dispatcher.Invoke(() =>
-            //{
-            //    ShowDialog(result);
-            //});
-            ShowDialog(result);
-            //Task.Run(() =>
-            //{
-                
-            //}).ConfigureAwait(true);
-            
+            ShowDialog(result);            
         }
 
         /// <summary>
