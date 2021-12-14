@@ -12,7 +12,6 @@ using Prism.Events;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace BankApp.Modules.Client.ViewModels
 {

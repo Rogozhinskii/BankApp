@@ -1,6 +1,4 @@
-﻿using BankLibrary.AccountModel.Interfaces;
-using BankLibrary.Model.AccountModel;
-using BankLibrary.Model.AccountModel.Interfaces;
+﻿using BankLibrary.Model.AccountModel;
 
 namespace BankUI.Core.Services.Interfaces
 {

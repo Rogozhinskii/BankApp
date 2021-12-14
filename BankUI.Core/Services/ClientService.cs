@@ -3,7 +3,6 @@ using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Services.Interfaces;
-using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
