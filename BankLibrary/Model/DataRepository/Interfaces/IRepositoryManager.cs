@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+
 
 namespace BankLibrary.Model.DataRepository.Interfaces
 {
@@ -16,7 +19,9 @@ namespace BankLibrary.Model.DataRepository.Interfaces
         /// Извлекает данные из хранилища, возвращает, как перечисление
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IStorableDoc> ReadStorableDataAsList();        
+        IList<IStorableDoc> ReadStorableDataAsList();
+
+        Task<IList<IStorableDoc>> ReadStorableDataAsListAsync();
         
         /// <summary>
         /// Сохраняет изменение и записывает их в хранилище

@@ -3,10 +3,10 @@ using BankLibrary.Model.ClientModel;
 using BankLibrary.Model.ClientModel.Interfaces;
 using BankLibrary.Model.DataRepository.Interfaces;
 using BankUI.Core.Services.Interfaces;
-using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BankUI.Core.Services
 {
@@ -16,16 +16,20 @@ namespace BankUI.Core.Services
     public class ClientService : IClientService
     {
         
-        private readonly IRepositoryManager _repositoryManager;
+        
         private List<IStorableDoc> _clients;
         private List<IClient> _regularClientItems = new();
         private List<IClient> _specialClientItems = new();
+        private readonly IRepositoryManager _repositoryManager;
 
         public ClientService(IRepositoryManager repositoryManager)
         {           
             _repositoryManager = repositoryManager;
-            _clients = _repositoryManager.ReadStorableDataAsList().ToList();
-            EnrichClietnLists();           
+            Task.Factory.StartNew(async () => {
+                _clients = (List<IStorableDoc>)await _repositoryManager.ReadStorableDataAsListAsync();
+                EnrichClietnLists();
+            });
+            
         }
 
         /// <summary>

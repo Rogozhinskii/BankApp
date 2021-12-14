@@ -210,7 +210,8 @@ namespace BankApp.Modules.Client.ViewModels
         /// <param name="parameters"></param>
         public override void OnDialogOpened(IDialogParameters parameters){
             _owner = parameters.GetValue<IStorableDoc>(CommonTypesPrism.ParameterOwner);
-            Accounts = new ReadOnlyCollection<IAccount>(((IClient)_owner).Accounts);            
+            if(_owner is not null)
+                Accounts = new ReadOnlyCollection<IAccount>(((IClient)_owner).Accounts);            
         }
     }
 }

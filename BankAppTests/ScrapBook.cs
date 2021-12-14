@@ -56,13 +56,13 @@ namespace BankAppTests
         [TestMethod]
         public void SerializeTest()
         {
-            var clients = Enumerable.Range(1,10000).Select(i=>new RegularClient(Guid.NewGuid(),RandomData.GetRandomName(),RandomData.GetRandomSurname())
+            var clients = Enumerable.Range(1,1_000_000).Select(i=>new RegularClient(Guid.NewGuid(),RandomData.GetRandomName(),RandomData.GetRandomSurname())
             {   
                 Name = RandomData.GetRandomName(),
                 Surname = RandomData.GetRandomSurname()                
             });
 
-            var specClients = Enumerable.Range(1, 10000).Select(i => new SpecialClient(Guid.NewGuid(), RandomData.GetRandomName(), RandomData.GetRandomSurname())
+            var specClients = Enumerable.Range(1, 1_000_000).Select(i => new SpecialClient(Guid.NewGuid(), RandomData.GetRandomName(), RandomData.GetRandomSurname())
             {
                 Name = RandomData.GetRandomName(),
                 Surname = RandomData.GetRandomSurname()

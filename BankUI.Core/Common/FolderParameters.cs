@@ -8,7 +8,7 @@
         public const string FolderKey = "Folder";
         public const string Regular = "Regular";
         public const string Special = "Special";
-        public const string DefaultNavigationPath = $"ClientList?{FolderKey}={Regular}";
+        public static string DefaultNavigationPath = $"ClientList?{FolderKey}={Regular}";
 
     }
 }

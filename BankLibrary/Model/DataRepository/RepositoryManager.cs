@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BankLibrary.Model.DataRepository
 {
@@ -46,9 +47,21 @@ namespace BankLibrary.Model.DataRepository
                 throw new ArgumentException("файл не существует");            
         }
 
-       
+        public async Task<IList<IStorableDoc>> ReadStorableDataAsListAsync()
+        {
+            return await Task.Run(() =>
+            {
+                List<IStorableDoc> retval = new();
+                try
+                {
+                    retval= (List<IStorableDoc>)ReadStorableDataAsList();
+                }
+                catch (Exception) { }
+                return retval;
+            });
+        }
 
-        public IEnumerable<IStorableDoc> ReadStorableDataAsList(){
+        public IList<IStorableDoc> ReadStorableDataAsList(){
             
             logger?.Info("Попытка чтения репозитория");
             try{
@@ -58,7 +71,7 @@ namespace BankLibrary.Model.DataRepository
             catch (UnauthorizedAccessException ex){
                 logger?.Error($"Ошибка доступа к файлу. {ex.Message}");
             }
-            return Enumerable.Empty<IStorableDoc>();
+            return Enumerable.Empty<IStorableDoc>().ToList();
         }
 
         public bool CommitChanges()
@@ -83,5 +96,7 @@ namespace BankLibrary.Model.DataRepository
             }
             return default;
         }
+
+       
     }
 }

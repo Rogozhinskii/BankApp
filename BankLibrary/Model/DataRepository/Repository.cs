@@ -22,7 +22,7 @@ namespace BankLibrary.Model.DataRepository
         }
 
 
-        public IEnumerable<IStorableDoc> Deserialize(){
+        public IList<IStorableDoc> Deserialize(){
            
             string json = File.ReadAllText(repositoryManager.ConnectionString);
             JArray arr = JArray.Parse(json);

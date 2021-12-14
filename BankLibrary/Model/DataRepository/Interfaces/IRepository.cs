@@ -19,7 +19,7 @@ namespace BankLibrary.Model.DataRepository
         /// Десериализует хранимые объекты
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> Deserialize();
+        IList<T> Deserialize();
         
     }
 }
