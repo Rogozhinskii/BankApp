@@ -10,8 +10,11 @@ using Prism.Events;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace BankApp.Modules.Client.ViewModels
 {
@@ -270,31 +273,39 @@ namespace BankApp.Modules.Client.ViewModels
 
         #endregion
 
-
         public override void OnNavigatedTo(NavigationContext navigationContext){
             _currentFolder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
-            LoadClients(_currentFolder);
-            Client = BankClients.FirstOrDefault();            
+            
+            Task.Run(async () =>
+            {
+                _eventAgregator.GetEvent<LongOperationEvent>().Publish(Visibility.Visible);
+                await LoadClients(_currentFolder);
+                _eventAgregator.GetEvent<LongOperationEvent>().Publish(Visibility.Hidden);
+                Client = BankClients.FirstOrDefault();
+                RaisePropertyChanged(nameof(Accounts));
+            });
+            
         }
+
 
         /// <summary>
         /// Получает коллекцию клиентов выбранного в навигационном баре типа
         /// </summary>
         /// <param name="folder"></param>
-        private void LoadClients(string folder)
+        private async Task LoadClients(string folder)
         {
             switch (folder)
             {
                 case FolderParameters.Regular:
                     {
-                        BankClients = new ObservableCollection<IClient>(_clientService.GetRegularClients());
+                        BankClients = new ObservableCollection<IClient>(await _clientService.GetRegularClientsAsync());
                         break;
                     }
                 case FolderParameters.Special:
                     {
-                        BankClients = new ObservableCollection<IClient>(_clientService.GetSpecialClients());
+                        BankClients = new ObservableCollection<IClient>(await _clientService.GetSpecialClientsAsync());
                         break;
-                    }               
+                    }
                 default:
                     break;
             }

@@ -6,6 +6,7 @@ using BankLibrary.Model.DataRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BankUI.Core.Services.Interfaces
 {
@@ -19,11 +20,17 @@ namespace BankUI.Core.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         IList<IClient> GetRegularClients();
+
+
+        Task<IList<IClient>> GetRegularClientsAsync();
+
         /// <summary>
         /// Возвращает коллекцию клиентов, у которых ClientType==ClientType.Special
         /// </summary>
         /// <returns></returns>
         IList<IClient> GetSpecialClients();
+
+        Task<IList<IClient>> GetSpecialClientsAsync();
 
         /// <summary>
         /// Добавляет новых счет к коллекции счетов клиента

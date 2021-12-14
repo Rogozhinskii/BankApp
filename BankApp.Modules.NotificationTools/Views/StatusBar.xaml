@@ -16,8 +16,12 @@
                     ToolTip="Save all changes">
                     <materialDesign:PackIcon Kind="ContentSaveAll"/>
             </Button>
+            <Separator/>
+            <StackPanel Width="200" VerticalAlignment="Center">
+                <ProgressBar IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}"/>
 
-
+            </StackPanel>
+            
         </ToolBar>
     </ToolBarTray>
 </UserControl>

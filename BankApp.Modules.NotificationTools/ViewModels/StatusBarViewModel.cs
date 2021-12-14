@@ -7,6 +7,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
+using System.Windows;
 
 namespace BankApp.Modules.NotificationTools.ViewModels
 {
@@ -24,8 +25,20 @@ namespace BankApp.Modules.NotificationTools.ViewModels
             _saveService = saveService;
             _dialogService = dialogService;            
             _eventAggregator = eventAgregator;
+            _eventAggregator.GetEvent<LongOperationEvent>().Subscribe(LongOperationOccure);
         }
 
+        private void LongOperationOccure(Visibility obj)
+        {            
+            ProgressBarVisibility = obj;
+        }
+
+        private Visibility _progressBarVisibility=Visibility.Hidden;
+        public Visibility ProgressBarVisibility
+        {
+            get { return _progressBarVisibility; }
+            set { SetProperty(ref _progressBarVisibility, value); }
+        }
         private DelegateCommand _showLogCommand;
 
         /// <summary>

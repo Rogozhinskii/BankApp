@@ -14,30 +14,32 @@ namespace BankUI.Core.Services
     /// Для взаимодействия UI и хранилищем 
     /// </summary>
     public class ClientService : IClientService
-    {
-        
-        
+    {        
         private List<IStorableDoc> _clients;
         private List<IClient> _regularClientItems = new();
         private List<IClient> _specialClientItems = new();
         private readonly IRepositoryManager _repositoryManager;
+        private readonly Task _loadTask;
 
         public ClientService(IRepositoryManager repositoryManager)
         {           
             _repositoryManager = repositoryManager;
-            Task.Factory.StartNew(async () => {
+            _loadTask = Task.Run(async () =>
+            {
                 _clients = (List<IStorableDoc>)await _repositoryManager.ReadStorableDataAsListAsync();
                 EnrichClietnLists();
             });
-            
+
         }
 
         /// <summary>
         /// Распределяет элементы коллекции _client по соответсвующим коллекциям в зависимости от типа хранимых клиентов
         /// </summary>
-        private void EnrichClietnLists(){            
+        private void EnrichClietnLists()
+        {
+            
             foreach (var item in _clients){
-                if(item is IClient client){
+                if (item is IClient client){
                     if (client.ClientType == ClientType.Regular){
                         _regularClientItems.Add(client);
                     }
@@ -45,7 +47,7 @@ namespace BankUI.Core.Services
                         _specialClientItems.Add(client);
                     }
                 }
-            }
+            }            
         }
 
         public bool SaveNewAccount(Guid ownerId,IAccount account){            
@@ -57,18 +59,40 @@ namespace BankUI.Core.Services
             return false;
         }
 
-        public IList<IClient> GetRegularClients(){
-            return _regularClientItems;
-        }
-
-        public IList<IClient> GetSpecialClients(){
-            return _specialClientItems;
-        }
-
-       
-        public IList<IStorableDoc> GetAllClients()
+        public async Task<IList<IClient>> GetRegularClientsAsync()
         {
-            return _clients;
+            return await Task.Run(() =>
+            {
+                if (_loadTask.Status == TaskStatus.RanToCompletion)
+                {
+                    return _regularClientItems;
+                }
+                else
+                {
+                    _loadTask.Wait();
+                    return _regularClientItems;
+                }
+            });
         }
+
+        public async Task<IList<IClient>> GetSpecialClientsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                if (_loadTask.Status == TaskStatus.RanToCompletion){
+                    return _specialClientItems;
+                }
+                else{
+                    _loadTask.Wait();
+                    return _specialClientItems;
+                }
+            });
+        }
+
+
+        public IList<IClient> GetRegularClients()=>_regularClientItems;
+        public IList<IClient> GetSpecialClients()=>_specialClientItems;
+        public IList<IStorableDoc> GetAllClients()=> _clients;
+        
     }
 }
